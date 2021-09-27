@@ -6,3 +6,6 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+Software Engineering/.gradle
+Software Engineering/.idea
+Software Engineering/.settings
