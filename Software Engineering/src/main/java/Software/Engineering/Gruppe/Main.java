@@ -12,5 +12,7 @@ public class Main {
 
         System.out.println("Testing Commits again!");
 
+        System.out.println("CK tester");
+
     }
 }
