@@ -10,15 +10,10 @@ public class Application {
 
     public static void main(String[] args) {
 
-        Javalin app = Javalin.create().start();
-        app.config.enableWebjars();
+        Javalin app = Javalin.create().start(7000);
 
-        app.get("/", new Handler() {
-            @Override
-            public void handle(@NotNull Context ctx) throws Exception {
-                ctx.result("Hello World!");
-            }
+        app.get("/", ctx -> {
+            ctx.result("Hello World!");
         });
-
     }
 }
