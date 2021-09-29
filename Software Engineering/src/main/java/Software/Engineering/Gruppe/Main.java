@@ -23,8 +23,8 @@ public class Main {
             ResultSet resultSet = statement.executeQuery(query);
 
             while(resultSet.next()) {
-                int shopID = resultSet.getInt("storeID");
-                String shopName = resultSet.getString("storeID");
+                int shopID = resultSet.getInt("shopID");
+                String shopName = resultSet.getString("shopName");
                 String description = resultSet.getString("description");
                 Shop oneShop = new Shop(shopID, shopName, description);
 
