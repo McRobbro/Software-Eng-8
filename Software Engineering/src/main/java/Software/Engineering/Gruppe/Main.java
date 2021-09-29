@@ -1,10 +1,8 @@
 package Software.Engineering.Gruppe;
-import Software.Engineering.Gruppe.Model.Shop;
+import Software.Engineering.Gruppe.Model.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.Scanner;
 
 public class Main {
 
@@ -30,6 +28,22 @@ public class Main {
 
                 System.out.println(oneShop);
             }
+
+            Scanner sc = new Scanner(System.in);
+
+            String scannedUsername = sc.nextLine();
+            String scannedPassword = sc.nextLine();
+
+            User user1 = new User(scannedUsername, scannedPassword);
+
+            String query2 = " insert into Users (user_username, user_password)"
+                    + " values (?, ?)";
+
+            PreparedStatement preparesStmt = connection.prepareStatement(query2);
+            preparesStmt.setString(1, user1.getUsername());
+            preparesStmt.setString(2, user1.getPassword());
+
+            preparesStmt.execute();
 
 
         } catch (Exception e) {
