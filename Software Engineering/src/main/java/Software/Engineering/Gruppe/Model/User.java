@@ -1,4 +1,5 @@
 package Software.Engineering.Gruppe.Model;
 
-public class User {
+public abstract class User {
+
 }
