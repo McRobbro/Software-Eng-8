@@ -1,4 +1,6 @@
 package Software.Engineering.Gruppe;
+import Software.Engineering.Gruppe.Model.Shop;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,14 +9,6 @@ import java.sql.Statement;
 public class Main {
 
     public static void main(String[] args) {
-
-        System.out.println("hello world");
-        System.out.println("Testing Commits");
-        System.out.println("hello world");
-        System.out.println("Testing Commits again!");
-        System.out.println("CK tester");
-
-
         String url = "jdbc:mysql://34.88.134.36:3306/soe_group_8";
         String user = "root";
         String password = "group8ftw";
