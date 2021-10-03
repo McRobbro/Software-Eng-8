@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
         String url = "jdbc:mysql://34.88.134.36:3306/soe_group_8";
         String user = "root";
         String password = "group8ftw";
@@ -46,7 +47,8 @@ public class Main {
             preparesStmt.execute();
 
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.out.println(e);
         }
 
