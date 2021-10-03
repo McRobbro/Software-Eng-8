@@ -3,9 +3,8 @@ package Software.Engineering.Gruppe.Repository;
 import Software.Engineering.Gruppe.Model.Store;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface StoreInterface {
-
-    ArrayList<Store> getAllStores();
-
+    List<Store> getAllStores();
 }
