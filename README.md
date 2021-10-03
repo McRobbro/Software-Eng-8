@@ -201,6 +201,7 @@ front end application (Vue)
 assets
     /images
     /svg
+    /pdf
 
 
 #### Tests
