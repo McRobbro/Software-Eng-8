@@ -8,6 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        /*
         String url = "jdbc:mysql://34.88.134.36:3306/soe_group_8";
         String user = "root";
         String password = "group8ftw";
@@ -25,7 +26,7 @@ public class Main {
                 int shopID = resultSet.getInt("shopID");
                 String shopName = resultSet.getString("shopName");
                 String description = resultSet.getString("description");
-                Shop oneShop = new Shop(shopID, shopName, description);
+                Store oneShop = new Store(shopID, shopName, description);
 
                 System.out.println(oneShop);
             }
@@ -51,6 +52,8 @@ public class Main {
         catch (Exception e) {
             System.out.println(e);
         }
+
+         */
 
 
     }
