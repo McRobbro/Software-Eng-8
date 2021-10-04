@@ -4,15 +4,9 @@ import Software.Engineering.Gruppe.Config.SQLDatabase;
 import Software.Engineering.Gruppe.Controller.StoresController;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 import io.javalin.Javalin;
-import io.javalin.http.Context;
-import io.javalin.http.Handler;
-import io.javalin.http.staticfiles.Location;
 import io.javalin.plugin.rendering.vue.*;
-import org.jetbrains.annotations.NotNull;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.function.Consumer;
+
 
 public class Application {
 
