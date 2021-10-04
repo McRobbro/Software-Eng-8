@@ -2,7 +2,7 @@
   <app-frame>
     <ul class="store-overview-list">
       <li v-for="store in stores">
-        <a :href="`/stores/${store.storeName}`">{{store.storeName}} ({{store.slug}})</a>
+        <a :href="`/stores/${store.slug}`">{{store.storeName}} ({{store.slug}})</a>
       </li>
     </ul>
   </app-frame>
