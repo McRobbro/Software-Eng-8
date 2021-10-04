@@ -14,11 +14,11 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.0'
     implementation 'org.junit.jupiter:junit-jupiter-params:5.8.0'
 
-    implementation 'io.javalin:javalin:4.0.0'
+    implementation 'io.javalin:javalin:4.0.1'
     implementation 'org.slf4j:slf4j-simple:1.7.32'
 
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5'
-    implementation 'org.webjars.npm:vue:3.2.10'
+    implementation 'org.webjars.npm:vue:3.2.2'
 
     implementation 'mysql:mysql-connector-java:8.0.26'
 }
