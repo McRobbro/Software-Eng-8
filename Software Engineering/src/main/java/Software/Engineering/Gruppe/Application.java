@@ -48,7 +48,7 @@ public class Application {
 
         app.get("/api/stores", storesController::getAllStores);
 
-        app.get("/api/{Store-id}", storesController::getSpecificStore);
+        app.get("/api/StoreId", storesController::getSpecificStore);
 
     }
 }
