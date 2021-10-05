@@ -22,7 +22,7 @@ public class StoreRepository implements StoreInterface {
         try (Connection connection = database.getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 int storeId = resultSet.getInt("storeId");
                 String slug = resultSet.getString("slug");
                 String storeName = resultSet.getString("storeName");
@@ -36,6 +36,32 @@ public class StoreRepository implements StoreInterface {
             throwable.printStackTrace();
         }
 
+        return null;
+    }
+
+
+    @Override
+    public Store getSpecificStoreByID(int storeID) {
+        String query = "select * from store where storeId = " + storeID;
+        Store spesificStore = null;
+
+        try (Connection connection = database.getConnection()) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int storeId = resultSet.getInt("storeId");
+                String slug = resultSet.getString("slug");
+                String storeName = resultSet.getString("storeName");
+                String storeImage = resultSet.getString("storeImage");
+                String storeDescription = resultSet.getString("storeDescription");
+                spesificStore = new Store(storeId, slug, storeName, storeImage, storeDescription);
+            }
+            return spesificStore;
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return null;
     }
 }

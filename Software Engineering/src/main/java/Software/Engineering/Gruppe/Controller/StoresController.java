@@ -1,11 +1,9 @@
 package Software.Engineering.Gruppe.Controller;
 
 import Software.Engineering.Gruppe.Model.Store;
-import Software.Engineering.Gruppe.Repository.StoreInterface;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 import io.javalin.http.Context;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StoresController {
@@ -23,6 +21,17 @@ public class StoresController {
 
         context.json(allStores);
     }
+
+
+    public void getSpecificStore(Context context) {
+
+        String storeId = context.pathParam("storeId");
+        Store getStoreById = storeRepository.getSpecificStoreByID(Integer.parseInt(storeId));
+        context.json(getStoreById);
+
+
+    }
+
 
 
 }

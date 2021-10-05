@@ -36,6 +36,9 @@ public class Application {
         // Init controllers
         StoresController storesController = new StoresController(storeRepository);
 
+
+
+
         //redirect to homepage
         app.before("/", ctx -> ctx.redirect("/home"));
         // Register routes and handlers
@@ -45,7 +48,7 @@ public class Application {
 
         app.get("/api/stores", storesController::getAllStores);
 
-//        app.get("/api/{store-id}", storesController::getSpecificStore);
+        app.get("/api/{Store-id}", storesController::getSpecificStore);
 
     }
 }
