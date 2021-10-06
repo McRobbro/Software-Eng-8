@@ -1,5 +1,7 @@
 package Software.Engineering.Gruppe;
+import Software.Engineering.Gruppe.Config.SQLDatabase;
 import Software.Engineering.Gruppe.Model.*;
+import Software.Engineering.Gruppe.Repository.StoreRepository;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -54,6 +56,19 @@ public class Main {
         }
 
          */
+
+
+        SQLDatabase SQLdatabase = new SQLDatabase(
+                "jdbc:mysql://34.88.134.36:3306/soe_group_8",
+                "root",
+                "group8ftw"
+        );
+
+        StoreRepository storeRepository = new StoreRepository(SQLdatabase);
+
+        storeRepository.getSpecificStoreByID(1);
+        storeRepository.getSpecificStoreByID(2);
+        storeRepository.getSpecificStoreByID(3);
 
 
     }
