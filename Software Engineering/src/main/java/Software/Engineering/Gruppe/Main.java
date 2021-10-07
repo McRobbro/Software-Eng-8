@@ -66,9 +66,11 @@ public class Main {
 
         StoreRepository storeRepository = new StoreRepository(SQLdatabase);
 
-        storeRepository.getSpecificStoreByID(1);
-        storeRepository.getSpecificStoreByID(2);
-        storeRepository.getSpecificStoreByID(3);
+
+        System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
+        System.out.println(storeRepository.getSpecificStoreBySlug("johansens-butikk").getSlug());
+        System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
+
 
 
     }

@@ -1,37 +1,35 @@
-<template id="store-overview">
+<template id="store-detail">
   <app-frame>
-    <ul class="store-overview-list">
-      <li v-for="Store in store">
-        <a :href="`/stores/${StoreID}`">{{slug}} ({{storeDescription}})</a>
-      </li>
-    </ul>
+    <p>{{store.storeDescription}}</p>
   </app-frame>
 </template>
 <script>
-app.component("store-overview", {
-  template: "#store-overview",
+app.component("store-detail", {
+  template: "#store-detail",
   data: () => ({
     store: [],
   }),
   created() {
-    fetch("/api/stores")
+    const specificStore = this.$javalin.pathParams["slug"];
+    console.log("This store id: " + specificStore);
+    fetch(`/api/stores/${specificStore}`)
         .then(res => res.json())
         .then(json => this.store = json)
-        .catch(() => alert("Error while fetching stores"));
+        .catch(() => alert("Error while fetching specific store"));
   }
 });
 </script>
 <style>
-ul.store-overview-list {
+ul.store-detail-list {
   padding: 0;
   list-style: none;
 }
-ul.store-overview-list a {
+ul.store-detail-list a {
   display: block;
   padding: 16px;
   border-bottom: 1px solid #ddd;
 }
-ul.store-overview-list a:hover {
+ul.store-detail-list a:hover {
   background: #00000010;
 }
 </style>

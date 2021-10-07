@@ -41,13 +41,14 @@ public class StoreRepository implements StoreInterface {
 
 
     @Override
-    public Store getSpecificStoreByID(int storeID) {
-        String query = "select * from store where storeId = " + storeID;
+    public Store getSpecificStoreBySlug(String SLUG) {
+        String query = "select * from " + "store where slug = ?";
         Store spesificStore = null;
 
         try (Connection connection = database.getConnection()) {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, SLUG);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int storeId = resultSet.getInt("storeId");
                 String slug = resultSet.getString("slug");

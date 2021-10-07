@@ -7,5 +7,5 @@ import java.util.List;
 public interface StoreInterface {
     List<Store> getAllStores();
 
-    Store getSpecificStoreByID(int slug);
+    Store getSpecificStoreBySlug(String SLUG);
 }
