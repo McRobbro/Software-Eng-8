@@ -1,6 +1,5 @@
 package Software.Engineering.Gruppe.Repository;
 
-import Software.Engineering.Gruppe.Config.SQLDatabase;
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Store;
 

@@ -1,6 +1,5 @@
 package Software.Engineering.Gruppe;
 
-import Software.Engineering.Gruppe.Config.SQLDatabase;
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Controller.StoresController;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
@@ -12,19 +11,12 @@ import io.javalin.plugin.rendering.vue.*;
 public class Application {
 
     public static void main(String[] args) {
-        // Init Connection to database (google cloud)
-        SQLDatabase SQLdatabase = new SQLDatabase(
-                "jdbc:mysql://34.88.134.36:3306/soe_group_8",
-            "root",
-            "group8ftw"
-        );
 
         String userDir = System.getProperty("user.dir");
         String databaseDir = "\\db\\group8dbftw.db";
 
         // init Connection to sqlite database
         SqliteDatabase sqliteDatabase = new SqliteDatabase("jdbc:sqlite:" + userDir + databaseDir);
-
 
 
         // init javalin web service
