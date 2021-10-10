@@ -1,14 +1,31 @@
 package Software.Engineering.Gruppe;
 import Software.Engineering.Gruppe.Config.SQLDatabase;
+import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.*;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.Scanner;
 
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+
+
+        //sql lite connection test!
+        SqliteDatabase sqliteDatabase = new SqliteDatabase("jdbc:sqlite:C:\\Users\\phili\\code\\SOE2021-gruppeOppgave-prototype\\Software-Eng-8\\db\\group8dbftw.db");
+
+        StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
+
+        System.out.println(storeRepository.getAllStores());
+        System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
+
 
         /*
         String url = "jdbc:mysql://34.88.134.36:3306/soe_group_8";
@@ -64,12 +81,12 @@ public class Main {
                 "group8ftw"
         );
 
-        StoreRepository storeRepository = new StoreRepository(SQLdatabase);
+       // StoreRepository storeRepository = new StoreRepository(SQLdatabase);
 
 
-        System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
-        System.out.println(storeRepository.getSpecificStoreBySlug("johansens-butikk").getSlug());
-        System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
+       // System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
+       // System.out.println(storeRepository.getSpecificStoreBySlug("johansens-butikk").getSlug());
+       // System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
 
 
 

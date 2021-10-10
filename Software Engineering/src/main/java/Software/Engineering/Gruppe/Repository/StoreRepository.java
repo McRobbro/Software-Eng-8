@@ -1,6 +1,7 @@
 package Software.Engineering.Gruppe.Repository;
 
 import Software.Engineering.Gruppe.Config.SQLDatabase;
+import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Store;
 
 import java.sql.*;
@@ -8,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoreRepository implements StoreInterface {
-    private final SQLDatabase database;
 
-    public StoreRepository(SQLDatabase database) {
+    private final SqliteDatabase database;
+
+    public StoreRepository(SqliteDatabase database) {
         this.database = database;
     }
 
