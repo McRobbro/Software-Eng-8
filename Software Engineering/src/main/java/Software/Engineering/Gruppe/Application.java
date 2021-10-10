@@ -19,9 +19,11 @@ public class Application {
             "group8ftw"
         );
 
+        String userDir = System.getProperty("user.dir");
+        String databaseDir = "\\db\\group8dbftw.db";
 
         // init Connection to sqlite database
-        SqliteDatabase sqliteDatabase = new SqliteDatabase("jdbc:sqlite:{url to database file ->}\\group8dbftw.db");
+        SqliteDatabase sqliteDatabase = new SqliteDatabase("jdbc:sqlite:" + userDir + databaseDir);
 
 
 
