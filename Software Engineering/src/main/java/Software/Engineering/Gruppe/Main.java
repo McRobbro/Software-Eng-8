@@ -6,9 +6,22 @@ import Software.Engineering.Gruppe.Repository.StoreRepository;
 import java.sql.*;
 import java.util.Scanner;
 
+import static Software.Engineering.Gruppe.Config.SqliteDatabase.Connect.connect;
+
 public class Main {
 
     public static void main(String[] args) {
+
+
+
+        //sql lite connection test!
+
+        connect();
+
+
+        System.out.println("\n");
+
+
 
         /*
         String url = "jdbc:mysql://34.88.134.36:3306/soe_group_8";
