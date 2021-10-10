@@ -6,34 +6,15 @@ import java.sql.SQLException;
 
 public class SqliteDatabase {
 
-    public static class Connect {
+    private final String url;
 
-        public static void connect() {
-            Connection conn = null;
-            try {
-
-                // url to the database
-                String url = "jdbc:sqlite:C:\\Users\\sqlite\\db\\group8dbftw.db";
-
-                conn = DriverManager.getConnection(url);
-
-                System.out.println("Connection to SQLite has been established.");
-
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            } finally {
-                try {
-
-                    if (conn != null) {
-                        conn.close();
-                    }
-
-                } catch (SQLException ex) {
-                    System.out.println(ex.getMessage());
-                }
-            }
-        }
-
+    public SqliteDatabase(String url) {
+        this.url = url;
     }
 
+    public Connection getConnection() throws SQLException {
+
+        return DriverManager.getConnection(url);
+
+    }
 }
