@@ -77,8 +77,35 @@ public class StoreRepository implements StoreInterface {
             preparedStatement.setString(2, storeName);
             preparedStatement.setString(3, storeImage);
             preparedStatement.setString(4, storeDescription);
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
             return new Store(slug, storeName, storeImage, storeDescription);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
+    }
+
+
+    @Override
+    public Store updateStore(int storeId, String slug, String storeName, String storeImage, String storeDescription) {
+        String query = "UPDATE store SET slug = ?, " +
+                "storeName = ?, " +
+                "storeImage = ?, " +
+                "storeDescription = ?" +
+                "WHERE storeId = ?";
+
+        try (Connection connection = database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, slug);
+            preparedStatement.setString(2, storeName);
+            preparedStatement.setString(3, storeImage);
+            preparedStatement.setString(4, storeDescription);
+            preparedStatement.setInt(5, storeId);
+            preparedStatement.executeUpdate();
+            System.out.println("Update success");
+            return new Store(storeId, slug, storeName, storeImage, storeDescription);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -9,7 +9,7 @@ CREATE TABLE user (
 CREATE TABLE store (
     storeId          INTEGER        PRIMARY KEY AUTOINCREMENT
                                     NOT NULL,
-    slug             VARCHAR (255)  NOT NULL
+    slug             VARCHAR (255)  NOT NULL UNIQUE
                                     NOT NULL,
     storeName        VARCHAR (45)   NOT NULL,
     storeImage       VARCHAR (1024),
@@ -25,8 +25,6 @@ CREATE TABLE store_user (
     FOREIGN KEY (userId) REFERENCES user(userId),
     FOREIGN KEY (storeId) REFERENCES store(storeId)
 );
-
-
 
 
 
