@@ -66,4 +66,24 @@ public class StoreRepository implements StoreInterface {
         }
         return null;
     }
+
+    @Override
+    public Store createStore(String slug, String storeName, String storeImage, String storeDescription) {
+        String query = "INSERT INTO store(slug, storeName, storeImage, storeDescription) VALUES(?,?,?,?)";
+
+        try (Connection connection = database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, slug);
+            preparedStatement.setString(2, storeName);
+            preparedStatement.setString(3, storeImage);
+            preparedStatement.setString(4, storeDescription);
+            preparedStatement.execute();
+            return new Store(slug, storeName, storeImage, storeDescription);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
+    }
 }
