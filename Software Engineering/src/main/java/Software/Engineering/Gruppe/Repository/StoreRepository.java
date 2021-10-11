@@ -113,4 +113,22 @@ public class StoreRepository implements StoreInterface {
 
         return null;
     }
+
+
+    @Override
+    public boolean deleteStore(String slug) {
+        String query = "DELETE FROM store WHERE slug = ?";
+        try (Connection connection = database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, slug);
+            preparedStatement.executeUpdate();
+            System.out.println("deleted success");
+            return true;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return false;
+    }
 }

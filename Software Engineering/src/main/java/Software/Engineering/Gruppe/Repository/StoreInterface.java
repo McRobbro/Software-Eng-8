@@ -15,6 +15,6 @@ public interface StoreInterface {
     Store updateStore(int storeId, String slug, String storeName, String storeImage, String storeDescription);
 
 
-
+    boolean deleteStore(String slug);
 
 }

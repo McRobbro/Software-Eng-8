@@ -29,6 +29,8 @@ public class Main {
 
         System.out.println(storeRepository.updateStore(5,"Andreas-butikk", "Andreas", "null", "lorem ipsum"));
 
+        System.out.println(storeRepository.deleteStore("Marcus-butikk"));
+
         /*
         String url = "jdbc:mysql://34.88.134.36:3306/soe_group_8";
         String user = "root";
