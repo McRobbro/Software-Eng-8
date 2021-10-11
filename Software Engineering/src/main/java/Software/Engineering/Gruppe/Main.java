@@ -25,6 +25,8 @@ public class Main {
         System.out.println(storeRepository.getSpecificStoreBySlug("johansens-butikk").getSlug());
         System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
 
+        System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
+
 
 
         /*

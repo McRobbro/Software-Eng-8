@@ -1,36 +1,30 @@
-
 CREATE TABLE user (
-    userId int not null,
-    email varchar(45) not null,
-	username varchar(20) not null,
-    password varchar(25) not null,
-    PRIMARY KEY(userId)
+    userId   INTEGER      PRIMARY KEY AUTOINCREMENT
+                          NOT NULL,
+    email    VARCHAR (45) NOT NULL,
+    username VARCHAR (20) NOT NULL,
+    password VARCHAR (25) NOT NULL
 );
-
-
 
 CREATE TABLE store (
-	storeId int not null,
-	slug varchar(255) unique not null,
-    storeName varchar(45) not null,
-    storeImage varchar(1024),
-    storeDescription varchar(255),
-    PRIMARY KEY(storeId)
+    storeId          INTEGER        PRIMARY KEY AUTOINCREMENT
+                                    NOT NULL,
+    slug             VARCHAR (255)  NOT NULL
+                                    NOT NULL,
+    storeName        VARCHAR (45)   NOT NULL,
+    storeImage       VARCHAR (1024),
+    storeDescription VARCHAR (255)
 );
-
-
 
 CREATE TABLE store_user (
-	storeUserId int not null,
-    userId int not null,
-    storeId int not null,
-    userRole varchar(45),
-	FOREIGN KEY(userId) REFERENCES user(userId),
-	FOREIGN KEY(storeId) REFERENCES store(storeId),
-	PRIMARY KEY(storeUserId)
-	
+    storeUserId INTEGER      PRIMARY KEY AUTOINCREMENT
+                             NOT NULL,
+    userId      INT          NOT NULL,
+    storeId     INT          NOT NULL,
+    userRole    VARCHAR (45),
+    FOREIGN KEY (userId) REFERENCES user(userId),
+    FOREIGN KEY (storeId) REFERENCES store(storeId)
 );
-
 
 
 
