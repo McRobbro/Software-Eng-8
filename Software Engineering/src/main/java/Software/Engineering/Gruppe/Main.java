@@ -1,14 +1,35 @@
 package Software.Engineering.Gruppe;
-import Software.Engineering.Gruppe.Config.SQLDatabase;
-import Software.Engineering.Gruppe.Model.*;
+import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 
-import java.sql.*;
-import java.util.Scanner;
+import java.io.IOException;
+
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+
+        String userDir = System.getProperty("user.dir");
+        String databaseDir = "\\db\\group8dbftw.db";
+        SqliteDatabase sqliteDatabase = new SqliteDatabase("jdbc:sqlite:" + userDir + databaseDir);
+
+
+        StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
+
+        System.out.println(storeRepository.getAllStores());
+        System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
+
+
+        System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
+        System.out.println(storeRepository.getSpecificStoreBySlug("johansens-butikk").getSlug());
+        System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
+
+      //  System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
+
+        System.out.println(storeRepository.updateStore(5,"Andreas-butikk", "Andreas", "null", "lorem ipsum"));
+
+        System.out.println(storeRepository.deleteStore("Marcus-butikk"));
 
         /*
         String url = "jdbc:mysql://34.88.134.36:3306/soe_group_8";
@@ -58,17 +79,8 @@ public class Main {
          */
 
 
-        SQLDatabase SQLdatabase = new SQLDatabase(
-                "jdbc:mysql://34.88.134.36:3306/soe_group_8",
-                "root",
-                "group8ftw"
-        );
 
-        StoreRepository storeRepository = new StoreRepository(SQLdatabase);
 
-        storeRepository.getSpecificStoreByID(1);
-        storeRepository.getSpecificStoreByID(2);
-        storeRepository.getSpecificStoreByID(3);
 
 
     }

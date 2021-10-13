@@ -7,5 +7,14 @@ import java.util.List;
 public interface StoreInterface {
     List<Store> getAllStores();
 
-    Store getSpecificStoreByID(int slug);
+    Store getSpecificStoreBySlug(String SLUG);
+
+    Store createStore(String slug, String storeName, String storeImage, String storeDescription);
+
+
+    Store updateStore(int storeId, String slug, String storeName, String storeImage, String storeDescription);
+
+
+    boolean deleteStore(String slug);
+
 }
