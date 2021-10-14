@@ -16,6 +16,7 @@ public class Test_get_store {
     @Test
     public void get_store() {
         assertEquals("philips-butikk",storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
+
     }
 
 }

@@ -32,6 +32,7 @@ public class Main {
         System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
 
 
+
         System.out.println(connect());
 
 

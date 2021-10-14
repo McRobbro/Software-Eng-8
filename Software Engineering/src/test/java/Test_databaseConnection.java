@@ -20,6 +20,7 @@ public class Test_databaseConnection {
 
         System.out.println(SqliteDatabase.connect());
         assertEquals(true, SqliteDatabase.connect());
+
     }
 
 
