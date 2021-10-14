@@ -14,10 +14,8 @@ public class Application {
 
         String userDir = System.getProperty("user.dir");
         String databaseDir = "\\db\\group8dbftw.db";
-
         // init Connection to sqlite database
         SqliteDatabase sqliteDatabase = new SqliteDatabase("jdbc:sqlite:" + userDir + databaseDir);
-
 
         // init javalin web service
         Javalin app = Javalin.create(config -> {
