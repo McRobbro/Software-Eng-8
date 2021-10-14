@@ -4,6 +4,8 @@ import Software.Engineering.Gruppe.Repository.StoreRepository;
 
 import java.io.IOException;
 
+import static Software.Engineering.Gruppe.Config.SqliteDatabase.connect;
+
 
 public class Main {
 
@@ -15,9 +17,13 @@ public class Main {
         SqliteDatabase sqliteDatabase = new SqliteDatabase("jdbc:sqlite:" + userDir + databaseDir);
 
 
+        System.out.println(userDir);
+
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
 
         System.out.println(storeRepository.getAllStores());
+        System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk"));
+
         System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
 
 
@@ -25,11 +31,18 @@ public class Main {
         System.out.println(storeRepository.getSpecificStoreBySlug("johansens-butikk").getSlug());
         System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
 
-      //  System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
 
-        System.out.println(storeRepository.updateStore(5,"Andreas-butikk", "Andreas", "null", "lorem ipsum"));
+        System.out.println(connect());
 
-        System.out.println(storeRepository.deleteStore("Marcus-butikk"));
+
+
+      // System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
+
+      //  System.out.println(storeRepository.updateStore(5,"Andreas-butikk", "Andreas", "null", "lorem ipsum"));
+
+      //  System.out.println(storeRepository.deleteStore("Marius-butikk"));
+
+
 
         /*
         String url = "jdbc:mysql://34.88.134.36:3306/soe_group_8";
