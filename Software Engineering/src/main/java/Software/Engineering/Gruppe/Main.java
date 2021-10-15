@@ -1,5 +1,6 @@
 package Software.Engineering.Gruppe;
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
+//import Software.Engineering.Gruppe.Model.Product;
 import Software.Engineering.Gruppe.Repository.ProductRepository;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 
@@ -26,11 +27,21 @@ public class Main {
         System.out.println(storeRepository.getSpecificStoreBySlug("johansens-butikk").getSlug());
         System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
 
-      //  System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
+       // System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
 
        // System.out.println(storeRepository.updateStore(5,"Andreas-butikk", "Andreas", "null", "lorem ipsum"));
 
       //  System.out.println(storeRepository.deleteStore("Marcus-butikk"));
+
+
+        //System.out.println(productRepository.createProduct("LUX-taklampe", "LUX taklampe", "null", "LUX taklampe \nfarge: gold \n60W E27 \n1 stk", "Belysning" ));
+
+        //System.out.println(storeRepository.createStore("Heidi-butikk", "Heidi", "null","lorem ipsum"));
+        //System.out.println(storeRepository.createStore("Zofie-butikk", "Zofie", "null","vintagevarer"));
+        //System.out.println(storeRepository.getSpecificStoreBySlug("Heidi-butikk"));
+        //System.out.println(storeRepository.updateStore(11, "Zofies-butikk", "Zofie", "null", "vintagevarer"));
+        //System.out.println(storeRepository.getSpecificStoreBySlug("Zofies-butikk").getSlug());
+
 
         /*
         String url = "jdbc:mysql://34.88.134.36:3306/soe_group_8";
