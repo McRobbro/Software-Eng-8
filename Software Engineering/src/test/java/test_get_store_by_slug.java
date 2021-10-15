@@ -20,7 +20,11 @@ public class test_get_store_by_slug {
     @Test
     public void get_store() {
         assertEquals("philips-butikk", storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
+        assertEquals("Andreas-butikk", storeRepository.getSpecificStoreBySlug("Andreas-butikk").getSlug());
 
+        // just to check the test
+        //assertEquals("Andreas-butikk", storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
+        //assertEquals("Sabella", storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
     }
 
 }
