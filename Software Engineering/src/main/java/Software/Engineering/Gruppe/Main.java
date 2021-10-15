@@ -1,5 +1,6 @@
 package Software.Engineering.Gruppe;
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
+import Software.Engineering.Gruppe.Repository.ProductRepository;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 
 import java.io.IOException;
@@ -18,11 +19,9 @@ public class Main {
 
 
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
+        ProductRepository productRepository = new ProductRepository(sqliteDatabase);
 
         System.out.println(storeRepository.getAllStores());
-        System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
-
-
         System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
         System.out.println(storeRepository.getSpecificStoreBySlug("johansens-butikk").getSlug());
         System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
@@ -77,12 +76,7 @@ public class Main {
         catch (Exception e) {
             System.out.println(e);
         }
-
          */
-
-
-
-
 
 
     }

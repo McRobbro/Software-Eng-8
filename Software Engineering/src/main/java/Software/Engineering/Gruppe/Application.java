@@ -1,12 +1,13 @@
 package Software.Engineering.Gruppe;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
+import Software.Engineering.Gruppe.Controller.ProductController;
 import Software.Engineering.Gruppe.Controller.StoresController;
+import Software.Engineering.Gruppe.Repository.ProductRepository;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
+
 import io.javalin.Javalin;
 import io.javalin.plugin.rendering.vue.*;
-
-
 
 public class Application {
 
@@ -32,8 +33,10 @@ public class Application {
 
         // Init repos
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
+        ProductRepository productRepository = new ProductRepository(sqliteDatabase);
         // Init controllers
         StoresController storesController = new StoresController(storeRepository);
+        ProductController productController = new ProductController(productRepository);
 
         //redirect to homepage
         app.before("/", ctx -> ctx.redirect("/stores"));
@@ -44,6 +47,10 @@ public class Application {
 
         app.get("/api/stores", storesController::getAllStores);
         app.get("/api/stores/{slug}", storesController::getSpecificStore);
+
+        // how will the path be for the products?
+        app.get("/api/products", productController::getAllProducts);
+        app.get("/api/products/{slug}", productController::getSpecificProduct);
 
     }
 }
