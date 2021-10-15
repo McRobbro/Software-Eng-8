@@ -32,6 +32,10 @@ public class Main {
 
       //  System.out.println(storeRepository.deleteStore("Marcus-butikk"));
 
+        //creating products
+        System.out.println(productRepository.createProduct("LUX-taklampe", "LUX taklampe", "null", "lorem ipsum", "Belysning"));
+        System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
+
         /*
         String url = "jdbc:mysql://34.88.134.36:3306/soe_group_8";
         String user = "root";
