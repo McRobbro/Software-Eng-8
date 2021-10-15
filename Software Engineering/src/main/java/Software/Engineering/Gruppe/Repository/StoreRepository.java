@@ -10,7 +10,6 @@ import java.util.List;
 public class StoreRepository implements StoreInterface {
 
     private final SqliteDatabase database;
-
     public StoreRepository(SqliteDatabase database) {
         this.database = database;
     }
@@ -39,7 +38,6 @@ public class StoreRepository implements StoreInterface {
 
         return null;
     }
-
 
     @Override
     public Store getSpecificStoreBySlug(String SLUG) {
@@ -87,7 +85,6 @@ public class StoreRepository implements StoreInterface {
         return null;
     }
 
-
     @Override
     public Store updateStore(int storeId, String slug, String storeName, String storeImage, String storeDescription) {
         String query = "UPDATE store SET slug = ?, " +
@@ -113,7 +110,6 @@ public class StoreRepository implements StoreInterface {
 
         return null;
     }
-
 
     @Override
     public boolean deleteStore(String slug) {

@@ -1,12 +1,5 @@
 package Software.Engineering.Gruppe.Model;
 
-import Software.Engineering.Gruppe.Config.SqliteDatabase;
-import Software.Engineering.Gruppe.Repository.StoreRepository;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Store {
@@ -17,10 +10,7 @@ public class Store {
     private String storeImage;
     private String storeDescription;
 
-    private final SqliteDatabase database;
-    /* public StoreRepository(SqliteDatabase database) {
-        this.database = database;
-    }*/
+    //private final SqliteDatabase database;
     private ArrayList<Product> ProductList = new ArrayList<>();
 
 
@@ -79,10 +69,10 @@ public class Store {
         this.storeDescription = storeDescription;
     }
 
-    public boolean addProductBySlug(String SLUG) {
+    public void addProductBySlug(String SLUG) {
         Product specificProduct = null;
         String query = "select * from product where slug = ?";
-
+/*
         try (Connection connection = database.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, SLUG);
@@ -98,13 +88,12 @@ public class Store {
             }
             ProductList.add(specificProduct);
             System.out.println("added product");
-            return true;
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
         System.out.println("add product not successful");
-        return false;
+ */
     }
 
     @Override
