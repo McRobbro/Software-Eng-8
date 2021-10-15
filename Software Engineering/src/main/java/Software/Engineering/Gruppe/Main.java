@@ -32,6 +32,16 @@ public class Main {
 
       //  System.out.println(storeRepository.deleteStore("Marcus-butikk"));
 
+
+        //System.out.println(productRepository.createProduct("LUX-taklampe", "LUX taklampe", "null", "LUX taklampe \nfarge: gold \n60W E27 \n1 stk", "Belysning" ));
+
+        //System.out.println(storeRepository.createStore("Heidi-butikk", "Heidi", "null","lorem ipsum"));
+        //System.out.println(storeRepository.createStore("Zofie-butikk", "Zofie", "null","vintagevarer"));
+        //System.out.println(storeRepository.getSpecificStoreBySlug("Heidi-butikk"));
+        //System.out.println(storeRepository.updateStore(11, "Zofies-butikk", "Zofie", "null", "vintagevarer"));
+        //System.out.println(storeRepository.getSpecificStoreBySlug("Zofies-butikk").getSlug());
+
+
         //creating products
         System.out.println(productRepository.createProduct("LUX-taklampe", "LUX taklampe", "null", "lorem ipsum", "Belysning"));
         System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
