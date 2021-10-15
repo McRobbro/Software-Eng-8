@@ -12,13 +12,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-
         String userDir = System.getProperty("user.dir");
         String databaseDir = "\\db\\group8dbftw.db";
         SqliteDatabase sqliteDatabase = new SqliteDatabase("jdbc:sqlite:" + userDir + databaseDir);
 
-
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
+        //not sure if correct parameter is sent to productRepository
         ProductRepository productRepository = new ProductRepository(sqliteDatabase);
 
         System.out.println(storeRepository.getAllStores());
@@ -26,25 +25,22 @@ public class Main {
         System.out.println(storeRepository.getSpecificStoreBySlug("johansens-butikk").getSlug());
         System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
 
-      //  System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
+        // System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
+        // System.out.println(storeRepository.updateStore(5,"Andreas-butikk", "Andreas", "null", "lorem ipsum"));
+        // System.out.println(storeRepository.deleteStore("Marcus-butikk"));
 
-       // System.out.println(storeRepository.updateStore(5,"Andreas-butikk", "Andreas", "null", "lorem ipsum"));
-
-      //  System.out.println(storeRepository.deleteStore("Marcus-butikk"));
-
-
-        //System.out.println(productRepository.createProduct("LUX-taklampe", "LUX taklampe", "null", "LUX taklampe \nfarge: gold \n60W E27 \n1 stk", "Belysning" ));
-
+        //Cornelia is checking functionality
         //System.out.println(storeRepository.createStore("Heidi-butikk", "Heidi", "null","lorem ipsum"));
         //System.out.println(storeRepository.createStore("Zofie-butikk", "Zofie", "null","vintagevarer"));
         //System.out.println(storeRepository.getSpecificStoreBySlug("Heidi-butikk"));
         //System.out.println(storeRepository.updateStore(11, "Zofies-butikk", "Zofie", "null", "vintagevarer"));
         //System.out.println(storeRepository.getSpecificStoreBySlug("Zofies-butikk").getSlug());
 
-
         //creating products
         System.out.println(productRepository.createProduct("LUX-taklampe", "LUX taklampe", "null", "lorem ipsum", "Belysning"));
         //System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
+
+
 
         /*
         String url = "jdbc:mysql://34.88.134.36:3306/soe_group_8";
@@ -84,7 +80,6 @@ public class Main {
             preparesStmt.setString(2, user1.getPassword());
 
             preparesStmt.execute();
-
 
         }
         catch (Exception e) {
