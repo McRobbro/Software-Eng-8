@@ -14,6 +14,8 @@ public class Store {
     private ArrayList<Product> ProductList = new ArrayList<>();
 
 
+
+
     public Store(int storeId, String slug, String storeName, String storeImage, String storeDescription) {
         this.storeId = storeId;
         this.slug = slug;

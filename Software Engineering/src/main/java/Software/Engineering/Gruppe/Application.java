@@ -30,6 +30,7 @@ public class Application {
         app.error(404, ctx -> {
             ctx.result("Generic 404 message");
         });
+        app.get("/login", new VueComponent("login-page"));
 
         // Init repos
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
