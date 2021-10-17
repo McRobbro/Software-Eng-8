@@ -11,6 +11,7 @@ import io.javalin.plugin.rendering.vue.*;
 
 public class Application {
 
+
     public static void main(String[] args) {
 
         String userDir = System.getProperty("user.dir");
