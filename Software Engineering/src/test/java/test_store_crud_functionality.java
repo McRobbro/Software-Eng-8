@@ -19,6 +19,38 @@ public class test_store_crud_functionality {
 
 
     @Test
+    public void test_create_store() {
+        storeRepository.createStore("DummySlug", "DummyName", "DummyUrl", "dummyBio");
+        assertEquals("DummySlug", storeRepository.getSpecificStoreBySlug("DummySlug").getSlug());
+        storeRepository.deleteStore("DummySlug");
+    }
+
+    @Test
+    public void test_read_store() {
+        storeRepository.createStore("DummySlug", "DummyName", "DummyUrl", "dummyBio");
+        assertEquals("DummySlug", storeRepository.getSpecificStoreBySlug("DummySlug").getSlug());
+        storeRepository.deleteStore("DummySlug");
+
+    }
+
+    @Test
+    public void test_update_store() {
+        storeRepository.createStore("DummySlug", "DummyName", "DummyUrl", "dummyBio");
+        int testStoreId = storeRepository.getSpecificStoreBySlug("DummySlug").getStoreId();
+        storeRepository.updateStore(testStoreId, "DummySlugDummySlug", "DummyNameDummyName", "DummyUrl2", "newDummyBio");
+        assertEquals("DummySlugDummySlug", storeRepository.getSpecificStoreBySlug("DummySlugDummySlug").getSlug());
+        storeRepository.deleteStore("DummySlugDummySlug");
+
+    }
+
+    @Test
+    public void test_delete_store() {
+        storeRepository.createStore("DummySlug", "DummyName", "DummyUrl", "dummyBio");
+        storeRepository.deleteStore("DummySlug");
+        assertNull(storeRepository.getSpecificStoreBySlug("DummySlug"));
+    }
+
+   /* @Test
     public void test_create_read_update_delete() {
         //create dummy
         storeRepository.createStore("DummySlug", "DummyName", "DummyUrl", "dummyBio");
@@ -41,6 +73,7 @@ public class test_store_crud_functionality {
 
     }
 
+    */
 
 
 }
