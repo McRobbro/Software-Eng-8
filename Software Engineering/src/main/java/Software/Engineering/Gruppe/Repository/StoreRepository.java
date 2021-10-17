@@ -101,7 +101,6 @@ public class StoreRepository implements StoreInterface {
             preparedStatement.setString(4, storeDescription);
             preparedStatement.setInt(5, storeId);
             preparedStatement.executeUpdate();
-            System.out.println("Update success");
             return new Store(storeId, slug, storeName, storeImage, storeDescription);
 
         } catch (SQLException throwables) {
@@ -118,7 +117,6 @@ public class StoreRepository implements StoreInterface {
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, slug);
             preparedStatement.executeUpdate();
-            System.out.println("deleted success");
             return true;
 
         } catch (SQLException throwables) {
