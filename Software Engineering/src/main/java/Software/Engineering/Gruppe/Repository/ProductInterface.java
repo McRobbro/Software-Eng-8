@@ -16,5 +16,7 @@ public interface ProductInterface {
 
     boolean deleteProduct(String slug);
 
+    // boolean uodatePrice(int pris);
+
 }
 

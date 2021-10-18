@@ -51,8 +51,8 @@ public class Application {
         app.get("/api/stores/{slug}", storesController::getSpecificStore);
 
         // how will the path be for the products?
-        app.get("/api/products", productController::getAllProducts);
-        app.get("/api/products/{slug}", productController::getSpecificProduct);
+        //app.get("/api/stores/products", productController::getAllProducts);
+        //app.get("/api/stores/products/{slug}", productController::getSpecificProduct);
 
     }
 }
