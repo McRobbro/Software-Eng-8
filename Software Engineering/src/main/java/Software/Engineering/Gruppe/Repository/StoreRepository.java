@@ -10,7 +10,6 @@ import java.util.List;
 public class StoreRepository implements StoreInterface {
 
     private final SqliteDatabase database;
-
     public StoreRepository(SqliteDatabase database) {
         this.database = database;
     }
@@ -39,7 +38,6 @@ public class StoreRepository implements StoreInterface {
 
         return null;
     }
-
 
     @Override
     public Store getSpecificStoreBySlug(String SLUG) {
@@ -87,7 +85,6 @@ public class StoreRepository implements StoreInterface {
         return null;
     }
 
-
     @Override
     public Store updateStore(int storeId, String slug, String storeName, String storeImage, String storeDescription) {
         String query = "UPDATE store SET slug = ?, " +
@@ -104,7 +101,6 @@ public class StoreRepository implements StoreInterface {
             preparedStatement.setString(4, storeDescription);
             preparedStatement.setInt(5, storeId);
             preparedStatement.executeUpdate();
-            System.out.println("Update success");
             return new Store(storeId, slug, storeName, storeImage, storeDescription);
 
         } catch (SQLException throwables) {
@@ -114,7 +110,6 @@ public class StoreRepository implements StoreInterface {
         return null;
     }
 
-
     @Override
     public boolean deleteStore(String slug) {
         String query = "DELETE FROM store WHERE slug = ?";
@@ -122,7 +117,6 @@ public class StoreRepository implements StoreInterface {
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, slug);
             preparedStatement.executeUpdate();
-            System.out.println("deleted success");
             return true;
 
         } catch (SQLException throwables) {
@@ -131,4 +125,5 @@ public class StoreRepository implements StoreInterface {
 
         return false;
     }
+
 }

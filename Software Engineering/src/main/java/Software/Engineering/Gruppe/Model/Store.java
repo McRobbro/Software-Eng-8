@@ -1,5 +1,7 @@
 package Software.Engineering.Gruppe.Model;
 
+import java.util.ArrayList;
+
 public class Store {
 
     private int storeId;
@@ -7,6 +9,10 @@ public class Store {
     private String storeName;
     private String storeImage;
     private String storeDescription;
+
+    //private final SqliteDatabase database;
+    private ArrayList<Product> ProductList = new ArrayList<>();
+
 
 
 
@@ -65,6 +71,32 @@ public class Store {
         this.storeDescription = storeDescription;
     }
 
+    public void addProductBySlug(String SLUG) {
+        Product specificProduct = null;
+        String query = "select * from product where slug = ?";
+/*
+        try (Connection connection = database.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, SLUG);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int productId = resultSet.getInt("productId");
+                String productSlug = resultSet.getString("slug");
+                String productName = resultSet.getString("productName");
+                String productImage = resultSet.getString("productImage");
+                String productDescription = resultSet.getString("productDescription");
+                String productCategory = resultSet.getString("productCategory");
+                specificProduct = new Product(productId, productSlug, productName, productImage, productDescription, productCategory);
+            }
+            ProductList.add(specificProduct);
+            System.out.println("added product");
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        System.out.println("add product not successful");
+ */
+    }
 
     @Override
     public String toString() {
