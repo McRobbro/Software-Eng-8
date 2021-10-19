@@ -40,7 +40,6 @@ public class test_store_crud_functionality {
         storeRepository.updateStore(testStoreId, "DummySlugDummySlug", "DummyNameDummyName", "DummyUrl2", "newDummyBio");
         assertEquals("DummySlugDummySlug", storeRepository.getSpecificStoreBySlug("DummySlugDummySlug").getSlug());
         storeRepository.deleteStore("DummySlugDummySlug");
-
     }
 
     @Test

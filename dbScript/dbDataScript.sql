@@ -22,6 +22,35 @@ Insert Into store_user (storeUserId, userId, storeId, userRole) values (1003, 10
 
 /*************************/
 
+/*products*/
+
+insert into products (productId, storeId, productSlug, productName, productImage, productDescription, productCategory, productPrice)
+                   VALUES (1, 1, "LUX-taklampe", "LUX taklampe", "imageUrl", "loremipsum", "Belysning", 500);
+            
+            
+insert into products (productId, storeId, productSlug, productName, productImage, productDescription, productCategory, productPrice)
+            VALUES(2, 1, "Biedermeierbenk", "Biedermeierbenk", "imageUrl", "loremipsum", "Benk", 3000);
+            
+
+insert into products (productId, storeId, productSlug, productName, productImage, productDescription, productCategory, productPrice)
+            VALUES(3, 2, "Skuvseng", "Skuvseng", "imageUrl", "loremipsum", "seng", 10000);
+            
+
+
+insert into products (productId, storeId, productSlug, productName, productImage, productDescription, productCategory, productPrice)
+            VALUES(4, 2, "Da-Vinci-Barglob-modell-102", "Da Vinci Barglob", "imageUrl", "loremipsum", "Serveringsvogner", 3300);
+            
+
+
+insert into products (productId, storeId, productSlug, productName, productImage, productDescription, productCategory, productPrice)
+            VALUES(5, 3, "Krystallysekrone-Empire-Wien", "Krystallysekrone Empire Wien", "imageUrl", "loremipsum", "taklamper", 1300);
+            
+
+insert into products (productId, storeId, productSlug, productName, productImage, productDescription, productCategory, productPrice)
+            VALUES(6, 3, "Antikk-løve-dørknopper", "Antikk løve dørknopper", "imageUrl", "loremipsum", "dørknopper", 599);
+
+/**************************/
+
 select * from user;
 
 select * from store;
