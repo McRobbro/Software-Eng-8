@@ -4,9 +4,10 @@
   <app-frame>
     <ul class="store-overview-list">
       <li v-for="store in stores">
+        <a :href="`/stores/${store.slug}`">
         <img v-if="store.storeImage" class="cover-image-frontpage" v-bind:src="store.storeImage">
         <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
-        <a :href="`/stores/${store.slug}`">{{store.storeName}} ({{store.slug}})</a>
+        {{store.storeName}} ({{store.slug}})</a>
       </li>
     </ul>
   </app-frame>
@@ -33,13 +34,19 @@ ul.store-overview-list {
   padding: 0;
   list-style: none;
 }
+
 ul.store-overview-list a {
   display: block;
-  min-width: 300px;
-  border-bottom: 1px solid var(--gold-color);
+  max-width: 200px;
+
+  padding: 16px;
   background: #0e0e0e;
   text-decoration: none;
   color: white;
+
+  border-bottom: 1px solid var(--gold-color);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 li {
   margin: 16px;
@@ -51,6 +58,6 @@ img.cover-image-frontpage {
   height: auto;
   width: 100%;
   padding-bottom: 20px;
-  max-height: 280px;
+  max-height: auto;
 }
 </style>

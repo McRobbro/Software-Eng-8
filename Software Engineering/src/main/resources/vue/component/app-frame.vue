@@ -46,17 +46,4 @@ main section p{
   float: left;
 }
 
-.imagediv {
-  float: right;
-  height: auto;
-  width: 50%;
-  margin: 15px;
-}
-
-img {
-  float: right;
-  max-width: 100%;
-}
-
-
 </style>
