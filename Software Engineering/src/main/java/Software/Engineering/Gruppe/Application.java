@@ -28,6 +28,7 @@ public class Application {
         // Init Vue Files
         app.get("/stores", new VueComponent("store-overview"));
         app.get("/stores/{slug}", new VueComponent("store-detail"));
+        app.get("/stores/{slug}/{productSlug}", new VueComponent("product-detail"));
         app.error(404, ctx -> {
             ctx.result("Generic 404 message");
         });
@@ -57,7 +58,7 @@ public class Application {
         // when you open a specific product you'd want that to be
         // localhost:7777/stores/johansens-butikk/Antique-Vase | api/stores/{slug}/{product-name}
         app.get("/api/products", productController::getAllProducts);
-        app.get("/api/products/{slug}", productController::getSpecificProduct);
+        app.get("/api/stores/{slug}/{productSlug}", productController::getSpecificProduct);
 
     }
 }

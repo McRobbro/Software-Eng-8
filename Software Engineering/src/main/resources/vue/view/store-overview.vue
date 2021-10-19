@@ -37,7 +37,7 @@ ul.store-overview-list {
 
 ul.store-overview-list a {
   display: block;
-  max-width: 200px;
+  max-width: 250px;
 
   padding: 16px;
   background: #0e0e0e;
