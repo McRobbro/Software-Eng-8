@@ -51,6 +51,11 @@ public class Application {
         app.get("/api/stores/{slug}", storesController::getSpecificStore);
 
         // how will the path be for the products?
+        // the products should be gotten when entering a pages slug, as in when you get to a specific store
+        // you wish to view their products, so the patch to view the products and the store itself should be
+        // localhost:7777/stores/johansens-butikk | api/stores/{slug}
+        // when you open a specific product you'd want that to be
+        // localhost:7777/stores/johansens-butikk/Antique-Vase | api/stores/{slug}/{product-name}
         app.get("/api/products", productController::getAllProducts);
         app.get("/api/products/{slug}", productController::getSpecificProduct);
 

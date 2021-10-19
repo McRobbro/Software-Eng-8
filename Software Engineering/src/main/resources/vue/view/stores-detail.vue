@@ -1,4 +1,6 @@
 <template id="store-detail">
+  <navbar>
+  </navbar>
   <app-frame>
     <p>{{store.storeDescription}}</p>
   </app-frame>
