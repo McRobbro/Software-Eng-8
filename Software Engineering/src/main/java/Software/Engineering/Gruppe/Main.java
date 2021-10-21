@@ -2,6 +2,7 @@ package Software.Engineering.Gruppe;
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Repository.ProductRepository;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
+import Software.Engineering.Gruppe.Repository.UserRepository;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -20,6 +21,7 @@ public class Main {
 
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
         ProductRepository productRepository = new ProductRepository(sqliteDatabase);
+        UserRepository userRepository = new UserRepository(sqliteDatabase);
 
         System.out.println(storeRepository.getAllStores());
         System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());

@@ -5,7 +5,7 @@ public interface UserInterface {
 
     User createUser(String email, String username, String password);
 
-    User getSpecificUser(int userId, String email, String username, String password);
+    User getSpecificUser(int userId);
 
     boolean deleteUser(int userId);
 
