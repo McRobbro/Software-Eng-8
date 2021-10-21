@@ -59,8 +59,5 @@ public class Application {
         // localhost:7777/stores/johansens-butikk/Antique-Vase | api/stores/{slug}/{product-name}
         app.get("/api/products", productController::getAllProducts);
         app.get("/api/stores/{slug}/{productSlug}", productController::getSpecificProduct);
-
-        //udwnaudnawundauwdnuawnd
-        ////daduwnaudawnudnawudanwud
     }
 }
