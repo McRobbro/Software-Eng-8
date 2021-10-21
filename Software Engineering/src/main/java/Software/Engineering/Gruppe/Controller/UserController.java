@@ -2,16 +2,15 @@ package Software.Engineering.Gruppe.Controller;
 
 import Software.Engineering.Gruppe.Model.Product;
 import Software.Engineering.Gruppe.Repository.ProductRepository;
+import Software.Engineering.Gruppe.Repository.UserRepository;
 import io.javalin.http.Context;
 import java.util.List;
-
-
 
 public class UserController {
     private final UserRepository userRepository;
 
-    public UserController(UserRepostitory userRepostitory) {
-        this.userRepository = userRepostitory; }
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository; }
 
     //public void getAllUsers() {} // metode for å vise alle brukere?
 
