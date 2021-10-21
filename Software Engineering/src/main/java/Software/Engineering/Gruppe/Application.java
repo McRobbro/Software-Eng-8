@@ -32,7 +32,7 @@ public class Application {
         app.error(404, ctx -> {
             ctx.result("Generic 404 message");
         });
-        app.get("/login", new VueComponent("login-page"));
+        app.get("/signup", new VueComponent("login-page"));
 
         // Init repos
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
@@ -59,5 +59,7 @@ public class Application {
         // localhost:7777/stores/johansens-butikk/Antique-Vase | api/stores/{slug}/{product-name}
         app.get("/api/products", productController::getAllProducts);
         app.get("/api/stores/{slug}/{productSlug}", productController::getSpecificProduct);
+
+        //test!
     }
 }
