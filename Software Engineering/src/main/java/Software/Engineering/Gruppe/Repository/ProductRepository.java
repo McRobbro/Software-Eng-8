@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductRepository implements ProductInterface{
+public class ProductRepository implements ProductInterface {
 
     private final SqliteDatabase database;
 
@@ -23,7 +23,7 @@ public class ProductRepository implements ProductInterface{
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int productId = resultSet.getInt("productId");
-                String productSlug = resultSet.getString("slug");
+                String productSlug = resultSet.getString("productSlug");
                 String productName = resultSet.getString("productName");
                 String productImage = resultSet.getString("productImage");
                 String productDescription = resultSet.getString("productDescription");
@@ -42,15 +42,14 @@ public class ProductRepository implements ProductInterface{
     @Override
     public Product getSpecificProductBySlug(String SLUG)  {
         Product specificProduct = null;
-        String query = "select * from product where slug = ?";
-
+        String query = "select * from product where productSlug = ?";
         try (Connection connection = database.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, SLUG);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int productId = resultSet.getInt("productId");
-                String productSlug = resultSet.getString("slug");
+                String productSlug = resultSet.getString("productSlug");
                 String productName = resultSet.getString("productName");
                 String productImage = resultSet.getString("productImage");
                 String productDescription = resultSet.getString("productDescription");

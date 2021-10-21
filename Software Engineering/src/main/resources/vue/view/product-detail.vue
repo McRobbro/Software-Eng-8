@@ -1,0 +1,40 @@
+<template id="product-detail">
+  <navbar>
+  </navbar>
+  <app-frame>
+    <div v-if="product">
+      <a :href="``">
+        <img v-if="product.productImage" class="cover-image-frontpage" v-bind:src="product.productImage">
+        <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
+        {{product.productName}}
+        ({{product.productDescription}})
+      </a>
+    </div>
+  </app-frame>
+</template>
+<script>
+app.component("product-detail", {
+  template: "#product-detail",
+  data: () => ({
+    product: null,
+    storeProducts: [],
+  }),
+  created() {
+    const specificStore = this.$javalin.pathParams["slug"];
+    const specificProduct = this.$javalin.pathParams["productSlug"];
+    console.log("This store id: " + specificStore);
+    fetch(`/api/stores/${specificStore}/${specificProduct}`)
+        .then(res => res.json())
+        .then(json => this.storeProducts = json)
+        .catch(() => alert("Error while fetching specific product"));
+  }
+});
+</script>
+<style>
+img.cover-image-frontpage {
+  height: auto;
+  width: 100%;
+  padding-bottom: 20px;
+  max-height: auto;
+}
+</style>

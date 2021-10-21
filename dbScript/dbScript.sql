@@ -26,5 +26,21 @@ CREATE TABLE store_user (
     FOREIGN KEY (storeId) REFERENCES store(storeId)
 );
 
+CREATE TABLE products (
+    productId          INTEGER        PRIMARY KEY AUTOINCREMENT,
+    storeId            INT            NOT NULL,
+    productSlug        VARCHAR (45)   NOT NULL
+                                      UNIQUE,
+    productName        VARCHAR (45)   NOT NULL,
+    productImage       VARCHAR (1024) NOT NULL,
+    productDescription VARCHAR (255)  NOT NULL,
+    productCategory    VARCHAR (45)   NOT NULL,
+    productPrice       INT            NOT NULL,
+    FOREIGN KEY (
+        storeId
+    )
+    REFERENCES store (storeId) 
+);
+
 
 
