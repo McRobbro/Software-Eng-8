@@ -60,7 +60,7 @@ public class Application {
         app.get("/api/products", productController::getAllProducts);
         app.get("/api/stores/{slug}/{productSlug}", productController::getSpecificProduct);
 
+        //udwnaudnawundauwdnuawnd
         ////daduwnaudawnudnawudanwud
-
     }
 }
