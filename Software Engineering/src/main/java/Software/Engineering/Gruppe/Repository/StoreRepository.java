@@ -1,6 +1,7 @@
 package Software.Engineering.Gruppe.Repository;
 
-import Software.Engineering.Gruppe.Config.SqliteDatabase;
+import
+        Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Store;
 
 import java.sql.*;
