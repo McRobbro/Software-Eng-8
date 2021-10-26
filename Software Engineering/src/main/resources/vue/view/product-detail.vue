@@ -17,15 +17,17 @@ app.component("product-detail", {
   template: "#product-detail",
   data: () => ({
     product: null,
-    storeProducts: [],
+    slug: "",
   }),
   created() {
-    const specificStore = this.$javalin.pathParams["slug"];
-    const specificProduct = this.$javalin.pathParams["productSlug"];
+    const specificStore = this.$javalin.pathParams["storeSlug"];
+    this.slug = specificStore;
     console.log("This store id: " + specificStore);
+    const specificProduct = this.$javalin.pathParams["prodSlug"];
+    this.product = specificProduct
     fetch(`/api/stores/${specificStore}/${specificProduct}`)
         .then(res => res.json())
-        .then(json => this.storeProducts = json)
+        .then(json => this.product = json)
         .catch(() => alert("Error while fetching specific product"));
   }
 });
@@ -33,7 +35,7 @@ app.component("product-detail", {
 <style>
 img.cover-image-frontpage {
   height: auto;
-  width: 100%;
+  width: 10%;
   padding-bottom: 20px;
   max-height: auto;
 }
