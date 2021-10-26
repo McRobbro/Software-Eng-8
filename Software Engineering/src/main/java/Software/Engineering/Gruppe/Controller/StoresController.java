@@ -25,7 +25,7 @@ public class StoresController {
 
     public void getSpecificStore(Context context) {
 
-        String slug = context.pathParam("{slug}");
+        String slug = context.pathParam("{storeSlug}");
         Store getStoreBySlug = storeRepository.getSpecificStoreBySlug(slug);
         context.json(getStoreBySlug);
 
