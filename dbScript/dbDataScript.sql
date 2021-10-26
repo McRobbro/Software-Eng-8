@@ -51,12 +51,6 @@ insert into products (productId, storeId, productSlug, productName, productImage
 
 /**************************/
 
-insert into `order` (orderId, orderDate, userId, storeId)
-			VALUES(1, "2021-10-26", 101, 5); 
-            
-insert into orderline (orderId, productId, storeId)
-		VALUES(1, 3, 5); 
-            
 select * from user;
 
 select * from store;
