@@ -24,7 +24,7 @@ public class Main {
         UserRepository userRepository = new UserRepository(sqliteDatabase);
 
         System.out.println(storeRepository.getAllStores());
-        System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
+        System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks butikk").getSlug());
         System.out.println(storeRepository.getSpecificStoreBySlug("johansens-butikk").getSlug());
         System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
 
@@ -46,6 +46,11 @@ public class Main {
        // System.out.println(productRepository.createProduct("LUX-taklampe", "LUX taklampe", "null", "lorem ipsum", "Belysning"));
         //System.out.println(productRepository.getAllProducts());
         //System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
+        System.out.println("\nDivider\n");
+        System.out.println(productRepository.getSpecificProduct("johansens-butikk", "LUX-taklampe"));
+        System.out.println(productRepository.getSpecificProduct("Fredriks butikk", "LUX-taklampe"));
+        System.out.println(productRepository.getSpecificProduct("philips-butikk", "Da-Vinci-Barglob-modell-102"));
+
 
     }
 }
