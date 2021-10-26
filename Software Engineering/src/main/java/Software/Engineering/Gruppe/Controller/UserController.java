@@ -12,6 +12,7 @@ public class UserController {
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository; }
 
+
     //public void getAllUsers() {} // metode for å vise alle brukere?
 
     //public void getSpecificUser() {} // metode for å vise en bruker?
