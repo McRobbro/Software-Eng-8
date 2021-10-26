@@ -47,5 +47,7 @@ public class Main {
         //System.out.println(productRepository.getAllProducts());
         //System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
 
+
+        System.out.println(userRepository.getSpecificUser(100));
     }
 }
