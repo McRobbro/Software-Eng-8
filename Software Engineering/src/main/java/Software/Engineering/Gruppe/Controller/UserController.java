@@ -1,7 +1,6 @@
 package Software.Engineering.Gruppe.Controller;
 
-import Software.Engineering.Gruppe.Model.Product;
-import Software.Engineering.Gruppe.Repository.ProductRepository;
+import Software.Engineering.Gruppe.Model.User;
 import Software.Engineering.Gruppe.Repository.UserRepository;
 import io.javalin.http.Context;
 import java.util.List;
@@ -13,9 +12,16 @@ public class UserController {
         this.userRepository = userRepository; }
 
 
-    //public void getAllUsers() {} // metode for å vise alle brukere?
+    // Metoden må endres/tilpasses. Skal vi ha med denne? Må lage metode i Interface i så fall
+    /*public void getAllUsers() {
+        List<User> allUsers = userRepository.getAllUsers();
+        context.json(allUsers);
+    }
 
-    //public void getSpecificUser() {} // metode for å vise en bruker?
-
-
+    // Må fikses
+    public void getSpecificUser() {
+        String username = context.pathParam("{username}");
+        User getUser = userRepository.getSpecificUser(username);
+        context.json(getUser);
+    }*/
 }

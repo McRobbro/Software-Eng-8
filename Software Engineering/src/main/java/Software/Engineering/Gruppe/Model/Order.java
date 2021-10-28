@@ -16,6 +16,11 @@ public class Order {
         this.storeId = storeId;
     }
 
+    public Order(LocalDate orderDate, User userId, Store storeId) {
+        this.orderDate = orderDate;
+        this.userId = userId;
+        this.storeId = storeId;
+    }
 
 
     public int getOrderId() {
