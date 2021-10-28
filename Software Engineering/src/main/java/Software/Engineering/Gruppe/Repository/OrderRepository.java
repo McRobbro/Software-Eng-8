@@ -28,7 +28,7 @@ public class OrderRepository implements OrderInterface{
 
     @Override
     public Order createOrder(LocalDate orderDate, User userId, Store storeId){
-        String query = "INSERT INTO store(orderId, orderDate, userId, storeId) VALUES(?,?,?,?)";
+        String query = "INSERT INTO `order`(orderDate, userId, storeId) VALUES(?,?,?)";
 
         try (Connection connection = database.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -47,9 +47,9 @@ public class OrderRepository implements OrderInterface{
 
 
     @Override
-    public boolean deleteOrder(String slug){
+    public boolean deleteOrder(String slug) {
         return false;
-        }
+    }
 
 
 }
