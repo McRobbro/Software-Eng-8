@@ -65,7 +65,6 @@ public class StoreRepository implements StoreInterface {
         }
         return null;
     }
-
     @Override
     public Store createStore(String slug, String storeName, String storeImage, String storeDescription) {
         String query = "INSERT INTO store(slug, storeName, storeImage, storeDescription) VALUES(?,?,?,?)";
