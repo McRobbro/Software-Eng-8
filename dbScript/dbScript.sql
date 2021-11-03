@@ -42,5 +42,23 @@ CREATE TABLE products (
     REFERENCES store (storeId) 
 );
 
+CREATE TABLE orders (
+  orderId INTEGER PRIMARY KEY AUTOINCREMENT,
+  orderDate DATE NOT NULL,
+  userId,
+  storeId,  
+  FOREIGN KEY (userId) REFERENCES user(userId)
+  FOREIGN KEY (storeId) REFERENCES store(storeId)
+); 
+
+CREATE TABLE orderline (
+orderId INTEGER NOT NULL, 
+productId INTEGER NOT NULL,
+storeId INTEGER NOT NULL,
+PRIMARY KEY(orderId, productId, storeId),
+FOREIGN KEY (orderId) REFERENCES orders(orderId),
+FOREIGN KEY (productId) REFERENCES product(productId)
+FOREIGN KEY (storeId) REFERENCES store(storeId)
+); 
 
 

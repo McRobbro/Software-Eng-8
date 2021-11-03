@@ -1,5 +1,6 @@
 package Software.Engineering.Gruppe;
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
+import Software.Engineering.Gruppe.Repository.OrderRepository;
 import Software.Engineering.Gruppe.Repository.ProductRepository;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 import Software.Engineering.Gruppe.Repository.UserRepository;
@@ -9,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 
 public class Main {
@@ -22,6 +24,7 @@ public class Main {
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
         ProductRepository productRepository = new ProductRepository(sqliteDatabase);
         UserRepository userRepository = new UserRepository(sqliteDatabase);
+        OrderRepository orderRepository = new OrderRepository(sqliteDatabase);
 
         System.out.println(storeRepository.getAllStores());
         System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks butikk").getSlug());
@@ -50,6 +53,12 @@ public class Main {
         System.out.println(productRepository.getSpecificProduct("johansens-butikk", "LUX-taklampe"));
         System.out.println(productRepository.getSpecificProduct("Fredriks butikk", "LUX-taklampe"));
         System.out.println(productRepository.getSpecificProduct("philips-butikk", "Da-Vinci-Barglob-modell-102"));
+
+
+        System.out.println(userRepository.getSpecificUser(100));
+
+        System.out.println(orderRepository.createOrder(LocalDate.now(), userRepository.getSpecificUser(100),
+                storeRepository.getSpecificStoreBySlug("philips-butikk")));
 
 
     }
