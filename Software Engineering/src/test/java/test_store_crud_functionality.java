@@ -22,6 +22,7 @@ public class test_store_crud_functionality {
     StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
 
 
+
     @BeforeEach
     public void data_setup() {
         storeRepository.createStore("DummySlug", "DummyName", "DummyUrl", "dummyBio");
@@ -29,11 +30,13 @@ public class test_store_crud_functionality {
     }
 
 
+
     @AfterEach
     public void tear_down() {
         storeRepository.deleteStore("DummySlug");
         storeRepository.deleteStore("DummySlugDummySlug");
     }
+
 
 
     @Test
@@ -58,6 +61,7 @@ public class test_store_crud_functionality {
         ));
 
     }
+
 
 
     @Test

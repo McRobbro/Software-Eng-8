@@ -10,7 +10,6 @@
           {{product.productName}}
           ({{product.productDescription}})
         </a>
-
       </li>
     </ul>
   </app-frame>
