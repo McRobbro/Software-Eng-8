@@ -25,21 +25,6 @@ public class Application {
         }).start(7777);
         JavalinVue.rootDirectory(c -> c.classpathPath("/vue"));
         JavalinVue.vueVersion(c -> c.vue3("app"));
-        // Init Vue Files
-        app.get("/stores", new VueComponent("store-overview"));
-        app.get("/stores/{slug}", new VueComponent("store-detail"));
-        app.get("/stores/{slug}/{productSlug}", new VueComponent("product-detail"));
-        app.error(404, ctx -> {
-            ctx.result("Generic 404 message");
-        });
-        app.get("/login", new VueComponent("login-page"));
-
-        // Init repos
-        StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
-        ProductRepository productRepository = new ProductRepository(sqliteDatabase);
-        // Init controllers
-        StoresController storesController = new StoresController(storeRepository);
-        ProductController productController = new ProductController(productRepository);
 
         //redirect to homepage
         app.before("/", ctx -> ctx.redirect("/stores"));
@@ -48,8 +33,29 @@ public class Application {
             ctx.result("Platform home page");
         });
 
+        // Init Vue Files
+        app.get("/stores", new VueComponent("store-overview"));
+        app.get("/stores/{storeSlug}", new VueComponent("store-detail"));
+        app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"));
+        app.get("/login", new VueComponent("login-page"));
+        app.error(404, ctx -> {
+            ctx.result("Generic 404 message");
+        });
+
+        // Init repos
+        StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
+        ProductRepository productRepository = new ProductRepository(sqliteDatabase);
+        // Init controllers
+        StoresController storesController = new StoresController(storeRepository);
+        ProductController productController = new ProductController(productRepository);
+
         app.get("/api/stores", storesController::getAllStores);
-        app.get("/api/stores/{slug}", storesController::getSpecificStore);
+        app.get("/api/stores/{storeSlug}", productController::getProductsFromStore);
+        app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct);
+
+        app.get("/api/products", productController::getAllProducts);
+
+        //MOVED COMMENTS
 
         // how will the path be for the products?
         // the products should be gotten when entering a pages slug, as in when you get to a specific store
@@ -57,7 +63,5 @@ public class Application {
         // localhost:7777/stores/johansens-butikk | api/stores/{slug}
         // when you open a specific product you'd want that to be
         // localhost:7777/stores/johansens-butikk/Antique-Vase | api/stores/{slug}/{product-name}
-        app.get("/api/products", productController::getAllProducts);
-        app.get("/api/stores/{slug}/{productSlug}", productController::getSpecificProduct);
     }
 }

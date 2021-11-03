@@ -3,12 +3,13 @@ package Software.Engineering.Gruppe.Model;
 public class Product {
 
     private int productId;
+    private int storeId;
     private String productSlug;
     private String productName;
     private String productImage;
     private String productDescription;
     private String productCategory;
-    //private int pris;
+    private long pris;
 
     public Product(int productId, String productSlug, String productName, String productImage, String productDescription, String productCategory) {
         this.productId = productId;
@@ -25,6 +26,27 @@ public class Product {
         this.productImage = productImage;
         this.productDescription = productDescription;
         this.productCategory = productCategory;
+    }
+
+    public Product(int productId, int storeId, String productSlug, String productName, String productImage, String productDescription, String productCategory) {
+        this.productId = productId;
+        this.storeId = storeId;
+        this.productSlug = productSlug;
+        this.productName = productName;
+        this.productImage = productImage;
+        this.productDescription = productDescription;
+        this.productCategory = productCategory;
+    }
+
+    public Product(int productId, int storeId, String productSlug, String productName, String productImage, String productDescription, String productCategory, long pris) {
+        this.productId = productId;
+        this.storeId = storeId;
+        this.productSlug = productSlug;
+        this.productName = productName;
+        this.productImage = productImage;
+        this.productDescription = productDescription;
+        this.productCategory = productCategory;
+        this.pris = pris;
     }
 
     public int getProductId() {
@@ -77,13 +99,15 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "Id=" + productId +
-                ", slug='" + productSlug + '\'' +
-                ", Name='" + productName + '\'' +
-                ", Image='" + productImage + '\'' +
-                ", Description='" + productDescription + '\'' +
-                ", Category='" + productCategory + '\'' +
+        return "productName{" +
+                "productId=" + productId +
+                ", storeId=" + storeId +
+                ", productSlug='" + productSlug + '\'' +
+                ", productName='" + productName + '\'' +
+                ", productImage='" + productImage + '\'' +
+                ", productDescription='" + productDescription + '\'' +
+                ", productCategory='" + productCategory + '\'' +
+                ", pris=" + pris +
                 '}';
     }
 }

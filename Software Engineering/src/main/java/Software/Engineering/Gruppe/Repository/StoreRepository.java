@@ -18,17 +18,17 @@ public class StoreRepository implements StoreInterface {
     @Override
     public List<Store> getAllStores() {
         List<Store> storeList = new ArrayList<>();
-        String query = "select * from store";
+        String query = "SELECT * FROM store";
 
-        try (Connection connection = database.getConnection()) {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-                int storeId = resultSet.getInt("storeId");
-                String slug = resultSet.getString("slug");
-                String storeName = resultSet.getString("storeName");
-                String storeImage = resultSet.getString("storeImage");
-                String storeDescription = resultSet.getString("storeDescription");
+        try (Connection cn = database.getConnection()) {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                int storeId = rs.getInt("storeId");
+                String slug = rs.getString("slug");
+                String storeName = rs.getString("storeName");
+                String storeImage = rs.getString("storeImage");
+                String storeDescription = rs.getString("storeDescription");
                 storeList.add(new Store(storeId, slug, storeName, storeImage, storeDescription));
             }
             return storeList;
@@ -41,23 +41,23 @@ public class StoreRepository implements StoreInterface {
     }
 
     @Override
-    public Store getSpecificStoreBySlug(String SLUG) {
-        String query = "select * from " + "store where slug = ?";
-        Store spesificStore = null;
+    public Store getSpecificStoreBySlug(String storeSlug) {
+        String query = "SELECT * FROM store WHERE slug = ?";
+        Store specificStore = null;
 
-        try (Connection connection = database.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, SLUG);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                int storeId = resultSet.getInt("storeId");
-                String slug = resultSet.getString("slug");
-                String storeName = resultSet.getString("storeName");
-                String storeImage = resultSet.getString("storeImage");
-                String storeDescription = resultSet.getString("storeDescription");
-                spesificStore = new Store(storeId, slug, storeName, storeImage, storeDescription);
+        try (Connection cn = database.getConnection()) {
+            PreparedStatement st = cn.prepareStatement(query);
+            st.setString(1, storeSlug);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int storeId = rs.getInt("storeId");
+                String slug = rs.getString("slug");
+                String storeName = rs.getString("storeName");
+                String storeImage = rs.getString("storeImage");
+                String storeDescription = rs.getString("storeDescription");
+                specificStore = new Store(storeId, slug, storeName, storeImage, storeDescription);
             }
-            return spesificStore;
+            return specificStore;
 
 
         } catch (SQLException throwables) {
@@ -69,13 +69,13 @@ public class StoreRepository implements StoreInterface {
     public Store createStore(String slug, String storeName, String storeImage, String storeDescription) {
         String query = "INSERT INTO store(slug, storeName, storeImage, storeDescription) VALUES(?,?,?,?)";
 
-        try (Connection connection = database.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, slug);
-            preparedStatement.setString(2, storeName);
-            preparedStatement.setString(3, storeImage);
-            preparedStatement.setString(4, storeDescription);
-            preparedStatement.executeUpdate();
+        try (Connection cn = database.getConnection();
+             PreparedStatement st = cn.prepareStatement(query)) {
+            st.setString(1, slug);
+            st.setString(2, storeName);
+            st.setString(3, storeImage);
+            st.setString(4, storeDescription);
+            st.executeUpdate();
             return new Store(slug, storeName, storeImage, storeDescription);
 
         } catch (SQLException throwables) {
@@ -93,14 +93,14 @@ public class StoreRepository implements StoreInterface {
                 "storeDescription = ?" +
                 "WHERE storeId = ?";
 
-        try (Connection connection = database.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, slug);
-            preparedStatement.setString(2, storeName);
-            preparedStatement.setString(3, storeImage);
-            preparedStatement.setString(4, storeDescription);
-            preparedStatement.setInt(5, storeId);
-            preparedStatement.executeUpdate();
+        try (Connection cn = database.getConnection();
+             PreparedStatement st = cn.prepareStatement(query)) {
+            st.setString(1, slug);
+            st.setString(2, storeName);
+            st.setString(3, storeImage);
+            st.setString(4, storeDescription);
+            st.setInt(5, storeId);
+            st.executeUpdate();
             return new Store(storeId, slug, storeName, storeImage, storeDescription);
 
         } catch (SQLException throwables) {
@@ -111,12 +111,12 @@ public class StoreRepository implements StoreInterface {
     }
 
     @Override
-    public boolean deleteStore(String slug) {
+    public boolean deleteStore(String storeSlug) {
         String query = "DELETE FROM store WHERE slug = ?";
-        try (Connection connection = database.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, slug);
-            preparedStatement.executeUpdate();
+        try (Connection cn = database.getConnection();
+             PreparedStatement st = cn.prepareStatement(query)) {
+            st.setString(1, storeSlug);
+            st.executeUpdate();
             return true;
 
         } catch (SQLException throwables) {
