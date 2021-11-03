@@ -11,13 +11,10 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class OrderRepository implements OrderInterface {
+public class OrderRepository implements OrderInterface{
 
     private final SqliteDatabase database;
-
-    public OrderRepository(SqliteDatabase database) {
-        this.database = database;
-    }
+    public OrderRepository(SqliteDatabase database) {this.database = database;}
 
     @Override
     public List<Order> getAllOrders() {
@@ -30,7 +27,7 @@ public class OrderRepository implements OrderInterface {
     }*/
 
     @Override
-    public Order createOrder(LocalDate orderDate, User userId, Store storeId) {
+    public Order createOrder(LocalDate orderDate, User userId, Store storeId){
         String query = "INSERT INTO `order`(orderDate, userId, storeId) VALUES(?,?,?)";
 
         try (Connection connection = database.getConnection();
@@ -56,4 +53,3 @@ public class OrderRepository implements OrderInterface {
 
 
 }
-
