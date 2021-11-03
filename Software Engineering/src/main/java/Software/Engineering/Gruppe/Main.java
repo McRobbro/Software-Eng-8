@@ -60,12 +60,5 @@ public class Main {
         System.out.println(orderRepository.createOrder(LocalDate.now(), userRepository.getSpecificUser(100),
                 storeRepository.getSpecificStoreBySlug("philips-butikk")));
 
-
-        System.out.println(userRepository.getSpecificUser(100));
-
-        System.out.println(orderRepository.createOrder(LocalDate.now(), userRepository.getSpecificUser(100),
-                storeRepository.getSpecificStoreBySlug("philips-butikk")));
-
-
     }
 }
