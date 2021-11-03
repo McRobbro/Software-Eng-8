@@ -1,21 +1,22 @@
 package Software.Engineering.Gruppe;
+
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
-import Software.Engineering.Gruppe.Repository.OrderRepository;
-import Software.Engineering.Gruppe.Repository.ProductRepository;
-import Software.Engineering.Gruppe.Repository.StoreRepository;
-import Software.Engineering.Gruppe.Repository.UserRepository;
+import Software.Engineering.Gruppe.Model.Auction;
+import Software.Engineering.Gruppe.Repository.*;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.Period;
 
 
 public class Main {
 
+
+
     public static void main(String[] args) throws IOException {
+
+
 
         String userDir = System.getProperty("user.dir");
         String databaseDir = "\\db\\group8dbftw.db";
@@ -25,6 +26,8 @@ public class Main {
         ProductRepository productRepository = new ProductRepository(sqliteDatabase);
         UserRepository userRepository = new UserRepository(sqliteDatabase);
         OrderRepository orderRepository = new OrderRepository(sqliteDatabase);
+        AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase);
+        BidRepository bidRepository = new BidRepository(sqliteDatabase);
 
         System.out.println(storeRepository.getAllStores());
         System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
@@ -50,10 +53,30 @@ public class Main {
         //System.out.println(productRepository.getAllProducts());
         //System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
 
-        System.out.println(userRepository.getSpecificUser(100));
+       // System.out.println(userRepository.getSpecificUser(100));
 
-        System.out.println(orderRepository.createOrder(LocalDate.now(), userRepository.getSpecificUser(100),
-                storeRepository.getSpecificStoreBySlug("philips-butikk")));
+       // System.out.println(orderRepository.createOrder(LocalDate.now(), userRepository.getSpecificUser(100),
+        //        storeRepository.getSpecificStoreBySlug("philips-butikk")));
+
+        LocalDateTime startDate = LocalDateTime.of(2021,
+                Month.JULY, 11, 17, 0, 0);
+
+        LocalDateTime endDate = LocalDateTime.of(2021,
+                Month.JULY, 11, 18, 30, 0);
+
+        Auction auction1 = auctionRepository.createAuction(
+                storeRepository.getSpecificStoreBySlug("philips-butikk"),
+                productRepository.getSpecificProductBySlug("LUX-taklampe"),
+                startDate, endDate);
+
+        System.out.println(auction1.getAuctionTimeDurationInMin());
+
+
+        Period period = Period.between(startDate.toLocalDate(), endDate.toLocalDate());
+
+        System.out.println(userRepository.getSpecificUser(100).getUserId());
+
+      //  bidRepository.makeBid(userRepository.getSpecificUser(100), auction1, 100);
 
 
     }

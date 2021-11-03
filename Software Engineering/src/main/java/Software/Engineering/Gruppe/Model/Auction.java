@@ -1,6 +1,8 @@
 package Software.Engineering.Gruppe.Model;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+
 
 public class Auction {
     private int auctionId;
@@ -8,6 +10,7 @@ public class Auction {
     private Product productId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+
 
     public Auction(int auctionId, Store storeId, Product productId, LocalDateTime startTime, LocalDateTime endTime) {
         this.auctionId = auctionId;
@@ -17,6 +20,7 @@ public class Auction {
         this.endTime = endTime;
     }
 
+
     public Auction(Store storeId, Product productId, LocalDateTime startTime, LocalDateTime endTime) {
         this.storeId = storeId;
         this.productId = productId;
@@ -24,6 +28,10 @@ public class Auction {
         this.endTime = endTime;
     }
 
+    public Long getAuctionTimeDurationInMin() {
+        Duration duration = Duration.between(startTime, endTime);
+        return duration.toMinutes();
+    }
 
 
     public int getAuctionId() {
@@ -77,3 +85,4 @@ public class Auction {
                 '}';
     }
 }
+
