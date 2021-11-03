@@ -88,14 +88,14 @@ public class ProductRepository implements ProductInterface {
     @Override
     public Product getSpecificProduct(String storeSlug, String prodSlug) {
         Product specificProduct = null;
-        String query = "SELECT * FROM product WHERE storeId = ? AND productSlug = ?";
+        //String query = "SELECT * FROM product WHERE storeId = ? AND productSlug = ?";
+        String query = "SELECT * FROM product WHERE productSlug = ?";
         try (Connection cn = database.getConnection()) {
             PreparedStatement st = cn.prepareStatement(query);
-            int storeIdd = getStoreIdFromSlug(storeSlug);
-            System.out.println(storeIdd);
-            st.setInt(1, storeIdd);
-            System.out.println(storeIdd);
-            st.setString(2, prodSlug);
+            //int storeIdd = getStoreIdFromSlug(storeSlug);
+            //st.setInt(1, storeIdd);
+            st.setString(1, prodSlug);
+            //st.setString(2, prodSlug);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 int productId = rs.getInt("productId");
