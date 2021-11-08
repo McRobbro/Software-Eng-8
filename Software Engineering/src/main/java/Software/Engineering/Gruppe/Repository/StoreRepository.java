@@ -65,6 +65,33 @@ public class StoreRepository implements StoreInterface {
         }
         return null;
     }
+
+    @Override
+    public Store getSpecificStoreById(int storeId) {
+        Store specificStore = null;
+        String query = "SELECT * FROM store WHERE storeId = ?";
+
+        try (Connection cn = database.getConnection()) {
+            PreparedStatement st = cn.prepareStatement(query);
+            st.setInt(1, storeId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int Id = rs.getInt("storeId");
+                String slug = rs.getString("slug");
+                String storeName = rs.getString("storeName");
+                String storeImage = rs.getString("storeImage");
+                String storeDescription = rs.getString("storeDescription");
+                specificStore = new Store(Id, slug, storeName, storeImage, storeDescription);
+            }
+            return specificStore;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+
     @Override
     public Store createStore(String slug, String storeName, String storeImage, String storeDescription) {
         String query = "INSERT INTO store(slug, storeName, storeImage, storeDescription) VALUES(?,?,?,?)";

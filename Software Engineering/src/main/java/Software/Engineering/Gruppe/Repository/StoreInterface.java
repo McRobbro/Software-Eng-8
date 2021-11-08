@@ -10,6 +10,8 @@ public interface StoreInterface {
 
     Store getSpecificStoreBySlug(String SLUG);
 
+    Store getSpecificStoreById(int storeId);
+
 
     Store createStore(String slug, String storeName, String storeImage, String storeDescription);
 
