@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Period;
+import java.util.Date;
 
 
 public class Main {
@@ -15,7 +16,6 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-
 
 
         String userDir = System.getProperty("user.dir");
@@ -26,7 +26,7 @@ public class Main {
         ProductRepository productRepository = new ProductRepository(sqliteDatabase);
         UserRepository userRepository = new UserRepository(sqliteDatabase);
         OrderRepository orderRepository = new OrderRepository(sqliteDatabase);
-        AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase);
+        AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase, storeRepository, productRepository);
         BidRepository bidRepository = new BidRepository(sqliteDatabase);
 
         System.out.println(storeRepository.getAllStores());
@@ -64,19 +64,20 @@ public class Main {
 
        // System.out.println(orderRepository.createOrder(LocalDate.now(), userRepository.getSpecificUser(100),
         //        storeRepository.getSpecificStoreBySlug("philips-butikk")));
-
         LocalDateTime startDate = LocalDateTime.of(2021,
                 Month.JULY, 11, 17, 0, 0);
 
         LocalDateTime endDate = LocalDateTime.of(2021,
                 Month.JULY, 11, 18, 30, 0);
 
-       // Auction auction1 = auctionRepository.createAuction(2, 2,
-        //        startDate, endDate);
+       // System.out.println(storeRepository.getAllStores());
+
+        Auction auction1 = auctionRepository.createAuction(storeRepository.getSpecificStoreBySlug("philips-butikk"),
+                                                            productRepository.getSpecificProductBySlug("LUX-taklampe"), startDate, endDate);
 
 
-
-       // System.out.println(auction1);
+       System.out.println(auction1);
+        System.out.println(auction1.getAuctionTimeDurationInMin());
        // System.out.println(auction1.getAuctionTimeDurationInMin());
 
 
@@ -86,7 +87,19 @@ public class Main {
 
 
         System.out.println(productRepository.getSpecificProduct("philips-butikk", "LUX-taklampe"));
-      //  bidRepository.makeBid(userRepository.getSpecificUser(100), auction1, 100);
+
+
+
+        System.out.println("************************");
+       System.out.println(auctionRepository.getAuctionById(71));
+
+        System.out.println(storeRepository.getSpecificStoreById(2));
+
+
+        System.out.println("**************************************");
+        bidRepository.makeBid(userRepository.getSpecificUser(100), auctionRepository.getAuctionById(81), 100);
+
+        System.out.println(auctionRepository.getAuctionById(81));
 
     }
 }

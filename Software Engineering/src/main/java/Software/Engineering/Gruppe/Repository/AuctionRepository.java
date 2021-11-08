@@ -21,8 +21,10 @@ public class AuctionRepository implements AuctionInterface {
     StoreRepository storeRepository;
     ProductRepository productRepository;
 
-    public AuctionRepository(SqliteDatabase database) {
+    public AuctionRepository(SqliteDatabase database, StoreRepository storeRepository, ProductRepository productRepository) {
         this.database = database;
+        this.storeRepository = storeRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -45,15 +47,10 @@ public class AuctionRepository implements AuctionInterface {
         return null;
     }
 
+
     @Override
     public Auction getAuctionById(int auctionId) {
-        return null;
-    }
-
-/*
-    @Override
-    public Auction getAuctionById(int auctionId) {
-
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         Auction spesificAuction = null;
         String query="select * from auction where auctionId = ?";
         try (Connection connection = database.getConnection()) {
@@ -64,13 +61,14 @@ public class AuctionRepository implements AuctionInterface {
                 int auction = resultSet.getInt("auctionId");
                 int storeId = resultSet.getInt("storeId");
                 int productId = resultSet.getInt("productId");
-                Date startDate = resultSet.getDate("start_time");
-                Date endDate = resultSet.getDate("start_time");
-                LocalDateTime ldtSt = LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
-                LocalDateTime ldtEt = LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault());
-                Store store = storeRepository.getSpecificStoreBySlug();
-                Product product = productRepository.getSpecificProduct();
-                spesificAuction = new Auction(auction, store, productId, ldtSt, ldtEt);
+                String startDate = resultSet.getString("start_time");
+                String endDate = resultSet.getString("end_time");
+                Store store = storeRepository.getSpecificStoreById(storeId);
+                Product product = productRepository.getSpecificProductById(productId);
+                LocalDateTime ldtStart = LocalDateTime.parse(startDate, format);
+                LocalDateTime ldtEnd = LocalDateTime.parse(endDate, format);
+                spesificAuction = new Auction(auction, store, product, ldtStart, ldtEnd);
+                return spesificAuction;
             }
 
         } catch (SQLException throwables) {
@@ -80,6 +78,7 @@ public class AuctionRepository implements AuctionInterface {
         return null;
     }
 
-*/
+
+
 
 }

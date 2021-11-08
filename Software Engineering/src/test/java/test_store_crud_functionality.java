@@ -26,7 +26,6 @@ public class test_store_crud_functionality {
     @BeforeEach
     public void data_setup() {
         storeRepository.createStore("DummySlug", "DummyName", "DummyUrl", "dummyBio");
-
     }
 
 
@@ -47,7 +46,6 @@ public class test_store_crud_functionality {
                 hasProperty("storeImage", is("DummyUrl")),
                 hasProperty("storeDescription", is("dummyBio"))
         ));
-
     }
 
 

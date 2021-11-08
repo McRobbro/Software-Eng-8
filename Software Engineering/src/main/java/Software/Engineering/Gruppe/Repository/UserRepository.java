@@ -41,10 +41,11 @@ public class UserRepository implements UserInterface {
             statement.setString(1, String.valueOf(userId));
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
+                int user = resultSet.getInt("userId");
                 String email = resultSet.getString("email");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
-                specificUser = new User(email, username, password);
+                specificUser = new User(user, email, username, password);
             }
 
             return specificUser;

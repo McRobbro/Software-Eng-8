@@ -27,7 +27,7 @@ public class OrderRepository implements OrderInterface{
     }*/
 
     @Override
-    public Order createOrder(LocalDate orderDate, User userId, Store storeId){
+    public Order createOrder(LocalDate orderDate, User userId, Store storeId) {
         String query = "INSERT INTO `order`(orderDate, userId, storeId) VALUES(?,?,?)";
 
         try (Connection connection = database.getConnection();

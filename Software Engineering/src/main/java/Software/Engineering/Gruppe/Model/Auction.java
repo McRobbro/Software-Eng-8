@@ -2,6 +2,7 @@ package Software.Engineering.Gruppe.Model;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 
 public class Auction {
@@ -10,7 +11,6 @@ public class Auction {
     private Product product;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-
 
     public Auction(int auctionId, Store store, Product product, LocalDateTime startTime, LocalDateTime endTime) {
         this.auctionId = auctionId;
@@ -31,7 +31,6 @@ public class Auction {
         Duration duration = Duration.between(startTime, endTime);
         return duration.toMinutes();
     }
-
 
     public int getAuctionId() {
         return auctionId;

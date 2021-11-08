@@ -5,6 +5,7 @@ import Software.Engineering.Gruppe.Model.Product;
 import Software.Engineering.Gruppe.Model.Store;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public interface AuctionInterface {
 
