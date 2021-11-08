@@ -53,12 +53,14 @@ public class Main {
         //System.out.println(productRepository.getAllProducts());
         //System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
         System.out.println("\nDivider\n");
-        System.out.println(productRepository.getSpecificProduct("johansens-butikk", "LUX-taklampe"));
-        System.out.println(productRepository.getSpecificProduct("Fredriks-butikk", "LUX-taklampe"));
-        System.out.println(productRepository.getSpecificProduct("philips-butikk", "Da-Vinci-Barglob-modell-102"));
+        //System.out.println(productRepository.getSpecificProduct("johansens-butikk", "LUX-taklampe"));
+        //System.out.println(productRepository.getSpecificProduct("Fredriks-butikk", "LUX-taklampe"));
+        //System.out.println(productRepository.getSpecificProduct("philips-butikk", "Da-Vinci-Barglob-modell-102"));
 
 
        // System.out.println(userRepository.getSpecificUser(100));
+        System.out.println("product1: ");
+        System.out.println(productRepository.getSpecificProductById( 1));
 
        // System.out.println(orderRepository.createOrder(LocalDate.now(), userRepository.getSpecificUser(100),
         //        storeRepository.getSpecificStoreBySlug("philips-butikk")));

@@ -143,6 +143,32 @@ public class ProductRepository implements ProductInterface {
     }
 
     @Override
+    public Product getSpecificProductById(int prodId) {
+        Product specificProduct = null;
+        String query = "SELECT * FROM product WHERE productId = ?";
+
+        try (Connection cn = database.getConnection()) {
+            PreparedStatement st = cn.prepareStatement(query);
+            st.setInt(1, prodId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int productId = rs.getInt("productId");
+                String pSlug = rs.getString("productSlug");
+                String productName = rs.getString("productName");
+                String productImage = rs.getString("productImage");
+                String productDescription = rs.getString("productDescription");
+                String productCategory = rs.getString("productCategory");
+                specificProduct = new Product(productId, pSlug, productName, productImage, productDescription, productCategory);
+            }
+            return specificProduct;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public Product createProduct(String productSlug, String productName, String productImage, String productDescription, String productCategory) {
         String query = "INSERT INTO product(productSlug, productName, productImage, productDescription, productCategory) VALUES(?,?,?,?,?)";
 

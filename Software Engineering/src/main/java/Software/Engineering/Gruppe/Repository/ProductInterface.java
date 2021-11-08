@@ -15,6 +15,8 @@ public interface ProductInterface {
 
     Product getSpecificProductBySlug(String SLUG);
 
+    Product getSpecificProductById(int prodId);
+
     Product createProduct(String productSlug, String productName, String productImage, String productDescription, String productCategory);
 
     Product updateProduct(int productId, String productSlug, String productName, String productImage, String productDescription, String productCategory);
