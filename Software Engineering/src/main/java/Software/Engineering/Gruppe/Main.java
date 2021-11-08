@@ -71,9 +71,12 @@ public class Main {
 
         Auction auction1 = auctionRepository.createAuction(
                 storeRepository.getSpecificStoreBySlug("philips-butikk"),
-                productRepository.getSpecificProductBySlug("LUX-taklampe"),
+                productRepository.getSpecificProduct("philips-butikk","LUX-taklampe"),
                 startDate, endDate);
 
+
+
+        System.out.println(auction1);
         System.out.println(auction1.getAuctionTimeDurationInMin());
 
 
@@ -81,6 +84,8 @@ public class Main {
 
         System.out.println(userRepository.getSpecificUser(100).getUserId());
 
+
+        System.out.println(productRepository.getSpecificProduct("philips-butikk", "LUX-taklampe"));
       //  bidRepository.makeBid(userRepository.getSpecificUser(100), auction1, 100);
 
     }

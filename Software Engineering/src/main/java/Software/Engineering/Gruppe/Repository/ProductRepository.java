@@ -127,11 +127,11 @@ public class ProductRepository implements ProductInterface {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 int prodId = rs.getInt("prodId");
-                String prodSlug = rs.getString("slug");
-                String prodName = rs.getString("product name");
-                String prodImage = rs.getString("product image");
-                String prodDescription = rs.getString("description");
-                String productCategory = rs.getString("category");
+                String prodSlug = rs.getString("productSlug");
+                String prodName = rs.getString("productName");
+                String prodImage = rs.getString("productImage");
+                String prodDescription = rs.getString("productDescription");
+                String productCategory = rs.getString("productCategory");
                 specificProd = new Product(prodId, prodSlug, prodName, prodImage, prodDescription, productCategory);
             }
             return specificProd;
