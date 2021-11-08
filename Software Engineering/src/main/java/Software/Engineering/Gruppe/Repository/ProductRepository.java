@@ -95,8 +95,8 @@ public class ProductRepository implements ProductInterface {
             PreparedStatement st = cn.prepareStatement(query);
             //int storeIdd = getStoreIdFromSlug(storeSlug);
             //st.setInt(1, storeIdd);
+            //st.setString(1, storeSlug);
             st.setString(1, prodSlug);
-            //st.setString(2, prodSlug);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 int productId = rs.getInt("productId");
@@ -117,22 +117,22 @@ public class ProductRepository implements ProductInterface {
     }
 
     @Override
-    public Product getSpecificProductBySlug(String prodSLUG){
-        String query = "SELECT * FROM product WHERE slug = ?";
+    public Product getSpecificProductBySlug(String prodSlug){
         Product specificProd = null;
+        String query = "SELECT * FROM product WHERE productSlug = ?";
 
         try (Connection cn = database.getConnection()) {
             PreparedStatement st = cn.prepareStatement(query);
-            st.setString(1, prodSLUG);
+            st.setString(1, prodSlug);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                int prodId = rs.getInt("prodId");
-                String prodSlug = rs.getString("slug");
-                String prodName = rs.getString("product name");
-                String prodImage = rs.getString("product image");
-                String prodDescription = rs.getString("description");
-                String productCategory = rs.getString("category");
-                specificProd = new Product(prodId, prodSlug, prodName, prodImage, prodDescription, productCategory);
+                int productId = rs.getInt("productId");
+                String pSlug = rs.getString("productSlug");
+                String productName = rs.getString("productName");
+                String productImage = rs.getString("productImage");
+                String productDescription = rs.getString("productDescription");
+                String productCategory = rs.getString("productCategory");
+                specificProd = new Product(productId, pSlug, productName, productImage, productDescription, productCategory);
             }
             return specificProd;
 
