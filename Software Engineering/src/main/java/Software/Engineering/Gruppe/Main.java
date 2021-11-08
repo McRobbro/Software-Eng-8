@@ -69,15 +69,13 @@ public class Main {
         LocalDateTime endDate = LocalDateTime.of(2021,
                 Month.JULY, 11, 18, 30, 0);
 
-        Auction auction1 = auctionRepository.createAuction(
-                storeRepository.getSpecificStoreBySlug("philips-butikk"),
-                productRepository.getSpecificProduct("philips-butikk","LUX-taklampe"),
-                startDate, endDate);
+       // Auction auction1 = auctionRepository.createAuction(2, 2,
+        //        startDate, endDate);
 
 
 
-        System.out.println(auction1);
-        System.out.println(auction1.getAuctionTimeDurationInMin());
+       // System.out.println(auction1);
+       // System.out.println(auction1.getAuctionTimeDurationInMin());
 
 
         Period period = Period.between(startDate.toLocalDate(), endDate.toLocalDate());

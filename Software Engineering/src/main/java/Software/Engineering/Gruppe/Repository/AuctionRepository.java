@@ -18,6 +18,8 @@ import java.util.Date;
 public class AuctionRepository implements AuctionInterface {
 
     private final SqliteDatabase database;
+    StoreRepository storeRepository;
+    ProductRepository productRepository;
 
     public AuctionRepository(SqliteDatabase database) {
         this.database = database;
@@ -48,9 +50,10 @@ public class AuctionRepository implements AuctionInterface {
         return null;
     }
 
-    /*
+/*
     @Override
     public Auction getAuctionById(int auctionId) {
+
         Auction spesificAuction = null;
         String query="select * from auction where auctionId = ?";
         try (Connection connection = database.getConnection()) {
@@ -60,12 +63,14 @@ public class AuctionRepository implements AuctionInterface {
             while (resultSet.next()) {
                 int auction = resultSet.getInt("auctionId");
                 int storeId = resultSet.getInt("storeId");
-                int productId = resultSet.get("productId");
+                int productId = resultSet.getInt("productId");
                 Date startDate = resultSet.getDate("start_time");
                 Date endDate = resultSet.getDate("start_time");
                 LocalDateTime ldtSt = LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
                 LocalDateTime ldtEt = LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault());
-                spesificAuction = new Auction(auction, storeId, productId, ldtSt, ldtEt);
+                Store store = storeRepository.getSpecificStoreBySlug();
+                Product product = productRepository.getSpecificProduct();
+                spesificAuction = new Auction(auction, store, productId, ldtSt, ldtEt);
             }
 
         } catch (SQLException throwables) {
@@ -74,7 +79,8 @@ public class AuctionRepository implements AuctionInterface {
         }
         return null;
     }
-
      */
+
+
 
 }

@@ -6,24 +6,23 @@ import java.time.LocalDateTime;
 
 public class Auction {
     private int auctionId;
-    private Store storeId;
-    private Product productId;
+    private Store store;
+    private Product product;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
 
-    public Auction(int auctionId, Store storeId, Product productId, LocalDateTime startTime, LocalDateTime endTime) {
+    public Auction(int auctionId, Store store, Product product, LocalDateTime startTime, LocalDateTime endTime) {
         this.auctionId = auctionId;
-        this.storeId = storeId;
-        this.productId = productId;
+        this.store = store;
+        this.product = product;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-
-    public Auction(Store storeId, Product productId, LocalDateTime startTime, LocalDateTime endTime) {
-        this.storeId = storeId;
-        this.productId = productId;
+    public Auction(Store store, Product product, LocalDateTime startTime, LocalDateTime endTime) {
+        this.store = store;
+        this.product = product;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -42,20 +41,20 @@ public class Auction {
         this.auctionId = auctionId;
     }
 
-    public Store getStoreId() {
-        return storeId;
+    public Store getStore() {
+        return store;
     }
 
-    public void setStoreId(Store storeId) {
-        this.storeId = storeId;
+    public void setStore(Store store) {
+        this.store = store;
     }
 
-    public Product getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public LocalDateTime getStartTime() {
@@ -78,8 +77,8 @@ public class Auction {
     public String toString() {
         return "Auction{" +
                 "auctionId=" + auctionId +
-                ", storeId=" + storeId +
-                ", productId=" + productId +
+                ", store=" + store +
+                ", product=" + product +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 '}';
