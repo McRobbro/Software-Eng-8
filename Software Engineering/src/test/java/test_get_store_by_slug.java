@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class test_get_store_by_slug {
 
     Path userDir = Paths.get(System.getProperty("user.dir")).getParent();
-    String databaseDir = "\\db\\group8dbftw.db";
+    String databaseDir = "\\db\\FakeDatabase.db";
     String url = "jdbc:sqlite:" + userDir + databaseDir;
 
     SqliteDatabase sqliteDatabase = new SqliteDatabase(url);

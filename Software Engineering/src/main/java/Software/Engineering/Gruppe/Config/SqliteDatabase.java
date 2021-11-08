@@ -19,16 +19,16 @@ public class SqliteDatabase {
         return DriverManager.getConnection(url);
     }
 
-    public static Boolean connect() {
+    public static Boolean connect(String databaseFileName) {
         Connection conn = null;
         Path userDir = Paths.get(System.getProperty("user.dir")).getParent();
-        String databaseDir = "\\db\\group8dbftw.db";
+        String databaseDir = "\\db\\" + databaseFileName;
         String url = "jdbc:sqlite:" + userDir + databaseDir;
 
         try {
             conn = DriverManager.getConnection(url);
             System.out.println(conn);
-            System.out.println("Connection to SQLite has been established.");
+            System.out.println("Connection to SQLite has been established with " + databaseFileName);
             return true;
 
         } catch (SQLException throwables) {

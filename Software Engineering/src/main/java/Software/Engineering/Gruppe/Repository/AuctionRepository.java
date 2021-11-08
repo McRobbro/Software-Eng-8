@@ -4,9 +4,11 @@ import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Auction;
 import Software.Engineering.Gruppe.Model.Product;
 import Software.Engineering.Gruppe.Model.Store;
+import Software.Engineering.Gruppe.Model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -41,7 +43,20 @@ public class AuctionRepository implements AuctionInterface {
 
     @Override
     public Auction getAuctionById(int auctionId) {
+        Auction spesificAuction = null;
+        String query="select * from auction where auctionId = ?";
+        try (Connection connection = database.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, auctionId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
 
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }
         return null;
     }
 

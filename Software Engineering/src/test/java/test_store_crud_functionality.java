@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class test_store_crud_functionality {
     Path userDir = Paths.get(System.getProperty("user.dir")).getParent();
-    String databaseDir = "\\db\\group8dbftw.db";
+    String databaseDir = "\\db\\FakeDatabase.db";
     String url = "jdbc:sqlite:" + userDir + databaseDir;
     SqliteDatabase sqliteDatabase = new SqliteDatabase(url);
     StoreRepository storeRepository = new StoreRepository(sqliteDatabase);

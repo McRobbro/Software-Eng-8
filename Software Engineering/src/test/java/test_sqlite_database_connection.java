@@ -7,10 +7,20 @@ public class test_sqlite_database_connection {
 
 
     @Test
-    public void Test_Database_Connection() {
-        System.out.println(SqliteDatabase.connect());
-        assertEquals(true, SqliteDatabase.connect());
+    public void Test_Real_Database_Connection() {
+        System.out.println(SqliteDatabase.connect("group8dbftw.db"));
+        assertEquals(true, SqliteDatabase.connect("group8dbftw.db"));
 
     }
+
+
+    @Test
+    public void Test_Fake_Database_Connection() {
+        System.out.println(SqliteDatabase.connect("FakeDatabase.db"));
+        assertEquals(true, SqliteDatabase.connect("FakeDatabase.db"));
+
+    }
+
+
 
 }
