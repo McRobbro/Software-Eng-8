@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class AuctionRepository implements AuctionInterface {
 
@@ -43,6 +45,12 @@ public class AuctionRepository implements AuctionInterface {
 
     @Override
     public Auction getAuctionById(int auctionId) {
+        return null;
+    }
+
+    /*
+    @Override
+    public Auction getAuctionById(int auctionId) {
         Auction spesificAuction = null;
         String query="select * from auction where auctionId = ?";
         try (Connection connection = database.getConnection()) {
@@ -50,7 +58,14 @@ public class AuctionRepository implements AuctionInterface {
             statement.setInt(1, auctionId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-
+                int auction = resultSet.getInt("auctionId");
+                int storeId = resultSet.getInt("storeId");
+                int productId = resultSet.get("productId");
+                Date startDate = resultSet.getDate("start_time");
+                Date endDate = resultSet.getDate("start_time");
+                LocalDateTime ldtSt = LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
+                LocalDateTime ldtEt = LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault());
+                spesificAuction = new Auction(auction, storeId, productId, ldtSt, ldtEt);
             }
 
         } catch (SQLException throwables) {
@@ -59,5 +74,7 @@ public class AuctionRepository implements AuctionInterface {
         }
         return null;
     }
+
+     */
 
 }
