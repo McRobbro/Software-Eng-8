@@ -2,6 +2,7 @@ package Software.Engineering.Gruppe.Repository;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Product;
+import Software.Engineering.Gruppe.Model.Store;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -113,6 +114,32 @@ public class ProductRepository implements ProductInterface {
             throwables.printStackTrace();
         }
         return specificProduct;
+    }
+
+    @Override
+    public Product getSpecificProductBySlug(String prodSLUG){
+        String query = "SELECT * FROM product WHERE slug = ?";
+        Product specificProd = null;
+
+        try (Connection cn = database.getConnection()) {
+            PreparedStatement st = cn.prepareStatement(query);
+            st.setString(1, prodSLUG);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int prodId = rs.getInt("prodId");
+                String prodSlug = rs.getString("slug");
+                String prodName = rs.getString("product name");
+                String prodImage = rs.getString("product image");
+                String prodDescription = rs.getString("description");
+                String productCategory = rs.getString("category");
+                specificProd = new Product(prodId, prodSlug, prodName, prodImage, prodDescription, productCategory);
+            }
+            return specificProd;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 
     @Override
