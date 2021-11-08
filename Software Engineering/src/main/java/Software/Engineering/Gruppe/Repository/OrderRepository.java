@@ -2,19 +2,29 @@ package Software.Engineering.Gruppe.Repository;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Order;
+import Software.Engineering.Gruppe.Model.Product;
 import Software.Engineering.Gruppe.Model.Store;
 import Software.Engineering.Gruppe.Model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class OrderRepository implements OrderInterface{
 
     private final SqliteDatabase database;
-    public OrderRepository(SqliteDatabase database) {this.database = database;}
+    UserRepository userRepository;
+    StoreRepository storeRepository;
+
+    public OrderRepository(SqliteDatabase database) {
+        this.database = database;
+        this.userRepository = userRepository;
+        this.storeRepository = storeRepository;
+    }
 
     @Override
     public List<Order> getAllOrders() {
@@ -28,12 +38,12 @@ public class OrderRepository implements OrderInterface{
 
     @Override
     public Order createOrder(LocalDateTime orderDate, User userId, Store storeId) {
-        String query = "INSERT INTO order (orderDate, userId, storeId) VALUES(?,?,?)";
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String query = "INSERT INTO 'order' (orderDate, userId, storeId) VALUES(?,?,?)";
 
         try (Connection connection = database.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            //preparedStatement.setInt(1, orderId);
-            //preparedStatement.setInt(1, orderDate.getYear());
+            preparedStatement.setString(1, orderDate.format(format));
             preparedStatement.setInt(2, userId.getUserId());
             preparedStatement.setInt(3, storeId.getStoreId());
             preparedStatement.executeUpdate();
@@ -47,6 +57,29 @@ public class OrderRepository implements OrderInterface{
 
     @Override
     public Order getOrderById(int id) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        Order specificOrder = null;
+        String query = "SELECT * FROM 'order' WHERE orderId = ?";
+
+        try (Connection cn = database.getConnection()) {
+            PreparedStatement st = cn.prepareStatement(query);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int orderId = rs.getInt("orderId");
+                String orderDate = rs.getString("orderDate");
+                LocalDateTime ldtOrder = LocalDateTime.parse(orderDate, format);
+                int userId = rs.getInt("userId");
+                User user = userRepository.getSpecificUser(userId);
+                int storeId = rs.getInt("storeId");
+                Store store = storeRepository.getSpecificStoreById(storeId);
+                specificOrder = new Order(ldtOrder, user, store);
+            }
+            return specificOrder;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return null;
     }
 
