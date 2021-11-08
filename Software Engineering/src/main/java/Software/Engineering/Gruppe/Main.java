@@ -53,12 +53,13 @@ public class Main {
         //System.out.println(productRepository.getAllProducts());
         //System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
         System.out.println("\nDivider\n");
-        System.out.println(productRepository.getSpecificProduct("johansens-butikk", "LUX-taklampe"));
-        System.out.println(productRepository.getSpecificProduct("Fredriks-butikk", "LUX-taklampe"));
-        System.out.println(productRepository.getSpecificProduct("philips-butikk", "Da-Vinci-Barglob-modell-102"));
+        //System.out.println(productRepository.getSpecificProduct("johansens-butikk", "LUX-taklampe"));
+        //System.out.println(productRepository.getSpecificProduct("Fredriks-butikk", "LUX-taklampe"));
+        //System.out.println(productRepository.getSpecificProduct("philips-butikk", "Da-Vinci-Barglob-modell-102"));
 
 
-       // System.out.println(userRepository.getSpecificUser(100));
+       //System.out.println(userRepository.getSpecificUser(100));
+        // System.out.println(userRepository.getSpecificUser(100).getUserId());
 
        // System.out.println(orderRepository.createOrder(LocalDate.now(), userRepository.getSpecificUser(100),
         //        storeRepository.getSpecificStoreBySlug("philips-butikk")));
@@ -68,24 +69,24 @@ public class Main {
 
         LocalDateTime endDate = LocalDateTime.of(2021,
                 Month.JULY, 11, 18, 30, 0);
-
+/*
         Auction auction1 = auctionRepository.createAuction(
                 storeRepository.getSpecificStoreBySlug("philips-butikk"),
-                productRepository.getSpecificProduct("philips-butikk","LUX-taklampe"),
+                productRepository.getSpecificProductBySlug("skuvseng"),
                 startDate, endDate);
 
 
 
-        System.out.println(auction1);
         System.out.println(auction1.getAuctionTimeDurationInMin());
+        System.out.println(auction1);
+*/
 
+        System.out.println(productRepository.getSpecificProductBySlug("Skuvseng"));
 
         Period period = Period.between(startDate.toLocalDate(), endDate.toLocalDate());
 
-        System.out.println(userRepository.getSpecificUser(100).getUserId());
 
 
-        System.out.println(productRepository.getSpecificProduct("philips-butikk", "LUX-taklampe"));
       //  bidRepository.makeBid(userRepository.getSpecificUser(100), auction1, 100);
 
     }
