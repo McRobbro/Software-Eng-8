@@ -8,7 +8,7 @@ import Software.Engineering.Gruppe.Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderRepository implements OrderInterface{
@@ -27,13 +27,13 @@ public class OrderRepository implements OrderInterface{
     }*/
 
     @Override
-    public Order createOrder(LocalDate orderDate, User userId, Store storeId) {
-        String query = "INSERT INTO `order`(orderDate, userId, storeId) VALUES(?,?,?)";
+    public Order createOrder(LocalDateTime orderDate, User userId, Store storeId) {
+        String query = "INSERT INTO order (orderDate, userId, storeId) VALUES(?,?,?)";
 
         try (Connection connection = database.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             //preparedStatement.setInt(1, orderId);
-            preparedStatement.setInt(1, orderDate.getYear());
+            //preparedStatement.setInt(1, orderDate.getYear());
             preparedStatement.setInt(2, userId.getUserId());
             preparedStatement.setInt(3, storeId.getStoreId());
             preparedStatement.executeUpdate();
@@ -42,6 +42,11 @@ public class OrderRepository implements OrderInterface{
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return null;
+    }
+
+    @Override
+    public Order getOrderById(int id) {
         return null;
     }
 

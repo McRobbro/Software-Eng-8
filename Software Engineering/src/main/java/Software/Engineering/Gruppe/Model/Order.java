@@ -1,22 +1,22 @@
 package Software.Engineering.Gruppe.Model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Order {
 
     private int orderId;
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
     private User userId;
     private Store storeId;
 
-    public Order(int orderId, LocalDate orderDate, User userId, Store storeId) {
+    public Order(int orderId, LocalDateTime orderDate, User userId, Store storeId) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.userId = userId;
         this.storeId = storeId;
     }
 
-    public Order(LocalDate orderDate, User userId, Store storeId) {
+    public Order(LocalDateTime orderDate, User userId, Store storeId) {
         this.orderDate = orderDate;
         this.userId = userId;
         this.storeId = storeId;
@@ -31,11 +31,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public LocalDate getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
