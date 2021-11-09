@@ -1,4 +1,5 @@
-import Software.Engineering.Gruppe.Config.SqliteDatabase;
+/*import Software.Engineering.Gruppe.Config.SqliteDatabase;
+import Software.Engineering.Gruppe.Model.Store;
 import Software.Engineering.Gruppe.Repository.ProductRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertNull;
-/*
+
 public class test_product_crud_functionality {
     Path userDir = Paths.get(System.getProperty("user.dir")).getParent();
     String databaseDir = "\\db\\FakeDatabase.db";
@@ -22,7 +23,9 @@ public class test_product_crud_functionality {
 
     @BeforeEach
     public void data_setup() {
-        productRepository.createProduct("DummySlug", "DummyName", "DummyUrl", "dummyBio");
+        Store testStore = new Store("DummySlug", "DummyName", "DummyUrl", "dummyBio");
+        productRepository.createProduct(testStore, "DummySlug", "DummyName", "DummyImg",
+                "dummyDescript", "dummyCat", 12.09);
     }
 
     @AfterEach
@@ -32,10 +35,15 @@ public class test_product_crud_functionality {
 
     @Test
     public void test_create_product() {
-        assertThat(productRepository.getSpecificProductBySlug("DummySlug"), allOf(
+        assertThat(productRepository.getSpecificProduct("DummyStoreID", "DummySlug"), allOf(
+                hasProperty("productId", is("DummyId")),
+                hasProperty("storeId", is("DummyStoreId")),
+                hasProperty("productSlug", is("dummySlug")),
                 hasProperty("productName", is("DummyName")),
-                hasProperty("storeImage", is("DummyUrl")),
-                hasProperty("storeDescription", is("dummyBio"))
+                hasProperty("productImage", is("DummyImg")),
+                hasProperty("productDescription", is("DummyDescript")),
+                hasProperty("productCategory", is("DummyCat")),
+                hasProperty("productPrice", is("DummyPrice"))
         ));
 
     }

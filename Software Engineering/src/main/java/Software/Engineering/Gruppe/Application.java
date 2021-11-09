@@ -44,7 +44,7 @@ public class Application {
 
         // Init repos
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
-        ProductRepository productRepository = new ProductRepository(sqliteDatabase);
+        ProductRepository productRepository = new ProductRepository(sqliteDatabase, storeRepository);
         // Init controllers
         StoresController storesController = new StoresController(storeRepository);
         ProductController productController = new ProductController(productRepository);

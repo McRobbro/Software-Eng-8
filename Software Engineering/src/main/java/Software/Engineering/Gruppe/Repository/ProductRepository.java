@@ -11,9 +11,11 @@ import java.util.List;
 public class ProductRepository implements ProductInterface {
 
     private final SqliteDatabase database;
+    StoreRepository storeRepository;
 
-    public ProductRepository(SqliteDatabase database) {
+    public ProductRepository(SqliteDatabase database, StoreRepository storeRepository) {
         this.database = database;
+        this.storeRepository = storeRepository;
     }
 
     @Override
@@ -100,7 +102,8 @@ public class ProductRepository implements ProductInterface {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 int productId = rs.getInt("productId");
-                int storeId = rs.getInt("storeId");
+                int store = rs.getInt("storeId");
+                Store storeId = storeRepository.getSpecificStoreById(store);
                 String productSlug = rs.getString("productSlug");
                 String productName = rs.getString("productName");
                 String productImage = rs.getString("productImage");
@@ -168,12 +171,14 @@ public class ProductRepository implements ProductInterface {
         return null;
     }
 
+/* start her */
     @Override
-    public Product createProduct(String productSlug, String productName, String productImage, String productDescription, String productCategory) {
-        String query = "INSERT INTO product(productSlug, productName, productImage, productDescription, productCategory) VALUES(?,?,?,?,?)";
+    public Product createProduct(Store store, String productSlug, String productName, String productImage, String productDescription, String productCategory, double price) {
+        String query = "INSERT INTO product(store id, productSlug, productName, productImage, productDescription, productCategory, productPrice) VALUES(?,?,?,?,?,?,?)";
 
         try (Connection cn = database.getConnection();
              PreparedStatement st = cn.prepareStatement(query)) {
+            //st.set
             st.setString(1, productSlug);
             st.setString(2, productName);
             st.setString(3, productImage);

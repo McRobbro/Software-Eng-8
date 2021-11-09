@@ -28,7 +28,7 @@ public class ProductController {
     }
 
     public void getSpecificProduct(Context context) {
-        String storeSlug = context.pathParam("{storeSlug}");
+        String storeSlug = context.pathParam("{storeId}");
         String prodSlug = context.pathParam("{prodSlug}");
 
         Product product = productRepository.getSpecificProduct(storeSlug, prodSlug);
