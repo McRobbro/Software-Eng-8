@@ -20,7 +20,7 @@ public class OrderRepository implements OrderInterface{
     UserRepository userRepository;
     StoreRepository storeRepository;
 
-    public <userRepository> OrderRepository(SqliteDatabase database, UserRepository userRepository, StoreRepository storeRepository) {
+    public OrderRepository(SqliteDatabase database, UserRepository userRepository, StoreRepository storeRepository) {
         this.database = database;
         this.userRepository = userRepository;
         this.storeRepository = storeRepository;
@@ -73,7 +73,7 @@ public class OrderRepository implements OrderInterface{
                 User user = userRepository.getSpecificUser(userId);
                 int storeId = rs.getInt("storeId");
                 Store store = storeRepository.getSpecificStoreById(storeId);
-                specificOrder = new Order(ldtOrder, user, store);
+                specificOrder = new Order(orderId, ldtOrder, user, store);
             }
             return specificOrder;
 

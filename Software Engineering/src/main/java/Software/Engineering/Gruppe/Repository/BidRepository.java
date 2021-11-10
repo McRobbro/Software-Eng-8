@@ -17,6 +17,7 @@ public class BidRepository implements BidInterface {
         this.database = database;
     }
 
+
     @Override
     public Bid makeBid(User user, Auction auction, double amount) {
         String query = "INSERT INTO bid(userId, auctionId, amount) VALUES(?,?,?)";

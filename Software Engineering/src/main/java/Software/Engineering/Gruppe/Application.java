@@ -35,6 +35,7 @@ public class Application {
 
         // Init Vue Files
         app.get("/stores", new VueComponent("store-overview"));
+        app.get("/stores/create", new VueComponent("store-create"));
         app.get("/stores/{storeSlug}", new VueComponent("store-detail"));
         app.get("/stores/{storeSlug}/products/{prodSlug}", new VueComponent("product-detail"));
         app.get("/login", new VueComponent("login-page"));
@@ -50,8 +51,11 @@ public class Application {
         ProductController productController = new ProductController(productRepository);
 
         app.get("/api/stores", storesController::getAllStores);
+        app.post("/api/stores/create", storesController::createStore);
+
         app.get("/api/stores/{storeSlug}", productController::getProductsFromStore);
         app.get("/api/stores/{storeSlug}/products/{prodSlug}", productController::getSpecificProduct);
+
 
         app.get("/api/products", productController::getAllProducts);
 
