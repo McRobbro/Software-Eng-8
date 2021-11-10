@@ -1,7 +1,6 @@
 <template id="store-create">
   <navbar>
   </navbar>
-
   <app-frame>
     <div v-if="errors.length">
       <b>Please correct the following error(s):</b>
