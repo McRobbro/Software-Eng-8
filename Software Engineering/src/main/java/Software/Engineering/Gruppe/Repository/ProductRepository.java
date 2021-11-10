@@ -76,54 +76,35 @@ public class ProductRepository implements ProductInterface {
         }
     }
 
-    private void addProductsToList(List<Product> ProductList, ResultSet resultSet) throws SQLException {
-        while (resultSet.next()) {
-            int productId = resultSet.getInt("productId");
-            String productSlug = resultSet.getString("productSlug");
-            String productName = resultSet.getString("productName");
-            String productImage = resultSet.getString("productImage");
-            String productDescription = resultSet.getString("productDescription");
-            String productCategory = resultSet.getString("productCategory");
-            ProductList.add(new Product(productId, productSlug, productName, productImage, productDescription, productCategory));
+    private void addProductsToList(List<Product> ProductList, ResultSet rs) throws SQLException {
+        while (rs.next()) {
+            int productId = rs.getInt("productId");
+            int store = rs.getInt("storeId");
+            Store storeId = storeRepository.getSpecificStoreById(store);
+            String productSlug = rs.getString("productSlug");
+            String productName = rs.getString("productName");
+            String productImage = rs.getString("productImage");
+            String productDescription = rs.getString("productDescription");
+            String productCategory = rs.getString("productCategory");
+            long productPrice = rs.getLong("productPrice");
+            ProductList.add(new Product(productId, storeId, productSlug, productName, productImage, productDescription, productCategory, productPrice));
         }
     }
 
-    @Override
     public Product getSpecificProduct(String storeSlug, String prodSlug) {
-        Product specificProduct = null;
-        //String query = "SELECT * FROM product WHERE storeId = ? AND productSlug = ?";
-        String query = "SELECT * FROM product WHERE productSlug = ?";
-        try (Connection cn = database.getConnection()) {
-            PreparedStatement st = cn.prepareStatement(query);
-            //int storeIdd = getStoreIdFromSlug(storeSlug);
-            //st.setInt(1, storeIdd);
-            //st.setString(1, storeSlug);
-            st.setString(1, prodSlug);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                int productId = rs.getInt("productId");
-                int store = rs.getInt("storeId");
-                Store storeId = storeRepository.getSpecificStoreById(store);
-                String productSlug = rs.getString("productSlug");
-                String productName = rs.getString("productName");
-                String productImage = rs.getString("productImage");
-                String productDescription = rs.getString("productDescription");
-                String productCategory = rs.getString("productCategory");
-                long productPrice = rs.getLong("productPrice");
-                specificProduct = new Product(productId, storeId, productSlug, productName, productImage, productDescription, productCategory, productPrice);
+        List<Product> ProductList = getProductsFromStore(storeSlug);
+        for ( Product oneProduct : ProductList ) {
+            if (oneProduct.getProductSlug().equals(prodSlug)) {
+                return oneProduct;
             }
-            return specificProduct;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
-        return specificProduct;
+        return null;
     }
 
     @Override
     public Product getSpecificProductBySlug(String prodSlug){
         Product specificProd = null;
         String query = "SELECT * FROM product WHERE productSlug = ?";
-
         try (Connection cn = database.getConnection()) {
             PreparedStatement st = cn.prepareStatement(query);
             st.setString(1, prodSlug);
@@ -174,7 +155,7 @@ public class ProductRepository implements ProductInterface {
 /* start her */
     @Override
     public Product createProduct(Store store, String productSlug, String productName, String productImage, String productDescription, String productCategory, double price) {
-        String query = "INSERT INTO product(store id, productSlug, productName, productImage, productDescription, productCategory, productPrice) VALUES(?,?,?,?,?,?,?)";
+        String query = "INSERT INTO product(storeid, productSlug, productName, productImage, productDescription, productCategory, productPrice) VALUES(?,?,?,?,?,?,?)";
 
         try (Connection cn = database.getConnection();
              PreparedStatement st = cn.prepareStatement(query)) {
