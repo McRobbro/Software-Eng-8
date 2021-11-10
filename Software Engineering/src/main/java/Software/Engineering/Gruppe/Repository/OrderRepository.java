@@ -42,7 +42,7 @@ public class OrderRepository implements OrderInterface{
         String query = "INSERT INTO 'order' (orderDate, userId, storeId) VALUES(?,?,?)";
 
         try (Connection connection = database.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, orderDate.format(format));
             preparedStatement.setInt(2, userId.getUserId());
             preparedStatement.setInt(3, storeId.getStoreId());
@@ -91,4 +91,3 @@ public class OrderRepository implements OrderInterface{
 
 
 }
-

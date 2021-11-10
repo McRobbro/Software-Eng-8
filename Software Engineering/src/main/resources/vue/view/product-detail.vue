@@ -3,12 +3,11 @@
   </navbar>
   <app-frame>
     <div v-if="product">
-      <a :href="``">
+      <p>
         <img v-if="product.productImage" class="cover-image-frontpage" v-bind:src="product.productImage">
         <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
-        {{product.productName}}
-        ({{product.productDescription}})
-      </a>
+        {{product.productName}} Sold By {{product.store.slug}}
+      </p>
     </div>
   </app-frame>
 </template>
@@ -17,15 +16,15 @@ app.component("product-detail", {
   template: "#product-detail",
   data: () => ({
     product: null,
-    slug: "",
+    storeName: "",
   }),
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
-    this.slug = specificStore;
-    console.log("This store id: " + specificStore);
+    this.storeName = specificStore;
+    console.log("This store name: " + specificStore);
     const specificProduct = this.$javalin.pathParams["prodSlug"];
     this.product = specificProduct
-    fetch(`/api/stores/${specificStore}/${specificProduct}`)
+    fetch(`/api/stores/${specificStore}/products/${specificProduct}`)
         .then(res => res.json())
         .then(json => this.product = json)
         .catch(() => alert("Error while fetching specific product"));

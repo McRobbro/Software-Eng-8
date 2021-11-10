@@ -3,13 +3,14 @@ package Software.Engineering.Gruppe.Model;
 public class Product {
 
     private int productId;
-    private int storeId;
+    private Store store;
+    private String storeSlug;
     private String productSlug;
     private String productName;
     private String productImage;
     private String productDescription;
     private String productCategory;
-    private long pris;
+    private double price;
 
     public Product(int productId, String productSlug, String productName, String productImage, String productDescription, String productCategory) {
         this.productId = productId;
@@ -28,9 +29,9 @@ public class Product {
         this.productCategory = productCategory;
     }
 
-    public Product(int productId, int storeId, String productSlug, String productName, String productImage, String productDescription, String productCategory) {
+    public Product(int productId, Store store, String productSlug, String productName, String productImage, String productDescription, String productCategory) {
         this.productId = productId;
-        this.storeId = storeId;
+        this.store = store;
         this.productSlug = productSlug;
         this.productName = productName;
         this.productImage = productImage;
@@ -38,15 +39,25 @@ public class Product {
         this.productCategory = productCategory;
     }
 
-    public Product(int productId, int storeId, String productSlug, String productName, String productImage, String productDescription, String productCategory, long pris) {
+    public Product(int productId, Store store, String productSlug, String productName, String productImage, String productDescription, String productCategory, double price) {
         this.productId = productId;
-        this.storeId = storeId;
+        this.store = store;
         this.productSlug = productSlug;
         this.productName = productName;
         this.productImage = productImage;
         this.productDescription = productDescription;
         this.productCategory = productCategory;
-        this.pris = pris;
+        this.price = price;
+    }
+
+    public Product(String storeSlug, String productSlug, String productName, String productImage, String productDescription, String productCategory, long price) {
+        this.storeSlug = storeSlug;
+        this.productSlug = productSlug;
+        this.productName = productName;
+        this.productImage = productImage;
+        this.productDescription = productDescription;
+        this.productCategory = productCategory;
+        this.price = price;
     }
 
     public int getProductId() {
@@ -97,17 +108,42 @@ public class Product {
         this.productCategory = productCategory;
     }
 
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public String getStoreSlug() {
+        return storeSlug;
+    }
+
+    public void setStoreSlug(String storeSlug) {
+        this.storeSlug = storeSlug;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
-        return "productName{" +
+        return "Product{" +
                 "productId=" + productId +
-                ", storeId=" + storeId +
+                ", store=" + store +
+                ", storeSlug='" + storeSlug + '\'' +
                 ", productSlug='" + productSlug + '\'' +
                 ", productName='" + productName + '\'' +
                 ", productImage='" + productImage + '\'' +
                 ", productDescription='" + productDescription + '\'' +
                 ", productCategory='" + productCategory + '\'' +
-                ", pris=" + pris +
+                ", pris=" + price +
                 '}';
     }
 }

@@ -36,7 +36,7 @@ public class Application {
         // Init Vue Files
         app.get("/stores", new VueComponent("store-overview"));
         app.get("/stores/{storeSlug}", new VueComponent("store-detail"));
-        app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"));
+        app.get("/stores/{storeSlug}/products/{prodSlug}", new VueComponent("product-detail"));
         app.get("/login", new VueComponent("login-page"));
         app.error(404, ctx -> {
             ctx.result("Generic 404 message");
@@ -44,14 +44,14 @@ public class Application {
 
         // Init repos
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
-        ProductRepository productRepository = new ProductRepository(sqliteDatabase);
+        ProductRepository productRepository = new ProductRepository(sqliteDatabase, storeRepository);
         // Init controllers
         StoresController storesController = new StoresController(storeRepository);
         ProductController productController = new ProductController(productRepository);
 
         app.get("/api/stores", storesController::getAllStores);
         app.get("/api/stores/{storeSlug}", productController::getProductsFromStore);
-        app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct);
+        app.get("/api/stores/{storeSlug}/products/{prodSlug}", productController::getSpecificProduct);
 
         app.get("/api/products", productController::getAllProducts);
 
