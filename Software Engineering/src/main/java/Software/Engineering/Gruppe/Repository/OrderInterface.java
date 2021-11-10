@@ -17,12 +17,8 @@ public interface OrderInterface {
 
     Order getOrderById(int id);
 
-    //Oppdatere ordre - trenger vi det?
-    //Order updateOrder();
+    boolean deleteOrder(int orderId);
 
-
-    //Slette ordre?
-    boolean deleteOrder(String slug);
-
+    //Order updateOrder(); Skal vi implementere dette?
 }
 
