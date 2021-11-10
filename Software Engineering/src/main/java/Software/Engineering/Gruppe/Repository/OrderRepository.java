@@ -20,7 +20,7 @@ public class OrderRepository implements OrderInterface{
     UserRepository userRepository;
     StoreRepository storeRepository;
 
-    public OrderRepository(SqliteDatabase database) {
+    public <userRepository> OrderRepository(SqliteDatabase database, UserRepository userRepository, StoreRepository storeRepository) {
         this.database = database;
         this.userRepository = userRepository;
         this.storeRepository = storeRepository;
