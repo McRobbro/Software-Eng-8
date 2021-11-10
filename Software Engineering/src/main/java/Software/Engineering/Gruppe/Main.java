@@ -3,8 +3,10 @@ package Software.Engineering.Gruppe;
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Auction;
 import Software.Engineering.Gruppe.Repository.*;
+import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Period;
@@ -101,5 +103,10 @@ public class Main {
 
         System.out.println(auctionRepository.getAuctionById(81));
 
+        //Test av Order
+        LocalDateTime date1_order = LocalDateTime.now(); //dato til Order objekt
+        //System.out.println(orderRepository.createOrder(date1_order, userRepository.getSpecificUser(101), storeRepository.getSpecificStoreBySlug("Fredriks-butikk")));
+        //System.out.println("Henter ordre etter ID: " + orderRepository.getOrderById(6));
+        //orderRepository.deleteOrder(7);
     }
 }
