@@ -35,6 +35,23 @@ public class test_order_crud_functionality {
         orderRepository.createOrder(testDate, testUser, testStore);
     }
 
+    @AfterEach
+    public void tear_down() {
+        orderRepository.deleteOrder(2); // Bytte ut orderId med et annet tall / teste på annen måte?
+    }
+
+    @Test
+    //Må fikses, fungerer ikke
+    public void test_create_order() {
+        assertThat(orderRepository.getOrderById(2), allOf(
+                hasProperty("orderDate", is(testDate)),
+                hasProperty("userId", is(testUser)),
+                hasProperty("storeId", is(testStore))
+                ));
+    }
+
+
+
 
 
 
