@@ -1,7 +1,9 @@
 <template id="store-overview">
   <navbar>
   </navbar>
+
   <app-frame>
+    <a :href="'stores/create'"><p>create store</p></a>
     <ul class="store-overview-list">
       <li v-for="store in stores">
         <a :href="`/stores/${store.slug}`">
