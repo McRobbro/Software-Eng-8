@@ -24,7 +24,7 @@ app.component("product-detail", {
     console.log("This store name: " + specificStore);
     const specificProduct = this.$javalin.pathParams["prodSlug"];
     this.product = specificProduct
-    fetch(`/api/stores/${specificStore}/products/${specificProduct}`)
+    fetch(`/api/stores/${specificStore}/${specificProduct}`)
         .then(res => res.json())
         .then(json => this.product = json)
         .catch(() => alert("Error while fetching specific product"));
