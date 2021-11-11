@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface OrderInterface {
 
-    List<Order> getAllOrders();
+    //List<Order> getAllOrders();
 
     //Order getSpecificOrderBySlug(String SLUG);
 

@@ -61,9 +61,6 @@ public class Main {
         System.out.println(userRepository.getSpecificUser(100));
         */
 
-
-        System.out.println("\nfunctionality for auction");
-
         LocalDateTime startDate = LocalDateTime.of(2021,
                 Month.JULY, 11, 17, 0, 0);
 
@@ -72,20 +69,25 @@ public class Main {
 
         //Period period = Period.between(startDate.toLocalDate(), endDate.toLocalDate());
 
+        /*
+        System.out.println("\nfunctionality for auction");
         Auction auction1 = auctionRepository.createAuction(storeRepository.getSpecificStoreBySlug("philips-butikk"),
                 productRepository.getSpecificProductBySlug("LUX-taklampe"), startDate, endDate);
-
         System.out.println(auction1);
         System.out.println(auction1.getAuctionTimeDurationInMin());
         System.out.println(auctionRepository.getAuctionById(71));
         System.out.println(auction1.getAuctionId());
+        */
 
+        /*
         System.out.println("\nfunctionality for order");
         System.out.println(orderRepository.createOrder(startDate, userRepository.getSpecificUser(100), storeRepository.getSpecificStoreBySlug("philips-butikk")));
         System.out.println(orderRepository.getOrderById(31));
-        Order order1 = orderRepository.createOrder(startDate, userRepository.getSpecificUser(100), storeRepository.getSpecificStoreById(3));
+        Order order1 = orderRepository.createOrder(endDate, userRepository.getSpecificUser(100), storeRepository.getSpecificStoreById(3));
         System.out.println(order1);
         System.out.println(order1.getOrderId());
+        //orderRepository.deleteOrder(7);
+        */
 
         /*
         System.out.println("functionality for bid");
@@ -93,12 +95,6 @@ public class Main {
         */
 
         System.out.println("\nEnd of main");
-        System.out.println(auctionRepository.getAuctionById(81));
 
-        //Test av Order
-        LocalDateTime date1_order = LocalDateTime.now(); //dato til Order objekt
-        //System.out.println(orderRepository.createOrder(date1_order, userRepository.getSpecificUser(101), storeRepository.getSpecificStoreBySlug("Fredriks-butikk")));
-        //System.out.println("Henter ordre etter ID: " + orderRepository.getOrderById(6));
-        //orderRepository.deleteOrder(7);
     }
 }
