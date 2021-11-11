@@ -55,6 +55,25 @@ public class OrderRepository implements OrderInterface{
         return null;
     }
 
+    public Order createOrder(int orderId, LocalDateTime orderDate, User userId, Store storeId) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String query = "INSERT INTO 'order' (orderId, orderDate, userId, storeId) VALUES(?,?,?,?)";
+
+        try (Connection connection = database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, orderId);
+            preparedStatement.setString(2, orderDate.format(format));
+            preparedStatement.setInt(3, userId.getUserId());
+            preparedStatement.setInt(4, storeId.getStoreId());
+            preparedStatement.executeUpdate();
+            return new Order(orderId, orderDate, userId, storeId);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public Order getOrderById(int id) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -91,7 +110,6 @@ public class OrderRepository implements OrderInterface{
             PreparedStatement st = cn.prepareStatement(query)) {
             st.setInt(1, orderId);
             st.executeUpdate();
-            System.out.println("deleted success");
             return true;
 
         } catch (SQLException throwables) {

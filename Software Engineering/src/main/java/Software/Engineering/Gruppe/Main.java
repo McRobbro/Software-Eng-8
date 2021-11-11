@@ -2,6 +2,7 @@ package Software.Engineering.Gruppe;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Auction;
+import Software.Engineering.Gruppe.Model.Order;
 import Software.Engineering.Gruppe.Repository.*;
 import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities;
 
@@ -49,6 +50,8 @@ public class Main {
 
         //System.out.println(storeRepository.createStore("Maia-butikk", "Maia", "null","lorem ipsum"));
         System.out.println(storeRepository.getAllStores());
+
+        System.out.println(orderRepository.getOrderById(3));
 
         //creating products
        // System.out.println(productRepository.createProduct("LUX-taklampe", "LUX taklampe", "null", "lorem ipsum", "Belysning"));
@@ -105,8 +108,10 @@ public class Main {
 
         //Test av Order
         LocalDateTime date1_order = LocalDateTime.now(); //dato til Order objekt
-        //System.out.println(orderRepository.createOrder(date1_order, userRepository.getSpecificUser(101), storeRepository.getSpecificStoreBySlug("Fredriks-butikk")));
+       Order order1 = orderRepository.createOrder(startDate, userRepository.getSpecificUser(101), storeRepository.getSpecificStoreBySlug("Fredriks-butikk"));
         //System.out.println("Henter ordre etter ID: " + orderRepository.getOrderById(6));
         //orderRepository.deleteOrder(7);
+        System.out.println(order1);
+        System.out.println(orderRepository.getOrderById(3));
     }
 }
