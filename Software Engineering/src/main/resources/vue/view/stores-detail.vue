@@ -2,6 +2,7 @@
   <navbar>
   </navbar>
   <app-frame>
+    <a :href="'/stores/{storeSlug}/update'"><p>update store</p></a>
     <ul class="store-overview-list">
       <li v-for="product in storeProducts">
         <a :href="`/stores/${product.store.slug}/${product.productSlug}`">
