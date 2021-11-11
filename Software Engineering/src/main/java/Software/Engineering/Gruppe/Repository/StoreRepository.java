@@ -15,6 +15,7 @@ public class StoreRepository implements StoreInterface {
         this.database = database;
     }
 
+
     @Override
     public List<Store> getAllStores() {
         List<Store> storeList = new ArrayList<>();

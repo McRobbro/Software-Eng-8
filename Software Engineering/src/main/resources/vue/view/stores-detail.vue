@@ -4,7 +4,7 @@
   <app-frame>
     <ul class="store-overview-list">
       <li v-for="product in storeProducts">
-        <a :href="`/stores/{slug}/${product.productSlug}`">
+        <a :href="`/stores/${product.store.slug}/${product.productSlug}`">
           <img v-if="product.productImage" class="cover-image-frontpage" v-bind:src="product.productImage">
           <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
           {{product.productName}}
@@ -22,7 +22,7 @@ app.component("store-detail", {
   }),
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
-    console.log("This store id: " + specificStore);
+    console.log("This store name: " + specificStore);
     fetch(`/api/stores/${specificStore}`)
         .then(res => res.json())
         .then(json => this.storeProducts = json)

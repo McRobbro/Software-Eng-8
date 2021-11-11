@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface OrderInterface {
 
-    //List<Order> getAllOrders();
+    List<Order> getAllOrders();
 
     //Order getSpecificOrderBySlug(String SLUG);
 
@@ -17,7 +17,8 @@ public interface OrderInterface {
 
     Order getOrderById(int id);
 
-    boolean deleteOrder(String slug);
+    boolean deleteOrder(int orderId);
 
+    //Order updateOrder(); Skal vi implementere dette?
 }
 

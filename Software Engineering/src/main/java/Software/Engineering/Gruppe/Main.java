@@ -24,7 +24,7 @@ public class Main {
         SqliteDatabase sqliteDatabase = new SqliteDatabase("jdbc:sqlite:" + userDir + databaseDir);
 
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
-        ProductRepository productRepository = new ProductRepository(sqliteDatabase);
+        ProductRepository productRepository = new ProductRepository(sqliteDatabase, storeRepository);
         UserRepository userRepository = new UserRepository(sqliteDatabase);
         OrderRepository orderRepository = new OrderRepository(sqliteDatabase, userRepository, storeRepository);
         AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase, storeRepository, productRepository);
@@ -93,5 +93,12 @@ public class Main {
         */
 
         System.out.println("\nEnd of main");
+        System.out.println(auctionRepository.getAuctionById(81));
+
+        //Test av Order
+        LocalDateTime date1_order = LocalDateTime.now(); //dato til Order objekt
+        //System.out.println(orderRepository.createOrder(date1_order, userRepository.getSpecificUser(101), storeRepository.getSpecificStoreBySlug("Fredriks-butikk")));
+        //System.out.println("Henter ordre etter ID: " + orderRepository.getOrderById(6));
+        //orderRepository.deleteOrder(7);
     }
 }

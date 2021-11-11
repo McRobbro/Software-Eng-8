@@ -2,6 +2,7 @@ package Software.Engineering.Gruppe.Repository;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Order;
+import Software.Engineering.Gruppe.Model.Product;
 import Software.Engineering.Gruppe.Model.Store;
 import Software.Engineering.Gruppe.Model.User;
 
@@ -86,7 +87,19 @@ public class OrderRepository implements OrderInterface{
 
 
     @Override
-    public boolean deleteOrder(String slug) {
+    public boolean deleteOrder(int orderId) {
+        String query = "DELETE FROM 'order' WHERE orderId = ?";
+        try (Connection cn = database.getConnection();
+            PreparedStatement st = cn.prepareStatement(query)) {
+            st.setInt(1, orderId);
+            st.executeUpdate();
+            System.out.println("deleted success");
+            return true;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return false;
     }
 
