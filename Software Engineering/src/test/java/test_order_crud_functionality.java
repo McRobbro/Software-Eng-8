@@ -29,6 +29,7 @@ public class test_order_crud_functionality {
     UserRepository userRepository = new UserRepository(sqliteDatabase);
     OrderRepository orderRepository = new OrderRepository(sqliteDatabase, userRepository, storeRepository);
 
+
     @BeforeEach
     public void data_setup() {
         LocalDateTime testDate = LocalDateTime.of(2021,
@@ -48,7 +49,7 @@ public class test_order_crud_functionality {
         orderRepository.deleteOrder(1);
         System.out.println("teardown");
      }
- 
+
     @Test
     public void test_create_order() {
         System.out.println(orderRepository.getOrderById(1));

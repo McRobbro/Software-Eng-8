@@ -31,6 +31,7 @@ public class UserRepository implements UserInterface {
         return null;
     }
 
+
     public User createUser(int userId, String email, String username, String password) {
         String query = "INSERT INTO user(userId, email, username, password) VALUES(?,?,?,?)";
 
