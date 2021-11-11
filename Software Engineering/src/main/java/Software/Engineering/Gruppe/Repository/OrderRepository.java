@@ -2,7 +2,6 @@ package Software.Engineering.Gruppe.Repository;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Order;
-import Software.Engineering.Gruppe.Model.Product;
 import Software.Engineering.Gruppe.Model.Store;
 import Software.Engineering.Gruppe.Model.User;
 
@@ -20,16 +19,18 @@ public class OrderRepository implements OrderInterface{
     UserRepository userRepository;
     StoreRepository storeRepository;
 
-    public <userRepository> OrderRepository(SqliteDatabase database, UserRepository userRepository, StoreRepository storeRepository) {
+    public OrderRepository(SqliteDatabase database, UserRepository userRepository, StoreRepository storeRepository) {
         this.database = database;
         this.userRepository = userRepository;
         this.storeRepository = storeRepository;
     }
 
+    /*
     @Override
     public List<Order> getAllOrders() {
         return null;
     }
+    */
 
     /*@Override
     public Order getSpecificOrderBySlug(String SLUG) {
@@ -56,24 +57,24 @@ public class OrderRepository implements OrderInterface{
     }
 
     @Override
-    public Order getOrderById(int id) {
+    public Order getOrderById(int orderId) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         Order specificOrder = null;
         String query = "SELECT * FROM 'order' WHERE orderId = ?";
 
         try (Connection cn = database.getConnection()) {
             PreparedStatement st = cn.prepareStatement(query);
-            st.setInt(1, id);
+            st.setInt(1, orderId);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                int orderId = rs.getInt("orderId");
+                int id = rs.getInt("orderId");
                 String orderDate = rs.getString("orderDate");
-                LocalDateTime ldtOrder = LocalDateTime.parse(orderDate, format);
+                LocalDateTime ldtOTime = LocalDateTime.parse(orderDate, format);
                 int userId = rs.getInt("userId");
                 User user = userRepository.getSpecificUser(userId);
                 int storeId = rs.getInt("storeId");
                 Store store = storeRepository.getSpecificStoreById(storeId);
-                specificOrder = new Order(ldtOrder, user, store);
+                specificOrder = new Order(id, ldtOTime, user, store);
             }
             return specificOrder;
 

@@ -196,7 +196,7 @@ public class ProductRepository implements ProductInterface {
                 "productImage = ?, " +
                 "productDescription = ?," +
                 "productCategory = ?" +
-                "WHERE storeId = ?";
+                "WHERE productId = ?";
 
         try (Connection cn = database.getConnection();
              PreparedStatement st = cn.prepareStatement(query)) {
@@ -233,4 +233,5 @@ public class ProductRepository implements ProductInterface {
 
         return false;
     }
+
 }

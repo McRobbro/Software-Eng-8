@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface OrderInterface {
 
-    List<Order> getAllOrders();
+    //List<Order> getAllOrders();
 
     //Order getSpecificOrderBySlug(String SLUG);
 
@@ -17,11 +17,6 @@ public interface OrderInterface {
 
     Order getOrderById(int id);
 
-    //Oppdatere ordre - trenger vi det?
-    //Order updateOrder();
-
-
-    //Slette ordre?
     boolean deleteOrder(String slug);
 
 }
