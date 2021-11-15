@@ -6,6 +6,7 @@
 
     <a v-if="cookie === 'role=PLATFORM_OWNER'" :href="'stores/create'"><p>create store</p></a>
 
+
     <ul class="store-overview-list">
       <li v-for="store in stores">
         <a :href="`/stores/${store.slug}`">

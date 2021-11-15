@@ -67,6 +67,7 @@ public class Application {
 
 
 
+
         //api
         app.post("/api/login", userController::login, Role.ANYONE);
         app.get("/api/stores", storesController::getAllStores, Role.ANYONE);

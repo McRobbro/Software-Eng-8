@@ -1,5 +1,6 @@
-/*import Software.Engineering.Gruppe.Config.SqliteDatabase;
+import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Store;
+import Software.Engineering.Gruppe.Model.Product;
 import Software.Engineering.Gruppe.Repository.ProductRepository;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -13,6 +14,7 @@ import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class test_product_crud_functionality {
@@ -25,29 +27,32 @@ public class test_product_crud_functionality {
 
     @BeforeEach
     public void data_setup() {
-        Store testStore = new Store("DummyStSlug", "DummyStName", "DummyStImg", "DummyStDesc");
+        Store testStore = storeRepository.createStore("DummyStSlug", "DummyStName", "DummyStImg", "DummyStDesc");
         productRepository.createProduct(testStore, "DummySlug", "DummyName", "DummyImg",
                 "DummyDesc", "DummyCat", 12.09);
     }
-
+/*
     @AfterEach
     public void tear_down() {
+        storeRepository.deleteStore("DummyStSlug");
         productRepository.deleteProduct("DummySlug");
     }
+*/
 
     @Test
     public void test_create_product() {
-        assertThat(productRepository.getSpecificProduct("DummyStSlug", "DummySlug"), allOf(
-                //hasProperty("productId", is("DummyId")),
-                //hasProperty("storeId", is("DummyStId")),
+        System.out.println(productRepository.getSpecificProductById(1));
+
+        /*assertThat(productRepository.getSpecificProductBySlug("DummySlug"), allOf(
+                hasProperty("productId", is("DummyId")),
                 hasProperty("productSlug", is("DummySlug")),
                 hasProperty("productName", is("DummyName")),
                 hasProperty("productImage", is("DummyImg")),
                 hasProperty("productDescription", is("DummyDesc")),
-                hasProperty("productCategory", is("DummyCat")),
-                hasProperty("productPrice", is(12.09))
+                hasProperty("productCategory", is("DummyCat"))
+                //hasProperty("productPrice", is(12.09))
         ));
 
+         */
     }
 }
-*/
