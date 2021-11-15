@@ -32,6 +32,25 @@ public class UserRepository implements UserInterface {
     }
 
 
+    public User createUser(int userId, String email, String username, String password) {
+        String query = "INSERT INTO user(userId, email, username, password) VALUES(?,?,?,?)";
+
+        try (Connection connection = database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setString(2, email);
+            preparedStatement.setString(3, username);
+            preparedStatement.setString(4, password);
+            preparedStatement.executeUpdate();
+            return new User(userId, email, username, password);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+
     @Override
     public User getSpecificUser(int userId) {
         User specificUser = null;

@@ -11,11 +11,13 @@ import org.junit.jupiter.api.Test;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.Month;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class test_order_crud_functionality {
@@ -27,27 +29,31 @@ public class test_order_crud_functionality {
     UserRepository userRepository = new UserRepository(sqliteDatabase);
     OrderRepository orderRepository = new OrderRepository(sqliteDatabase, userRepository, storeRepository);
 
+
     @BeforeEach
     public void data_setup() {
-        LocalDateTime testDate = LocalDateTime.now();
-        Store testStore = storeRepository.createStore("DummySlug_Order", "DummyName_Order", "DummyUrl_Order", "dummyBio_Order");
-        User testUser = userRepository.createUser("email1","name1", "password1");
-        orderRepository.createOrder(testDate, testUser, testStore);
+        LocalDateTime testDate = LocalDateTime.of(2021,
+                Month.JULY, 11, 17, 0, 0);
+        Store testStore = storeRepository.createStore("DummySlug", "DummyName", "DummyUrl", "dummyBio");
+        User testUser = userRepository.createUser(5,"email1","name1", "password1");
+        orderRepository.createOrder(1, testDate, testUser, testStore);
+        System.out.println("setup");
+
     }
 
     @AfterEach
     public void tear_down() {
-        orderRepository.deleteOrder(2); // Bytte ut orderId med et annet tall / teste på annen måte?
-    }
+
+        userRepository.deleteUser(5);
+        storeRepository.deleteStore("DummySlug");
+        orderRepository.deleteOrder(1);
+        System.out.println("teardown");
+     }
 
     @Test
-    //Må fikses, fungerer ikke
     public void test_create_order() {
-        assertThat(orderRepository.getOrderById(2), allOf(
-                hasProperty("orderDate", is(testDate)),
-                hasProperty("userId", is(testUser)),
-                hasProperty("storeId", is(testStore))
-                ));
+        System.out.println(orderRepository.getOrderById(1));
+        assertEquals(orderRepository.getOrderById(1).getUserId().getEmail(), "email1");
     }
 
 
