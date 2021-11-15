@@ -58,6 +58,7 @@ public class Application {
             ctx.result("Platform home page");
         });
 
+
         // Init Vue Files
         app.get("/login", new VueComponent("login-page"), Role.ANYONE);
         app.get("/stores", new VueComponent("store-overview"), Role.PLATFORM_OWNER, Role.USER);
@@ -80,6 +81,7 @@ public class Application {
             ctx.result("Generic 404 message");
         });
     }
+
 
 
     public static Role getUserRole(Context ctx) {

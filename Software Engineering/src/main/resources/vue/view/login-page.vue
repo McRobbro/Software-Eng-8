@@ -16,6 +16,7 @@
 </template>
 <script>
 
+
 app.component("login-page", {
   template: "#login-page",
 });
