@@ -1,24 +1,18 @@
 package Software.Engineering.Gruppe.Controller;
 
+import Software.Engineering.Gruppe.Repository.UserRepository;
 import io.javalin.http.Context;
 
 public class UserController {
 
-    public void login(Context ctx) {
-        String role = ctx.formParam("role");
-        ctx.header("Set-Cookie", String.format("role=%s; Path=/", role));
-        ctx.redirect("/stores");
+
+ private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-
-//    private final UserRepository userRepository;
-//
-//    public UserController() {
-//        this.userRepository = userRepository;
-//
-//    }
-
-    // Metoden må endres/tilpasses. Skal vi ha med denne? Må lage metode i Interface i så fall
+// Metoden må endres/tilpasses. Skal vi ha med denne? Må lage metode i Interface i så fall
     /*public void getAllUsers() {
         List<User> allUsers = userRepository.getAllUsers();
         context.json(allUsers);

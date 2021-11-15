@@ -4,9 +4,7 @@
 
   <app-frame>
 
-    <a v-if="cookie === 'role=PLATFORM_OWNER'" :href="'stores/create'"><p>create store</p></a>
-
-
+    <a v-if="cookieValue === 'role=PLATFORM_OWNER'" :href="'stores/create'"><p>create store</p></a>
 
     <ul class="store-overview-list">
       <li v-for="store in stores">
@@ -23,7 +21,7 @@ app.component("store-overview", {
   template: "#store-overview",
   data: () => ({
     stores: [],
-    cookie: document.cookie,
+    cookieValue: document.cookie,
   }),
 
   created() {

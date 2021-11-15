@@ -1,19 +1,18 @@
 package Software.Engineering.Gruppe;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
+import Software.Engineering.Gruppe.Controller.LoginController;
 import Software.Engineering.Gruppe.Controller.ProductController;
 import Software.Engineering.Gruppe.Controller.StoresController;
 import Software.Engineering.Gruppe.Controller.UserController;
 import Software.Engineering.Gruppe.Repository.ProductRepository;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 
+import Software.Engineering.Gruppe.Repository.UserRepository;
 import io.javalin.Javalin;
 import io.javalin.core.security.RouteRole;
 import io.javalin.http.Context;
 import io.javalin.plugin.rendering.vue.*;
-
-import java.util.Set;
-
 
 
 public class Application {
@@ -31,8 +30,10 @@ public class Application {
         // Init repos
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
         ProductRepository productRepository = new ProductRepository(sqliteDatabase, storeRepository);
+        UserRepository userRepository = new UserRepository(sqliteDatabase);
         // Init controllers
-        UserController userController = new UserController();
+        UserController userController = new UserController(userRepository);
+        LoginController loginController = new LoginController();
         StoresController storesController = new StoresController(storeRepository);
         ProductController productController = new ProductController(productRepository);
 
@@ -64,16 +65,18 @@ public class Application {
         app.get("/stores", new VueComponent("store-overview"), Role.PLATFORM_OWNER, Role.USER);
         app.get("/stores/create", new VueComponent("store-create"), Role.PLATFORM_OWNER);
         app.get("/stores/{storeSlug}", new VueComponent("store-detail"), Role.STORE_OWNER, Role.USER);
+        app.get("/stores/{storeSlug}/update", new VueComponent("store-update"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"), Role.ANYONE);
 
 
 
 
         //api
-        app.post("/api/login", userController::login, Role.ANYONE);
+        app.post("/api/login", loginController::login, Role.ANYONE);
         app.get("/api/stores", storesController::getAllStores, Role.ANYONE);
-        app.post("/api/stores/create", storesController::createStore);
+        app.post("/api/stores/create", storesController::createStore, Role.ANYONE);
         app.get("/api/stores/{storeSlug}", productController::getProductsFromStore, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/update", storesController::updateStore, Role.ANYONE);
         app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct, Role.ANYONE);
         app.get("/api/products", productController::getAllProducts, Role.ANYONE);
 

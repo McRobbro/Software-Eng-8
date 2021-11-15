@@ -45,4 +45,25 @@ public class StoresController {
 
     }
 
+    public void updateStore(Context context) {
+        String slug = context.pathParam("storeSlug");
+        System.out.println(slug);
+        int storeId = storeRepository.getSpecificStoreBySlug(slug).getStoreId();
+        String storeSlug = context.formParam("slug");
+        String storeName = context.formParam("storeName");
+        String storeImage = context.formParam("storeImage");
+        String storeDescription = context.formParam("storeDescription");
+        Store updatedStore = storeRepository.updateStore(storeId, storeSlug, storeName, storeImage, storeDescription);
+        if(updatedStore != null) {
+            context.redirect("/stores");
+        }
+        else {
+            context.status(400);
+        }
+
+
+
+    }
 }
+
+

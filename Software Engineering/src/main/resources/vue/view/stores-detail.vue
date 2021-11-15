@@ -2,6 +2,7 @@
   <navbar>
   </navbar>
   <app-frame>
+    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/update'">update store</a>
     <ul class="store-overview-list">
       <li v-for="product in storeProducts">
         <a :href="`/stores/${product.store.slug}/${product.productSlug}`">
@@ -19,8 +20,11 @@ app.component("store-detail", {
   template: "#store-detail",
   data: () => ({
     storeProducts: [],
+    storeSlug: null,
+    cookieValue: document.cookie
   }),
   created() {
+    this.storeSlug = this.$javalin.pathParams["storeSlug"];
     const specificStore = this.$javalin.pathParams["storeSlug"];
     console.log("This store name: " + specificStore);
     fetch(`/api/stores/${specificStore}`)
