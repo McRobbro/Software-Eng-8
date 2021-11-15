@@ -62,14 +62,14 @@ public class Main {
         */
 
         LocalDateTime startDate = LocalDateTime.of(2021,
-                Month.JULY, 11, 17, 0, 0);
+                Month.NOVEMBER, 16, 17, 0, 0);
 
         LocalDateTime endDate = LocalDateTime.of(2021,
-                Month.JULY, 11, 18, 30, 0);
+                Month.NOVEMBER, 15, 20, 30, 0);
 
         //Period period = Period.between(startDate.toLocalDate(), endDate.toLocalDate());
 
-        /*
+
         System.out.println("\nfunctionality for auction");
         Auction auction1 = auctionRepository.createAuction(storeRepository.getSpecificStoreBySlug("philips-butikk"),
                 productRepository.getSpecificProductBySlug("LUX-taklampe"), startDate, endDate);
@@ -77,7 +77,7 @@ public class Main {
         System.out.println(auction1.getAuctionTimeDurationInMin());
         System.out.println(auctionRepository.getAuctionById(71));
         System.out.println(auction1.getAuctionId());
-        */
+
 
         /*
         System.out.println("\nfunctionality for order");

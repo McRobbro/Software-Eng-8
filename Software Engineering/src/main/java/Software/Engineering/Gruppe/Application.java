@@ -52,7 +52,7 @@ public class Application {
         JavalinVue.vueVersion(c -> c.vue3("app"));
 
         //redirect to login-page
-        app.before("/", ctx -> ctx.redirect("/login"));
+        app.before("/", ctx -> ctx.redirect("/stores"));
         // Register routes and handlers
         app.get("/home", ctx -> {
             ctx.result("Platform home page");
@@ -60,12 +60,17 @@ public class Application {
 
         // Init Vue Files
         app.get("/login", new VueComponent("login-page"), Role.ANYONE);
-        app.get("/stores", new VueComponent("store-overview"), Role.PLATFORM_OWNER);
+        app.get("/stores", new VueComponent("store-overview"), Role.PLATFORM_OWNER, Role.USER);
+        app.get("/stores/create", new VueComponent("store-create"), Role.PLATFORM_OWNER);
         app.get("/stores/{storeSlug}", new VueComponent("store-detail"), Role.STORE_OWNER, Role.USER);
         app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"), Role.ANYONE);
 
+
+
+        //api
         app.post("/api/login", userController::login, Role.ANYONE);
         app.get("/api/stores", storesController::getAllStores, Role.ANYONE);
+        app.post("/api/stores/create", storesController::createStore);
         app.get("/api/stores/{storeSlug}", productController::getProductsFromStore, Role.ANYONE);
         app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct, Role.ANYONE);
         app.get("/api/products", productController::getAllProducts, Role.ANYONE);

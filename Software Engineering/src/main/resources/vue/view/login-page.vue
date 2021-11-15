@@ -2,7 +2,6 @@
   <navbar>
   </navbar>
   <app-frame>
-
     <form :action=`/api/login` method="post">
       <label for="role-select">Select role</label>
       <select name="role" id="role-select">
