@@ -75,6 +75,7 @@ public class Application {
         });
     }
 
+
     public static Role getUserRole(Context ctx) {
         String role = ctx.cookie("role");
         if (role == null) {

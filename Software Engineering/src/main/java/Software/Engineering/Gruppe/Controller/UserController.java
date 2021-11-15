@@ -9,6 +9,7 @@ public class UserController {
         ctx.header("Set-Cookie", String.format("role=%s; Path=/", role));
         ctx.redirect("/stores");
     }
+
 //    private final UserRepository userRepository;
 //
 //    public UserController() {
