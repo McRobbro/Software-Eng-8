@@ -24,7 +24,10 @@ app.component("store-overview", {
     fetch("/api/stores")
         .then(res => res.json())
         .then(json => this.stores = json)
-        .catch(() => alert("Error while fetching stores"));
+        .catch((error) => {
+          console.log(error);
+          alert("Error while fetching stores")
+        });
   }
 });
 </script>
