@@ -3,7 +3,9 @@
   </navbar>
 
   <app-frame>
-    <a :href="'stores/create'"><p>create store</p></a>
+
+    <a v-if="cookieValue === 'role=PLATFORM_OWNER'" :href="'stores/create'"><p>create store</p></a>
+
     <ul class="store-overview-list">
       <li v-for="store in stores">
         <a :href="`/stores/${store.slug}`">
@@ -19,7 +21,9 @@ app.component("store-overview", {
   template: "#store-overview",
   data: () => ({
     stores: [],
+    cookieValue: document.cookie,
   }),
+
   created() {
     fetch("/api/stores")
         .then(res => res.json())
@@ -29,6 +33,8 @@ app.component("store-overview", {
           alert("Error while fetching stores")
         });
   }
+
+
 });
 </script>
 <style>
