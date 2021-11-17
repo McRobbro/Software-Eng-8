@@ -64,6 +64,7 @@ public class Application {
         app.get("/login", new VueComponent("login-page"), Role.ANYONE);
         app.get("/stores", new VueComponent("store-overview"), Role.PLATFORM_OWNER, Role.USER);
         app.get("/stores/create", new VueComponent("store-create"), Role.PLATFORM_OWNER);
+        app.get("/stores/delete", new VueComponent("store-delete"), Role.PLATFORM_OWNER);
         app.get("/stores/{storeSlug}", new VueComponent("store-detail"), Role.STORE_OWNER, Role.USER);
         app.get("/stores/{storeSlug}/update", new VueComponent("store-update"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"), Role.ANYONE);
@@ -75,6 +76,7 @@ public class Application {
         app.post("/api/login", loginController::login, Role.ANYONE);
         app.get("/api/stores", storesController::getAllStores, Role.ANYONE);
         app.post("/api/stores/create", storesController::createStore, Role.ANYONE);
+        app.post("/api/stores/delete", storesController::deleteStore, Role.ANYONE);
         app.get("/api/stores/{storeSlug}", productController::getProductsFromStore, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/update", storesController::updateStore, Role.ANYONE);
         app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct, Role.ANYONE);

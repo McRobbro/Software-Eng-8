@@ -4,7 +4,8 @@
 
   <app-frame>
 
-    <a v-if="cookieValue === 'role=PLATFORM_OWNER'" :href="'stores/create'"><p>create store</p></a>
+    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='stores/create'">Create store</button>
+    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='stores/delete'">Delete store</button>
 
     <ul class="store-overview-list">
       <li v-for="store in stores">
