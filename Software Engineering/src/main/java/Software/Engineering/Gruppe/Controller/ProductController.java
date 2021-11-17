@@ -1,17 +1,24 @@
 package Software.Engineering.Gruppe.Controller;
 
 import Software.Engineering.Gruppe.Model.Product;
+import Software.Engineering.Gruppe.Model.Store;
 import Software.Engineering.Gruppe.Repository.ProductRepository;
 
+import Software.Engineering.Gruppe.Repository.StoreRepository;
 import io.javalin.http.Context;
 import java.util.List;
+
+import static java.lang.Double.parseDouble;
 
 
 public class ProductController {
 
     private final ProductRepository productRepository;
-    public ProductController(ProductRepository productRepository) {
+    private final StoreRepository storeRepository;
+
+    public ProductController(ProductRepository productRepository, StoreRepository storeRepository) {
         this.productRepository = productRepository;
+        this.storeRepository = storeRepository;
     }
 
     public void getAllProducts(Context context) {
@@ -36,6 +43,31 @@ public class ProductController {
     public void deleteProduct(Context context) {
         String storeSlug = context.pathParam("storeSlug");
         context.redirect("/stores/" + storeSlug);
+    }
+
+    public void createProduct(Context ctx) {
+        String storeSlug = ctx.pathParam("storeSlug");
+        Store currentStore = storeRepository.getSpecificStoreBySlug(storeSlug);
+        String productName = ctx.formParam("productSlug");
+        String productImage = ctx.formParam("productImage");
+        String productDescription = ctx.formParam("productDescription");
+        String productCategory = ctx.formParam("productCategory");
+        String productPrice = ctx.formParam("productPrice");
+        Product newProduct = productRepository.createProduct(
+               currentStore,
+               productName,
+               productName,
+               productImage,
+               productDescription,
+               productCategory, parseDouble(productPrice));
+
+        if(newProduct != null) {
+            ctx.redirect("/stores/" + storeSlug);
+        }
+        else {
+            ctx.status(400);
+        }
+
     }
 
 }

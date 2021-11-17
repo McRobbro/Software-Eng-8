@@ -35,7 +35,7 @@ public class Application {
         UserController userController = new UserController(userRepository);
         LoginController loginController = new LoginController();
         StoresController storesController = new StoresController(storeRepository);
-        ProductController productController = new ProductController(productRepository);
+        ProductController productController = new ProductController(productRepository, storeRepository);
 
         // init javalin web service
         Javalin app = Javalin.create(config -> {
@@ -62,11 +62,12 @@ public class Application {
 
         // Init Vue Files
         app.get("/login", new VueComponent("login-page"), Role.ANYONE);
-        app.get("/stores", new VueComponent("store-overview"), Role.PLATFORM_OWNER, Role.USER);
+        app.get("/stores", new VueComponent("store-overview"), Role.PLATFORM_OWNER, Role.STORE_OWNER, Role.USER);
         app.get("/stores/create", new VueComponent("store-create"), Role.PLATFORM_OWNER);
         app.get("/stores/delete", new VueComponent("store-delete"), Role.PLATFORM_OWNER);
         app.get("/stores/{storeSlug}", new VueComponent("store-detail"), Role.STORE_OWNER, Role.USER);
         app.get("/stores/{storeSlug}/update", new VueComponent("store-update"), Role.STORE_OWNER);
+        app.get("/stores/{storeSlug}/createProduct", new VueComponent("product-create"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"), Role.ANYONE);
 
 
@@ -79,6 +80,7 @@ public class Application {
         app.post("/api/stores/delete", storesController::deleteStore, Role.ANYONE);
         app.get("/api/stores/{storeSlug}", productController::getProductsFromStore, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/update", storesController::updateStore, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/create", productController::createProduct, Role.ANYONE);
         app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct, Role.ANYONE);
         app.get("/api/products", productController::getAllProducts, Role.ANYONE);
 

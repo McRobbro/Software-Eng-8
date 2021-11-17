@@ -30,28 +30,31 @@ public class Main {
         AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase, storeRepository, productRepository);
         BidRepository bidRepository = new BidRepository(sqliteDatabase);
 
-        /*
+
         System.out.println("\nfunctionality for store");
-        //System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
+     //   System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
         //System.out.println(storeRepository.updateStore(5,"Andreas-butikk", "Andreas", "null", "lorem ipsum"));
         //System.out.println(storeRepository.deleteStore("Marcus-butikk"));
         System.out.println(storeRepository.getAllStores());
         System.out.println(storeRepository.getSpecificStoreBySlug("Fredriks-butikk").getSlug());
         System.out.println(storeRepository.getSpecificStoreBySlug("Heidi-butikk"));
         System.out.println(storeRepository.getSpecificStoreById(2));
-        */
 
-        /*
+
+
         System.out.println("\nfunctionality for products");
-        //System.out.println(productRepository.createProduct("LUX-taklampe", "LUX taklampe", "null", "lorem ipsum", "Belysning"));
+        System.out.println(productRepository.createProduct(storeRepository.getSpecificStoreBySlug("johansens-butikk"), "bor", "null", "lorem ipsum", "Belysning", "nlbaqba", 100));
         //System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
+        /*
         System.out.println(productRepository.getAllProducts());
         System.out.println(productRepository.getSpecificProduct("johansens-butikk", "LUX-taklampe"));
         System.out.println(productRepository.getSpecificProduct("Fredriks-butikk", "LUX-taklampe"));
         System.out.println(productRepository.getSpecificProduct("philips-butikk", "Da-Vinci-Barglob-modell-102"));
         System.out.println(productRepository.getSpecificProductById( 1));
         System.out.println(productRepository.updateProduct(1, "LUX-taklampe", "LUX taklampe", "bilde", "descript", "Belysning"));
-        */
+
+
+         */
 
 
         /*

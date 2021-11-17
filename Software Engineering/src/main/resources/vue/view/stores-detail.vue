@@ -2,7 +2,10 @@
   <navbar>
   </navbar>
   <app-frame>
-    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/update'">update store</a>
+
+    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/update'"><button>update store</button></a>
+    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/createProduct'"><button>create product</button></a>
+
     <ul class="store-overview-list">
       <li v-for="product in storeProducts">
         <a :href="`/stores/${product.store.slug}/${product.productSlug}`">

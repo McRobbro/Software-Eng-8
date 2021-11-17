@@ -60,6 +60,18 @@ public class Product {
         this.price = price;
     }
 
+    // dont remove!
+    public Product(Store store, String productSlug, String productName, String productImage, String productDescription, String productCategory, double price) {
+        this.store = store;
+        this.productSlug = productSlug;
+        this.productName = productName;
+        this.productImage = productImage;
+        this.productDescription = productDescription;
+        this.productCategory = productCategory;
+        this.price = price;
+    }
+
+
     public int getProductId() {
         return productId;
     }

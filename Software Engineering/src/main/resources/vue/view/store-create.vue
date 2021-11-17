@@ -16,7 +16,7 @@
         <input type="text" name="slug" id="slug" v-model="slug">
 
         <lable for="name">storeName</lable>
-        <input type="text" name="storeName" id="storeName" v-model="name">
+        <input type="text" name="storeName" id="storeName" v-model="storeName">
 
         <lable for="storeImage">storeImage</lable>
         <input type="url" name="storeImage" id="storeImage" v-model="storeImage">
