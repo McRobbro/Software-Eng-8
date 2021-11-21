@@ -45,7 +45,6 @@ app.component("store-update", {
     const specificStore = this.$javalin.pathParams["storeSlug"];
     this.storeSlug = specificStore;
     console.log("This store name: " + specificStore);
-    fetch(`/api/stores/${specificStore}/update`)
   }
 });
 </script>

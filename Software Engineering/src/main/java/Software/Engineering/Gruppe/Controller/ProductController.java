@@ -40,11 +40,6 @@ public class ProductController {
         context.json(product);
     }
 
-    public void deleteProduct(Context context) {
-        String storeSlug = context.pathParam("storeSlug");
-        context.redirect("/stores/" + storeSlug);
-    }
-
     public void createProduct(Context ctx) {
         String storeSlug = ctx.pathParam("storeSlug");
         Store currentStore = storeRepository.getSpecificStoreBySlug(storeSlug);
@@ -67,6 +62,18 @@ public class ProductController {
         else {
             ctx.status(400);
         }
+
+    }
+
+
+    public void deleteProduct(Context ctx) {
+        String storeSlug = ctx.pathParam("storeSlug");
+        System.out.println(storeSlug);
+        String productSlug = ctx.formParam("product-delete");
+        System.out.println(productSlug);
+        productRepository.deleteProduct(productSlug);
+        ctx.redirect("/stores/" + storeSlug);
+
 
     }
 

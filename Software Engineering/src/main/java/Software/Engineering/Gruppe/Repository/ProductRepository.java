@@ -208,17 +208,17 @@ public class ProductRepository implements ProductInterface {
     @Override
     public boolean deleteProduct(String productSlug) {
         String query = "DELETE FROM product WHERE productSlug = ?";
-        try (Connection cn = database.getConnection();
-             PreparedStatement st = cn.prepareStatement(query)) {
-            st.setString(1, productSlug);
-            st.executeUpdate();
-            System.out.println("deleted success");
-            return true;
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
+        if (productSlug != null)
+            try (Connection cn = database.getConnection();
+                 PreparedStatement st = cn.prepareStatement(query)) {
+                st.setString(1, productSlug);
+                st.executeUpdate();
+                System.out.println("delete ok");
+                return true;
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        System.out.println("delete failed");
         return false;
     }
 

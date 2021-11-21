@@ -3,32 +3,26 @@
   </navbar>
 
   <app-frame>
-    <div v-if="errors.length">
-      <b>Please correct the following error(s):</b>
-      <ul>
-        <li v-for="error in errors">{{ error }}</li>
-      </ul>
-    </div>
     <div class="form-style">
-      <form class="create" :action=`/api/stores/${storeSlug}/create` method="post">
+      <form class="create" :action=`/api/stores/${storeSlug}/createProduct` method="post">
 
         <label for="productSlug">productSlug</label>
-        <input type="text" name="productSlug" id="productSlug" v-model="productSlug">
+        <input type="text" name="productSlug" id="productSlug" v-model="productSlug" required>
 
         <lable for="productName">productName</lable>
-        <input type="text" name="productName" id="productName" v-model="productName">
+        <input type="text" name="productName" id="productName" v-model="productName" required>
 
         <lable for="productImage">productImage</lable>
-        <input type="url" name="productImage" id="productImage" v-model="productImage">
+        <input type="url" name="productImage" id="productImage" v-model="productImage" required>
 
         <lable for="productDescription">productDescription</lable>
-        <input type="text" name="productDescription" id="productDescription" v-model="productDescription">
+        <input type="text" name="productDescription" id="productDescription" v-model="productDescription" required>
 
         <lable for="productCategory">productCategory</lable>
-        <input type="text" name="productCategory" id="productCategory" v-model="productCategory">
+        <input type="text" name="productCategory" id="productCategory" v-model="productCategory" required>
 
         <lable for="productPrice">productPrice</lable>
-        <input type="text" name="productPrice" id="productPrice" v-model="productPrice">
+        <input type="text" name="productPrice" id="productPrice" v-model="productPrice" required>
 
         <input type="submit" value="product create">
       </form>
@@ -45,9 +39,7 @@ app.component("product-create", {
     productImage: null,
     productDescription: null,
     productCategory: null,
-    productPrice: null,
-    errors: []
-
+    productPrice: null
   }),
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
