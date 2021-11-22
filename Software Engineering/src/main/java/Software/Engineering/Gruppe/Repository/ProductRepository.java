@@ -160,13 +160,15 @@ public class ProductRepository implements ProductInterface {
         try (Connection cn = database.getConnection();
              PreparedStatement st = cn.prepareStatement(query)) {
             //st.set
-            st.setString(1, productSlug);
-            st.setString(2, productName);
-            st.setString(3, productImage);
-            st.setString(4, productDescription);
-            st.setString(5, productCategory);
+            st.setInt(1, store.getStoreId());
+            st.setString(2, productSlug);
+            st.setString(3, productName);
+            st.setString(4, productImage);
+            st.setString(5, productDescription);
+            st.setString(6, productCategory);
+            st.setDouble(7, price);
             st.executeUpdate();
-            return new Product(productSlug, productName, productImage, productDescription, productCategory);
+            return new Product(store ,productSlug, productName, productImage, productDescription, productCategory, price);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -206,17 +208,17 @@ public class ProductRepository implements ProductInterface {
     @Override
     public boolean deleteProduct(String productSlug) {
         String query = "DELETE FROM product WHERE productSlug = ?";
-        try (Connection cn = database.getConnection();
-             PreparedStatement st = cn.prepareStatement(query)) {
-            st.setString(1, productSlug);
-            st.executeUpdate();
-            System.out.println("deleted success");
-            return true;
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
+        if (productSlug != null)
+            try (Connection cn = database.getConnection();
+                 PreparedStatement st = cn.prepareStatement(query)) {
+                st.setString(1, productSlug);
+                st.executeUpdate();
+                System.out.println("delete ok");
+                return true;
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        System.out.println("delete failed");
         return false;
     }
 

@@ -61,6 +61,12 @@ public class StoresController {
             context.status(400);
         }
 
+    }
+
+    public void deleteStore(Context ctx) {
+        String storeSelected = ctx.formParam("store-delete");
+        storeRepository.deleteStore(storeSelected);
+        ctx.redirect("/stores");
 
 
     }

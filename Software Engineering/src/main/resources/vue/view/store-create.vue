@@ -3,20 +3,14 @@
   </navbar>
 
   <app-frame>
-    <div v-if="errors.length">
-      <b>Please correct the following error(s):</b>
-      <ul>
-        <li v-for="error in errors">{{ error }}</li>
-      </ul>
-    </div>
     <div class="form-style">
       <form class="create" :action=`/api/stores/create` method="post">
 
         <label for="slug">storeSlug</label>
-        <input type="text" name="slug" id="slug" v-model="slug">
+        <input type="text" name="slug" id="slug" v-model="slug" required>
 
         <lable for="name">storeName</lable>
-        <input type="text" name="storeName" id="storeName" v-model="name">
+        <input type="text" name="storeName" id="storeName" v-model="storeName" required>
 
         <lable for="storeImage">storeImage</lable>
         <input type="url" name="storeImage" id="storeImage" v-model="storeImage">
@@ -36,9 +30,7 @@ app.component("store-create", {
     slug: null,
     storeName: null,
     storeImage: null,
-    storeDescription: null,
-    errors: []
-
+    storeDescription: null
   }),
 });
 </script>
