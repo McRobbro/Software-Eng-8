@@ -7,6 +7,7 @@ import Software.Engineering.Gruppe.Repository.ProductRepository;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 import io.javalin.http.Context;
 import java.util.List;
+import java.util.Objects;
 
 import static java.lang.Double.parseDouble;
 
@@ -62,6 +63,34 @@ public class ProductController {
         else {
             ctx.status(400);
         }
+
+    }
+
+    public void updateProduct(Context context) {
+        String storeSlug = context.pathParam("storeSlug");
+        String prodSlug = context.pathParam("prodSlug");
+        Product prod = productRepository.getSpecificProduct(storeSlug, prodSlug);
+        String updatedStoreSlug = context.formParam("productSlug");
+        String productName = context.formParam("productName");
+        String productImage = context.formParam("productImage");
+        String productDescription = context.formParam("productDescription");
+        String productCategory = context.formParam("productCategory");
+        String price = context.formParam("price");
+        Product updatedProduct = productRepository.updateProduct(
+                prod.getProductId(),
+                updatedStoreSlug,
+                productName,
+                productImage,
+                productDescription,
+                productCategory,
+                parseDouble(Objects.requireNonNull(price)));
+        if(updatedProduct != null) {
+            context.redirect("/stores/" + storeSlug + "/" + updatedProduct.getProductSlug());
+        }
+        else {
+            context.status(400);
+        }
+
 
     }
 
