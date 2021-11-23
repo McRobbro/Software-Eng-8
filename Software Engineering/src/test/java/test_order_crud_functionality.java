@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.Month;
 
 import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,30 +31,57 @@ public class test_order_crud_functionality {
 
     @BeforeEach
     public void data_setup() {
-        LocalDateTime testDate = LocalDateTime.of(2021,
-                Month.JULY, 11, 17, 0, 0);
-        Store testStore = storeRepository.createStore("DummySlug", "DummyName", "DummyUrl", "dummyBio");
-        User testUser = userRepository.createUser(5,"email1","name1", "password1");
-        orderRepository.createOrder(1, testDate, testUser, testStore);
-        System.out.println("setup");
-
+        LocalDateTime dummyDate = LocalDateTime.of(2021,
+                Month.NOVEMBER, 23, 15, 0, 0);
+        Store dummyStore = storeRepository.createStore("DummyStSlug", "DummyStName", "DummyStImg", "dummyStDesc");
+        User dummyUser = userRepository.createUser(5,"dummyEmail","DummyName", "dummyPassword");
+        orderRepository.createOrder(1, dummyDate, dummyUser, dummyStore);
     }
 
     @AfterEach
     public void tear_down() {
-
         userRepository.deleteUser(5);
-        storeRepository.deleteStore("DummySlug");
+        storeRepository.deleteStore("DummyStSlug");
         orderRepository.deleteOrder(1);
-        System.out.println("teardown");
      }
 
     @Test
     public void test_create_order() {
-        System.out.println(orderRepository.getOrderById(1));
-        assertEquals(orderRepository.getOrderById(1).getUserId().getEmail(), "email1");
+        /*
+        LocalDateTime dummyTime = orderRepository.getOrderById(1).getOrderDate();
+        int storeId = storeRepository.getSpecificStoreBySlug("DummyStSlug").getStoreId();
+        assertEquals(orderRepository.getOrderById(1), allOf(
+                hasProperty("orderId", is(1)),
+                hasProperty("orderDate", is(dummyTime)),
+                hasProperty("userId", is(5)),
+                hasProperty("storeId", is(storeId))
+        ));
+        */
     }
 
+    @Test
+    public void test_get_order_by_id() {
+        LocalDateTime dummyTime = orderRepository.getOrderById(1).getOrderDate();
+        int storeId = storeRepository.getSpecificStoreBySlug("DummyStSlug").getStoreId();
+        assertEquals(orderRepository.getOrderById(1), allOf(
+                hasProperty("orderId", is(1)),
+                hasProperty("orderDate", is(dummyTime)),
+                hasProperty("userId", is(5)),
+                hasProperty("storeId", is(storeId))
+        ));
+    }
+
+    /*
+    @Test
+    public void test_update_order() {}
+    there is no method updateOrder()
+    */
+
+    @Test
+    public void test_delete_order() {
+        orderRepository.deleteOrder(1);
+        assertNull(orderRepository.getOrderById(1));
+    }
 
 
 

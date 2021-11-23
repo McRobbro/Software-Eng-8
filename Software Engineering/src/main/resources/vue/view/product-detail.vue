@@ -2,6 +2,8 @@
   <navbar>
   </navbar>
   <app-frame>
+    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/' + prodSlug + '/updateProduct'"><button>update product</button></a>
+
     <div v-if="product">
       <p>
         <img v-if="product.productImage" class="cover-image-frontpage" v-bind:src="product.productImage">
@@ -17,6 +19,7 @@ app.component("product-detail", {
   data: () => ({
     product: null,
     storeName: "",
+    cookieValue: document.cookie
   }),
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
