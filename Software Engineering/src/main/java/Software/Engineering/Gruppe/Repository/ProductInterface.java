@@ -20,7 +20,7 @@ public interface ProductInterface {
 
     Product createProduct(Store store, String productSlug, String productName, String productImage, String productDescription, String productCategory, double pris);
 
-    Product updateProduct(int productId, String productSlug, String productName, String productImage, String productDescription, String productCategory);
+    Product updateProduct(int productId, String productSlug, String productName, String productImage, String productDescription, String productCategory, double price);
 
     boolean deleteProduct(String productSlug);
 

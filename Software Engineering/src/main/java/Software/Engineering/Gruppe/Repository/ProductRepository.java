@@ -178,12 +178,13 @@ public class ProductRepository implements ProductInterface {
     }
 
     @Override
-    public Product updateProduct(int productId, String productSlug, String productName, String productImage, String productDescription, String productCategory) {
+    public Product updateProduct(int productId, String productSlug, String productName, String productImage, String productDescription, String productCategory, double price) {
         String query = "UPDATE product SET productSlug = ?, " +
                 "productName = ?, " +
                 "productImage = ?, " +
                 "productDescription = ?," +
-                "productCategory = ?" +
+                "productCategory = ?," +
+                "productPrice = ?" +
                 "WHERE productId = ?";
 
         try (Connection cn = database.getConnection();
@@ -193,7 +194,8 @@ public class ProductRepository implements ProductInterface {
             st.setString(3, productImage);
             st.setString(4, productDescription);
             st.setString(5, productCategory);
-            st.setInt(6, productId);
+            st.setDouble(6, price);
+            st.setInt(7, productId);
             st.executeUpdate();
             System.out.println("Update success");
             return new Product(productId, productSlug, productName, productImage, productDescription, productCategory);

@@ -43,7 +43,7 @@ public class Main {
 
 
         System.out.println("\nfunctionality for products");
-        System.out.println(productRepository.createProduct(storeRepository.getSpecificStoreBySlug("johansens-butikk"), "bor", "null", "lorem ipsum", "Belysning", "nlbaqba", 100));
+       // System.out.println(productRepository.createProduct(storeRepository.getSpecificStoreBySlug("johansens-butikk"), "bor", "null", "lorem ipsum", "Belysning", "nlbaqba", 100));
         //System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
         /*
         System.out.println(productRepository.getAllProducts());
@@ -72,14 +72,16 @@ public class Main {
 
         //Period period = Period.between(startDate.toLocalDate(), endDate.toLocalDate());
 
-
+/*
         System.out.println("\nfunctionality for auction");
-        Auction auction1 = auctionRepository.createAuction(storeRepository.getSpecificStoreBySlug("philips-butikk"),
+      //  Auction auction1 = auctionRepository.createAuction(storeRepository.getSpecificStoreBySlug("philips-butikk"),
                 productRepository.getSpecificProductBySlug("LUX-taklampe"), startDate, endDate);
         System.out.println(auction1);
         System.out.println(auction1.getAuctionTimeDurationInMin());
         System.out.println(auctionRepository.getAuctionById(71));
         System.out.println(auction1.getAuctionId());
+
+ */
 
 
         /*
