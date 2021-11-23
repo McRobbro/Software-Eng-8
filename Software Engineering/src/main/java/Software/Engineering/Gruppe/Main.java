@@ -2,6 +2,7 @@ package Software.Engineering.Gruppe;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Auction;
+import Software.Engineering.Gruppe.Model.Bid;
 import Software.Engineering.Gruppe.Model.Order;
 import Software.Engineering.Gruppe.Repository.*;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Period;
 import java.util.Date;
+import java.util.List;
 
 
 public class Main {
@@ -28,7 +30,8 @@ public class Main {
         UserRepository userRepository = new UserRepository(sqliteDatabase);
         OrderRepository orderRepository = new OrderRepository(sqliteDatabase, userRepository, storeRepository);
         AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase, storeRepository, productRepository);
-        BidRepository bidRepository = new BidRepository(sqliteDatabase);
+        //Lagt inn user og auction repo. Fjerne?
+        BidRepository bidRepository = new BidRepository(sqliteDatabase, userRepository, auctionRepository);
 
 
         System.out.println("\nfunctionality for store");
@@ -42,8 +45,9 @@ public class Main {
 
 
 
-        System.out.println("\nfunctionality for products");
+        /*System.out.println("\nfunctionality for products");
         System.out.println(productRepository.createProduct(storeRepository.getSpecificStoreBySlug("johansens-butikk"), "bor", "null", "lorem ipsum", "Belysning", "nlbaqba", 100));
+        */
         //System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
         /*
         System.out.println(productRepository.getAllProducts());
@@ -74,12 +78,12 @@ public class Main {
 
 
         System.out.println("\nfunctionality for auction");
-        Auction auction1 = auctionRepository.createAuction(storeRepository.getSpecificStoreBySlug("philips-butikk"),
+        /*Auction auction1 = auctionRepository.createAuction(storeRepository.getSpecificStoreBySlug("philips-butikk"),
                 productRepository.getSpecificProductBySlug("LUX-taklampe"), startDate, endDate);
         System.out.println(auction1);
         System.out.println(auction1.getAuctionTimeDurationInMin());
         System.out.println(auctionRepository.getAuctionById(71));
-        System.out.println(auction1.getAuctionId());
+        System.out.println(auction1.getAuctionId());*/
 
 
         /*
@@ -92,10 +96,21 @@ public class Main {
         //orderRepository.deleteOrder(7);
         */
 
-        /*
+
         System.out.println("functionality for bid");
-        bidRepository.makeBid(userRepository.getSpecificUser(100), auctionRepository.getAuctionById(81), 100);
-        */
+        //bidRepository.makeBid(userRepository.getSpecificUser(101), auctionRepository.getAuctionById(90), 100);
+
+        //bidRepository.addBidToList();
+        //System.out.println("Bud fra spesifikk auksjon " + bidRepository.getBidFromAuctionId(auctionRepository.getAuctionById(90)));
+
+        //System.out.println("Bud fra spesifikk auksjon " + bidRepository.getBids(90)));
+
+        List<Bid> bidList = bidRepository.getBidFromAuctionId(90);
+        for (Bid oneBid: bidList) {
+            System.out.println(oneBid);
+        }
+
+        System.out.println("Test av høyeste " + bidRepository.getWinner(90));
 
         System.out.println("\nEnd of main");
 

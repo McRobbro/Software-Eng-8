@@ -33,7 +33,8 @@ public class UserRepository implements UserInterface {
 
 
     public User createUser(int userId, String email, String username, String password) {
-        String query = "INSERT INTO user(userId, email, username, password) VALUES(?,?,?,?)";
+        String query = "INSERT INTO user(user" +
+                "Id, email, username, password) VALUES(?,?,?,?)";
 
         try (Connection connection = database.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {

@@ -5,17 +5,22 @@ import Software.Engineering.Gruppe.Model.Auction;
 import Software.Engineering.Gruppe.Model.Bid;
 import Software.Engineering.Gruppe.Model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BidRepository implements BidInterface {
 
     private final SqliteDatabase database;
+    UserRepository userRepository;
+    AuctionRepository auctionRepository;
 
-    public BidRepository(SqliteDatabase database) {
+    public BidRepository(SqliteDatabase database, UserRepository userRepository, AuctionRepository auctionRepository) {
         this.database = database;
+        this.userRepository = userRepository;
+        this.auctionRepository = auctionRepository;
     }
+
 
 
     @Override
@@ -36,5 +41,44 @@ public class BidRepository implements BidInterface {
         return null;
     }
 
+
+    @Override
+    public List<Bid> getBidFromAuctionId(int id) {
+        List<Bid> BidList = new ArrayList<>();
+        String query = "SELECT * FROM bid WHERE auctionId = ?";
+
+        try (Connection cn = database.getConnection()) {
+            PreparedStatement st = cn.prepareStatement(query);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int bidId = rs.getInt("bidId");
+                int userId = rs.getInt("userId");
+                User user = userRepository.getSpecificUser(userId);
+                int auctionId = rs.getInt("auctionId");
+                Auction auction = auctionRepository.getAuctionById(auctionId);
+                double amount = rs.getDouble("amount");
+                BidList.add(new Bid(bidId, user, auction, amount));
+
+            }
+            return BidList;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+
+    @Override
+    public Bid getWinner(int id) {
+        List<Bid> BidList = getBidFromAuctionId(id);
+        Bid highestBid = BidList.get(0);
+        for (Bid oneBid : BidList)
+            if (oneBid.getAmount() > highestBid.getAmount()) {
+                highestBid = oneBid;
+                return highestBid;
+            }
+        return null;
+    }
 
 }
