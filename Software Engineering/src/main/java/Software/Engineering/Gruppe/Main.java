@@ -2,6 +2,7 @@ package Software.Engineering.Gruppe;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Auction;
+import Software.Engineering.Gruppe.Model.Bid;
 import Software.Engineering.Gruppe.Model.Order;
 import Software.Engineering.Gruppe.Model.Store;
 import Software.Engineering.Gruppe.Repository.*;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Period;
 import java.util.Date;
+import java.util.List;
 
 
 public class Main {
@@ -106,6 +108,11 @@ public class Main {
         System.out.println("functionality for bid");
         bidRepository.makeBid(userRepository.getSpecificUser(100), auctionRepository.getAuctionById(81), 100);
         */
+
+        List<Bid> bidList = bidRepository.getBidFromAuctionId(90);
+        for (Bid oneBid: bidList) {
+            System.out.println(oneBid);
+        }
 
         System.out.println("\nEnd of main");
 
