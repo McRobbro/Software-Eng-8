@@ -26,7 +26,6 @@ public class test_product_crud_functionality {
     StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
     ProductRepository productRepository = new ProductRepository(sqliteDatabase, storeRepository);
 
-
     @BeforeEach
     public void data_setup() {
         Store testStore = storeRepository.createStore("DummyStSlug", "DummyStName", "DummyStImg", "DummyStDesc");
