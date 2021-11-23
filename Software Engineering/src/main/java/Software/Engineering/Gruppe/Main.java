@@ -3,6 +3,7 @@ package Software.Engineering.Gruppe;
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Auction;
 import Software.Engineering.Gruppe.Model.Order;
+import Software.Engineering.Gruppe.Model.Store;
 import Software.Engineering.Gruppe.Repository.*;
 
 import java.io.IOException;
@@ -55,6 +56,14 @@ public class Main {
 
 
          */
+        System.out.println("dummy");
+        Store testStore = storeRepository.createStore("DummyStSlug", "DummyStName", "DummyStImg", "DummyStDesc");
+        productRepository.createProduct(testStore, "DummySlug", "DummyName", "DummyImg",
+                "DummyDesc", "DummyCat", 12.09);
+       // System.out.println(productRepository.getSpecificProductBySlug("DummySlug"));
+
+        System.out.println("*");
+        System.out.println(productRepository.getProductsFromStore("DummyStSlug"));
 
 
         /*
@@ -82,7 +91,6 @@ public class Main {
         System.out.println(auction1.getAuctionId());
 
  */
-
 
         /*
         System.out.println("\nfunctionality for order");
