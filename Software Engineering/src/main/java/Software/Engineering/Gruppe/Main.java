@@ -1,10 +1,7 @@
 package Software.Engineering.Gruppe;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
-import Software.Engineering.Gruppe.Model.Auction;
-import Software.Engineering.Gruppe.Model.Bid;
-import Software.Engineering.Gruppe.Model.Order;
-import Software.Engineering.Gruppe.Model.Store;
+import Software.Engineering.Gruppe.Model.*;
 import Software.Engineering.Gruppe.Repository.*;
 
 import java.io.IOException;
@@ -31,11 +28,11 @@ public class Main {
         UserRepository userRepository = new UserRepository(sqliteDatabase);
         OrderRepository orderRepository = new OrderRepository(sqliteDatabase, userRepository, storeRepository);
         AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase, storeRepository, productRepository);
-        BidRepository bidRepository = new BidRepository(sqliteDatabase);
+        BidRepository bidRepository = new BidRepository(sqliteDatabase, userRepository, auctionRepository);
 
 
         System.out.println("\nfunctionality for store");
-     //   System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
+        //System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
         //System.out.println(storeRepository.updateStore(5,"Andreas-butikk", "Andreas", "null", "lorem ipsum"));
         //System.out.println(storeRepository.deleteStore("Marcus-butikk"));
         System.out.println(storeRepository.getAllStores());
@@ -46,7 +43,7 @@ public class Main {
 
 
         System.out.println("\nfunctionality for products");
-       // System.out.println(productRepository.createProduct(storeRepository.getSpecificStoreBySlug("johansens-butikk"), "bor", "null", "lorem ipsum", "Belysning", "nlbaqba", 100));
+        // System.out.println(productRepository.createProduct(storeRepository.getSpecificStoreBySlug("johansens-butikk"), "bor", "null", "lorem ipsum", "Belysning", "nlbaqba", 100));
         //System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
         /*
         System.out.println(productRepository.getAllProducts());
@@ -57,7 +54,7 @@ public class Main {
         System.out.println(productRepository.updateProduct(1, "LUX-taklampe", "LUX taklampe", "bilde", "descript", "Belysning"));
 
 
-         */
+
         System.out.println("dummy");
         Store testStore = storeRepository.createStore("DummyStSlug", "DummyStName", "DummyStImg", "DummyStDesc");
         productRepository.createProduct(testStore, "DummySlug", "DummyName", "DummyImg",
@@ -68,7 +65,7 @@ public class Main {
         System.out.println(productRepository.getProductsFromStore("DummyStSlug"));
 
 
-        /*
+
         System.out.println("\nfunctionality for user");
         System.out.println("userID");
         System.out.println(userRepository.getSpecificUser(100).getUserId());
@@ -113,6 +110,9 @@ public class Main {
         for (Bid oneBid: bidList) {
             System.out.println(oneBid);
         }
+
+        //System.out.println(userRepository.getAllUsers());
+        //System.out.println(userRepository.getSpecificUserByUsername("Alejandra"));
 
         System.out.println("\nEnd of main");
 
