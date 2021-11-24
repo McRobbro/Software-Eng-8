@@ -1,10 +1,7 @@
 package Software.Engineering.Gruppe.Repository;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
-import Software.Engineering.Gruppe.Model.Auction;
-import Software.Engineering.Gruppe.Model.Product;
-import Software.Engineering.Gruppe.Model.Store;
-import Software.Engineering.Gruppe.Model.User;
+import Software.Engineering.Gruppe.Model.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,13 +10,15 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AuctionRepository implements AuctionInterface {
 
     private final SqliteDatabase database;
-    StoreRepository storeRepository;
-    ProductRepository productRepository;
+    private StoreRepository storeRepository;
+    private ProductRepository productRepository;
 
     public AuctionRepository(SqliteDatabase database, StoreRepository storeRepository, ProductRepository productRepository) {
         this.database = database;
@@ -52,7 +51,7 @@ public class AuctionRepository implements AuctionInterface {
     public Auction getAuctionById(int auctionId) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         Auction spesificAuction = null;
-        String query="select * from auction where auctionId = ?";
+        String query = "select * from auction where auctionId = ?";
         try (Connection connection = database.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, auctionId);
@@ -78,7 +77,41 @@ public class AuctionRepository implements AuctionInterface {
         return null;
     }
 
+    @Override
+    public List<Auction> getAllAuctionsFromSpecificStore(String storeSlug) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        List<Auction> auctionList = new ArrayList<>();
+        String query = "SELECT * FROM auction where storeId = ?";
+
+        try (Connection cn = database.getConnection()) {
+            PreparedStatement st = cn.prepareStatement(query);
+            int storeId = storeRepository.getSpecificStoreBySlug(storeSlug).getStoreId();
+            st.setInt(1, storeId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int auctionId = rs.getInt("auctionId");
+                int shopId = rs.getInt("storeId");
+                Store store = storeRepository.getSpecificStoreById(shopId);
+                int productId = rs.getInt("productId");
+                String prodSlug = productRepository.getSpecificProductById(productId).getProductSlug();
+                Product product = productRepository.getSpecificProduct(store.getSlug(), prodSlug);
+                String startDate = rs.getString("start_time");
+                String endDate = rs.getString("end_time");
+                LocalDateTime ldtStart = LocalDateTime.parse(startDate, format);
+                LocalDateTime ldtEnd = LocalDateTime.parse(endDate, format);
+                auctionList.add(new Auction(auctionId, store, product, ldtStart, ldtEnd));
+
+            }
+            return auctionList;
+
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
 
-
+        return null;
+    }
 }
+
+
