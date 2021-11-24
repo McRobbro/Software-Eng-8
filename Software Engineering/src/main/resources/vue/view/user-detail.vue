@@ -12,8 +12,6 @@
       <div class="changeInfo" v-else-if="showPages == true">
         <button @click="showPages = false">Go Back</button>
         <div class="form-style">
-
-          {{selectedUser}}
           <form class="create" @submit="checkForm" :action=`/api/user/${selectedUser.userId}/update` method="post">
 
             <label for="email">E-Mail</label>
