@@ -94,7 +94,7 @@ public class Main {
 
         System.out.println("\nfunctionality for order");
         System.out.println(orderRepository.createOrder(LocalDateTime.now(), userRepository.getSpecificUser(100), storeRepository.getSpecificStoreBySlug("philips-butikk")));
-        System.out.println(orderRepository.getOrderById(31));
+        System.out.println(orderRepository.getOrderById(6));
         Order order1 = orderRepository.createOrder(endDate, userRepository.getSpecificUser(100), storeRepository.getSpecificStoreById(3));
         System.out.println(order1);
         System.out.println(order1.getOrderId());
