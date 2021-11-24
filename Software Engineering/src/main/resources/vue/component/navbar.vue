@@ -2,13 +2,25 @@
   <div class="navbar">
     <nav>
       <a :href="/stores/"><p>Home</p></a>
+      <a :href="/cart/" id="cart" v-if="cookieValue === 'role=USER'"><p><i class="fas fa-shopping-cart">0</i></p></a>
       <a :href="/login/" id="login"><p>Login or Sign up</p></a>
+      <a :href="/users/" id="users" v-if="cookieValue === 'role=PLATFORM_OWNER'"><p>Registered Users</p></a>
+      <p class="currentUser" v-if="cookieValue === 'role=PLATFORM_OWNER'" >Current Role: {{$javalin.state.currentUser}}</p>
+      <p class="currentUser" v-if="cookieValue === 'role=STORE_OWNER'" >Current Role: {{$javalin.state.currentUser}}</p>
+      <a :href="/user/" id="user" v-if="cookieValue === 'role=USER'"><p>{{$javalin.state.currentUser}}</p></a>
     </nav>
   </div>
 </template>
 
 <script>
-app.component("navbar", {template: "#navbar"});
+app.component("navbar", {
+  template: "#navbar",
+
+data: () => ({
+
+  cookieValue: document.cookie,
+})
+});
 </script>
 
 <style scoped>
@@ -38,8 +50,18 @@ nav a:hover {
   transition: 0.25s;
 }
 
+.currentUser {
+  padding: 0.5em 2em;
+  color: gold;
+  text-decoration: none;
+  background-color: #0e0e0e;
+  float: right;
+}
+
 nav #login,
-nav #cart {
+nav #users,
+nav #cart,
+nav #user{
   float: right;
 }
 

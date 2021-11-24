@@ -49,4 +49,8 @@ app.component("store-update", {
 });
 </script>
 <style>
+.create {
+  display: flex;
+  flex-flow: column;
+}
 </style>

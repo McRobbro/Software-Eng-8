@@ -1,37 +1,38 @@
-<template id="store-overview">
+<template id="users-overview">
   <navbar>
   </navbar>
 
   <app-frame>
 
-    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='stores/create'">Create store</button>
-    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='stores/delete'">Delete store</button>
+    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='stores/create'">Create User</button>
+    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='users/delete'">Delete User</button>
 
     <ul class="store-overview-list">
-      <li v-for="store in stores">
-        <a :href="`/stores/${store.slug}`">
-        <img v-if="store.storeImage" class="cover-image-frontpage" v-bind:src="store.storeImage">
-        <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
-        {{store.storeName}}</a>
+      <li v-for="user in users">
+        <a :href="`/users/${user.username}`">
+          <img v-if="user.Image" class="cover-image-frontpage" v-bind:src="user.Image">
+          <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
+          {{user.email}} ({{user.username}})</a>
       </li>
     </ul>
   </app-frame>
 </template>
 <script>
-app.component("store-overview", {
-  template: "#store-overview",
+app.component("users-overview", {
+  template: "#users-overview",
   data: () => ({
-    stores: [],
+
+    users: [],
     cookieValue: document.cookie,
   }),
 
   created() {
-    fetch("/api/stores")
+    fetch("/api/users")
         .then(res => res.json())
-        .then(json => this.stores = json)
+        .then(json => this.users = json)
         .catch((error) => {
           console.log(error);
-          alert("Error while fetching stores")
+          alert("Error while fetching all users")
         });
   }
 
