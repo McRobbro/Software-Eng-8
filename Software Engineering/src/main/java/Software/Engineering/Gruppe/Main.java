@@ -82,16 +82,22 @@ public class Main {
 
 /*
         System.out.println("\nfunctionality for auction");
-      //  Auction auction1 = auctionRepository.createAuction(storeRepository.getSpecificStoreBySlug("philips-butikk"),
+        Auction auction1 = auctionRepository.createAuction(storeRepository.getSpecificStoreBySlug("johansens-butikk"),
                 productRepository.getSpecificProductBySlug("LUX-taklampe"), startDate, endDate);
         System.out.println(auction1);
         System.out.println(auction1.getAuctionTimeDurationInMin());
-        System.out.println(auctionRepository.getAuctionById(71));
-        System.out.println(auction1.getAuctionId());
+       // System.out.println(auctionRepository.getAuctionById(71));
+        //System.out.println(auction1.getAuctionId());
+
+
+
 
  */
 
 
+
+
+/*
         System.out.println("\nfunctionality for order");
         System.out.println(orderRepository.createOrder(LocalDateTime.now(), userRepository.getSpecificUser(100), storeRepository.getSpecificStoreBySlug("philips-butikk")));
         System.out.println(orderRepository.getOrderById(31));
@@ -101,17 +107,31 @@ public class Main {
         //orderRepository.deleteOrder(7);
 
 
+
+ */
         /*
         System.out.println("functionality for bid");
         bidRepository.makeBid(userRepository.getSpecificUser(100), auctionRepository.getAuctionById(81), 100);
         */
 
+        /*
         List<Bid> bidList = bidRepository.getBidFromAuctionId(90);
         for (Bid oneBid: bidList) {
             System.out.println(oneBid);
         }
 
         System.out.println("\nEnd of main");
+
+
+         */
+
+
+        for (Auction oneAuction: auctionRepository.getAllAuctionsFromSpecificStore("johansens-butikk")
+             ) {
+            System.out.println(oneAuction);
+
+        }
+
 
     }
 }

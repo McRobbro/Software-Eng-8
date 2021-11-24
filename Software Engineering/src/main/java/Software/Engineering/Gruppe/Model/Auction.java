@@ -1,5 +1,7 @@
 package Software.Engineering.Gruppe.Model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -9,7 +11,9 @@ public class Auction {
     private int auctionId;
     private Store store;
     private Product product;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime startTime;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime endTime;
 
     public Auction(int auctionId, Store store, Product product, LocalDateTime startTime, LocalDateTime endTime) {

@@ -7,6 +7,12 @@
     <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/createProduct'"><button>create product</button></a>
     <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/deleteProduct'"><button>delete product</button></a>
 
+    <h1>Auctions</h1>
+    <ul>
+      <li v-for="auction in storeAuctions">
+        <a :href="`/stores`">{{auction.product.productName}}</a>
+      </li>
+    </ul>
 
     <ul class="store-overview-list">
       <li v-for="product in storeProducts">
@@ -25,6 +31,7 @@ app.component("store-detail", {
   template: "#store-detail",
   data: () => ({
     storeProducts: [],
+    storeAuctions: [],
     storeSlug: null,
     cookieValue: document.cookie
   }),
@@ -36,6 +43,12 @@ app.component("store-detail", {
         .then(res => res.json())
         .then(json => this.storeProducts = json)
         .catch(() => alert("Error while fetching products"));
+
+    fetch(`/api/stores/${specificStore}/auctions`)
+        .then(res => res.json())
+        .then(json => this.storeAuctions = json)
+        .catch(() => alert("Error while fetching auctions"));
+
   }
 });
 </script>

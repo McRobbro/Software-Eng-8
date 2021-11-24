@@ -1,10 +1,8 @@
 package Software.Engineering.Gruppe;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
-import Software.Engineering.Gruppe.Controller.LoginController;
-import Software.Engineering.Gruppe.Controller.ProductController;
-import Software.Engineering.Gruppe.Controller.StoresController;
-import Software.Engineering.Gruppe.Controller.UserController;
+import Software.Engineering.Gruppe.Controller.*;
+import Software.Engineering.Gruppe.Repository.AuctionRepository;
 import Software.Engineering.Gruppe.Repository.ProductRepository;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 
@@ -33,11 +31,13 @@ public class Application {
         StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
         ProductRepository productRepository = new ProductRepository(sqliteDatabase, storeRepository);
         UserRepository userRepository = new UserRepository(sqliteDatabase);
+        AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase, storeRepository, productRepository);
         // Init controllers
         UserController userController = new UserController(userRepository);
         LoginController loginController = new LoginController();
         StoresController storesController = new StoresController(storeRepository);
         ProductController productController = new ProductController(productRepository, storeRepository);
+        AuctionController auctionController = new AuctionController(auctionRepository, storeRepository, productRepository);
 
         // init javalin web service
         Javalin app = Javalin.create(config -> {
@@ -87,6 +87,7 @@ public class Application {
         app.post("/api/stores/create", storesController::createStore, Role.ANYONE);
         app.post("/api/stores/delete", storesController::deleteStore, Role.ANYONE);
         app.get("/api/stores/{storeSlug}", productController::getProductsFromStore, Role.ANYONE);
+        app.get("/api/stores/{storeSlug}/auctions", auctionController::getAllAuctionsFromStore, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/update", storesController::updateStore, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/createProduct", productController::createProduct, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/deleteProduct", productController::deleteProduct, Role.ANYONE);
