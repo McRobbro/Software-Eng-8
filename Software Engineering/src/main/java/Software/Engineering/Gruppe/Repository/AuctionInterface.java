@@ -16,5 +16,7 @@ public interface AuctionInterface {
 
     List<Auction> getAllAuctionsFromSpecificStore(String storeSlug);
 
+    boolean deleteAuction(int auctionId);
+
 
 }

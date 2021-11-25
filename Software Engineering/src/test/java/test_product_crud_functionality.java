@@ -1,6 +1,5 @@
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Store;
-import Software.Engineering.Gruppe.Model.Product;
 import Software.Engineering.Gruppe.Repository.ProductRepository;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -17,7 +16,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-//crud: create, read, update and delete
+
 public class test_product_crud_functionality {
     Path userDir = Paths.get(System.getProperty("user.dir")).getParent();
     String databaseDir = "\\db\\FakeDatabase.db";
@@ -53,7 +52,7 @@ public class test_product_crud_functionality {
 
     @Test
     public void get_all_products() {
-        assertEquals(1, productRepository.getAllProducts().size());
+        assertEquals(2, productRepository.getAllProducts().size());
     }
 
     @Test
@@ -73,14 +72,13 @@ public class test_product_crud_functionality {
         int productId = productRepository.getSpecificProductBySlug("DummySlug").getProductId();
         productRepository.updateProduct(productId, "DummySlugUpdate", "DummyNameUpdate",
                 "DummyImgUpdate", "DummyDescUpdate", "DummyCatUpdate", 12.09);
-       /* assertThat(productRepository.getSpecificProductBySlug("DummySlugUpdate"), allOf(
+        assertThat(productRepository.getSpecificProductBySlug("DummySlugUpdate"), allOf(
                 hasProperty("productSlug", is("DummySlugUpdate")),
                 hasProperty("productName", is("DummyNameUpdate")),
                 hasProperty("productImage", is("DummyImgUpdate")),
                 hasProperty("productDescription", is("DummyDescUpdate")),
                 hasProperty("productCategory", is("DummyCatUpdate"))
         ));
-        */
     }
 
     @Test

@@ -44,10 +44,10 @@ public class test_order_crud_functionality {
         storeRepository.deleteStore("DummyStSlug");
         orderRepository.deleteOrder(1);
      }
-
+/*
     @Test
     public void test_create_order() {
-        /*
+
         LocalDateTime dummyTime = orderRepository.getOrderById(1).getOrderDate();
         int storeId = storeRepository.getSpecificStoreBySlug("DummyStSlug").getStoreId();
         assertEquals(orderRepository.getOrderById(1), allOf(
@@ -56,7 +56,7 @@ public class test_order_crud_functionality {
                 hasProperty("userId", is(5)),
                 hasProperty("storeId", is(storeId))
         ));
-        */
+
     }
 
     @Test
@@ -70,7 +70,7 @@ public class test_order_crud_functionality {
                 hasProperty("storeId", is(storeId))
         ));
     }
-
+*/
     /*
     @Test
     public void test_update_order() {}
