@@ -31,8 +31,7 @@ public class test_order_crud_functionality {
 
     @BeforeEach
     public void data_setup() {
-        LocalDateTime dummyDate = LocalDateTime.of(2021,
-                Month.NOVEMBER, 23, 15, 0, 0);
+        LocalDateTime dummyDate = LocalDateTime.of(2021, Month.NOVEMBER, 23, 15, 0, 0);
         Store dummyStore = storeRepository.createStore("DummyStSlug", "DummyStName", "DummyStImg", "dummyStDesc");
         User dummyUser = userRepository.createUser(5,"dummyEmail","DummyName", "dummyPassword");
         orderRepository.createOrder(1, dummyDate, dummyUser, dummyStore);
@@ -47,7 +46,6 @@ public class test_order_crud_functionality {
 
     @Test
     public void test_create_order() {
-        /*
         LocalDateTime dummyTime = orderRepository.getOrderById(1).getOrderDate();
         int storeId = storeRepository.getSpecificStoreBySlug("DummyStSlug").getStoreId();
         assertEquals(orderRepository.getOrderById(1), allOf(
@@ -56,7 +54,7 @@ public class test_order_crud_functionality {
                 hasProperty("userId", is(5)),
                 hasProperty("storeId", is(storeId))
         ));
-        */
+
     }
 
     @Test

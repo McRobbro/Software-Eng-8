@@ -75,6 +75,7 @@ public class Application {
         app.get("/stores/{storeSlug}/createProduct", new VueComponent("product-create"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/deleteProduct", new VueComponent("product-delete"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"), Role.ANYONE);
+        app.get("/stores/{storeSlug}/auctions/{auctionProd}", new VueComponent("product-auction"), Role.PLATFORM_OWNER, Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/{prodSlug}/updateProduct", new VueComponent("product-update"), Role.STORE_OWNER);
 
         //api
@@ -92,6 +93,7 @@ public class Application {
         app.post("/api/stores/{storeSlug}/createProduct", productController::createProduct, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/deleteProduct", productController::deleteProduct, Role.ANYONE);
         app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct, Role.ANYONE);
+        app.get("/api/stores/{storeSlug}/auctions/{auctionProd}", auctionController::getSpecificAuction, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/{prodSlug}/updateProduct", productController::updateProduct, Role.ANYONE);
         app.get("/api/products", productController::getAllProducts, Role.ANYONE);
 

@@ -10,11 +10,13 @@ import java.util.List;
 
 public interface AuctionInterface {
 
-    Auction createAuction(Store store, Product product, LocalDateTime startTime, LocalDateTime endTime);
+    Auction createAuction(Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime);
 
     Auction getAuctionById(int auctionId);
 
     List<Auction> getAllAuctionsFromSpecificStore(String storeSlug);
+
+    Auction getSpecificAuction(String storeSlug, String prodSlug);
 
 
 }

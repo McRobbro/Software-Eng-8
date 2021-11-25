@@ -11,22 +11,25 @@ public class Auction {
     private int auctionId;
     private Store store;
     private Product product;
+    private double startPrice;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime startTime;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime endTime;
 
-    public Auction(int auctionId, Store store, Product product, LocalDateTime startTime, LocalDateTime endTime) {
+    public Auction(int auctionId, Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime) {
         this.auctionId = auctionId;
         this.store = store;
         this.product = product;
+        this.startPrice = startPrice;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public Auction(Store store, Product product, LocalDateTime startTime, LocalDateTime endTime) {
+    public Auction(Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime) {
         this.store = store;
         this.product = product;
+        this.startPrice = startPrice;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -34,6 +37,15 @@ public class Auction {
     public Long getAuctionTimeDurationInMin() {
         Duration duration = Duration.between(startTime, endTime);
         return duration.toMinutes();
+    }
+
+
+    public double getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(double startPrice) {
+        this.startPrice = startPrice;
     }
 
     public int getAuctionId() {
@@ -79,11 +91,11 @@ public class Auction {
     @Override
     public String toString() {
         return "Auction{" +
-                "auctionId=" + auctionId +
-                ", store=" + store +
-                ", product=" + product +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
+                "auctionId=" + auctionId + "\n" +
+                ", store=" + store + "\n" +
+                ", product=" + product + "\n" +
+                ", startTime=" + startTime + "\n" +
+                ", endTime=" + endTime + "\n" +
                 '}';
     }
 }

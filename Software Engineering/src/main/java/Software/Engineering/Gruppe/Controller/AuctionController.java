@@ -27,4 +27,14 @@ public class AuctionController {
         context.json(getAuction);
 
     }
+
+    public void getSpecificAuction(Context context) {
+        String storeSlug = context.pathParam("storeSlug");
+        String prodSlug = context.pathParam("auctionProd");
+
+        Auction auction = auctionRepository.getSpecificAuction(storeSlug, prodSlug);
+        context.json(auction);
+
+
+    }
 }

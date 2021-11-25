@@ -10,7 +10,7 @@
     <h1>Auctions</h1>
     <ul>
       <li v-for="auction in storeAuctions">
-        <a :href="`/stores`">{{auction.product.productName}}</a>
+        <a :href="`/stores/${storeSlug}/auctions/${auction.product.productSlug}`">{{auction.product.productName}}</a>
       </li>
     </ul>
 

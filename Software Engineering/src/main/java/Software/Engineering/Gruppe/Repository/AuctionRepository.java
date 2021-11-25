@@ -27,18 +27,19 @@ public class AuctionRepository implements AuctionInterface {
     }
 
     @Override
-    public Auction createAuction(Store store, Product product, LocalDateTime startTime, LocalDateTime endTime) {
-        String query = "INSERT INTO auction(storeId, productId, start_time, end_time) VALUES(?,?,?,?)";
+    public Auction createAuction(Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime) {
+        String query = "INSERT INTO auction(storeId, productId, startPrice, start_time, end_time) VALUES(?,?,?,?,?)";
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
         try (Connection connection = database.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, store.getStoreId());
             preparedStatement.setInt(2, product.getProductId());
+            preparedStatement.setDouble(3, startPrice);
             preparedStatement.setString(3, startTime.format(format));
             preparedStatement.setString(4, endTime.format(format));
             preparedStatement.executeUpdate();
-            return new Auction(store, product, startTime, endTime);
+            return new Auction(store, product, startPrice, startTime, endTime);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -60,13 +61,15 @@ public class AuctionRepository implements AuctionInterface {
                 int auction = resultSet.getInt("auctionId");
                 int storeId = resultSet.getInt("storeId");
                 int productId = resultSet.getInt("productId");
+                double startPrice = resultSet.getDouble("startPrice");
                 String startDate = resultSet.getString("start_time");
                 String endDate = resultSet.getString("end_time");
                 Store store = storeRepository.getSpecificStoreById(storeId);
-                Product product = productRepository.getSpecificProductById(productId);
+                String prodSlug = productRepository.getSpecificProductById(productId).getProductSlug();
+                Product product = productRepository.getSpecificProduct(store.getSlug(), prodSlug);
                 LocalDateTime ldtStart = LocalDateTime.parse(startDate, format);
                 LocalDateTime ldtEnd = LocalDateTime.parse(endDate, format);
-                spesificAuction = new Auction(auction, store, product, ldtStart, ldtEnd);
+                spesificAuction = new Auction(auction, store, product, startPrice, ldtStart, ldtEnd);
                 return spesificAuction;
             }
 
@@ -95,11 +98,12 @@ public class AuctionRepository implements AuctionInterface {
                 int productId = rs.getInt("productId");
                 String prodSlug = productRepository.getSpecificProductById(productId).getProductSlug();
                 Product product = productRepository.getSpecificProduct(store.getSlug(), prodSlug);
+                double startPrice = rs.getDouble("startPrice");
                 String startDate = rs.getString("start_time");
                 String endDate = rs.getString("end_time");
                 LocalDateTime ldtStart = LocalDateTime.parse(startDate, format);
                 LocalDateTime ldtEnd = LocalDateTime.parse(endDate, format);
-                auctionList.add(new Auction(auctionId, store, product, ldtStart, ldtEnd));
+                auctionList.add(new Auction(auctionId, store, product, startPrice, ldtStart, ldtEnd));
 
             }
             return auctionList;
@@ -110,6 +114,19 @@ public class AuctionRepository implements AuctionInterface {
         }
 
 
+        return null;
+    }
+
+
+    @Override
+    public Auction getSpecificAuction(String storeSlug, String prodSlug) {
+        List<Auction> auctionList = getAllAuctionsFromSpecificStore(storeSlug);
+        for (Auction oneAuction: auctionList) {
+            if(oneAuction.getProduct().getProductSlug().equals(prodSlug)) {
+                return oneAuction;
+            }
+
+        }
         return null;
     }
 }

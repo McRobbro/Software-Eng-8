@@ -131,6 +131,10 @@ public class Main {
             System.out.println(oneAuction);
 
         }
+        System.out.println("***********************");
+        System.out.println(auctionRepository.getAuctionById(95));
+
+        System.out.println(auctionRepository.getSpecificAuction("johansens-butikk", "LUX-taklampe"));
 
 
     }
