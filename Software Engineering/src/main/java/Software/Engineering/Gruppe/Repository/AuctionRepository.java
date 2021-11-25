@@ -46,7 +46,7 @@ public class AuctionRepository implements AuctionInterface {
         return null;
     }
 
-
+//her
     @Override
     public Auction getAuctionById(int auctionId) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -111,6 +111,23 @@ public class AuctionRepository implements AuctionInterface {
 
 
         return null;
+    }
+
+    @Override
+    public boolean deleteAuction(int auctionId) {
+        String query = "DELETE FROM auction WHERE auctionId = ?";
+        try (Connection cn = database.getConnection();
+             PreparedStatement st = cn.prepareStatement(query)) {
+            st.setInt(1, auctionId);
+            st.executeUpdate();
+            return true;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return false;
+
     }
 }
 

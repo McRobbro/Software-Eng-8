@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-/*
+
 public class test_auction_crud_functionality {
     Path userDir = Paths.get(System.getProperty("user.dir")).getParent();
     String databaseDir = "\\db\\FakeDatabase.db";
@@ -46,7 +46,8 @@ public class test_auction_crud_functionality {
     public void tear_down() {
         storeRepository.deleteStore("DummyStSlug");
         productRepository.deleteProduct("DummyPrSlug");
-        auctionRepository.deleteAuction();
+        //auctionRepository.deleteAuction();
     }
+
+
 }
-*/

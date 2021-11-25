@@ -39,6 +39,30 @@ public class test_user_crud_functionality {
         ));
     }
 
+    @Test
+    public void test_get_user_by_id() {
+        assertThat(userRepository.getSpecificUser(1), allOf(
+                hasProperty("email", is("dummyEmail")),
+                hasProperty("username", is("dummyUsername")),
+                hasProperty("password", is("dummyPassword"))
+        ));
+    }
+
+    @Test
+    public void test_update_user() {
+        userRepository.updateUser("1", "NewEmail", "dummyUsername", "dummyPassword");
+        assertThat(userRepository.getSpecificUser(1), allOf(
+                hasProperty("email", is("NewEmail")),
+                hasProperty("username", is("dummyUsername")),
+                hasProperty("password", is("dummyPassword"))
+        ));
+    }
+
+    @Test
+    public void test_delete_user() {
+        userRepository.deleteUser(1);
+        assertNull(userRepository.getSpecificUser(1));
+    }
 
 
 
