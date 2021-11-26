@@ -125,7 +125,7 @@ public class Main {
 
          */
 
-
+/*
         for (Auction oneAuction: auctionRepository.getAllAuctionsFromSpecificStore("johansens-butikk")
              ) {
             System.out.println(oneAuction);
@@ -135,6 +135,17 @@ public class Main {
         System.out.println(auctionRepository.getAuctionById(95));
 
         System.out.println(auctionRepository.getSpecificAuction("johansens-butikk", "LUX-taklampe"));
+
+
+ */
+
+/*
+        System.out.println("***************");
+        System.out.println(auctionRepository.getAuctionById(95).getAuctionTimeDurationInMin());
+        System.out.println(bidRepository.getWinner(95));
+
+
+ */
 
 
     }

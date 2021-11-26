@@ -37,4 +37,9 @@ public class AuctionController {
 
 
     }
+
+    public void createAuction(Context context) {
+
+
+    }
 }

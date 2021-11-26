@@ -9,7 +9,7 @@
         <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
         {{auctionProduct.product.productName}} start price: {{auctionProduct.startPrice}}
       </p>
-      <form :action=`/api/` method="post">
+      <form :action=`/api/stores/${storeSlug}/auctions/${auctionProduct.product.productSlug}/createBid` method="post">
         <label for="bid">Place a bid</label>
         <input type="text" name="bid" id="bid" v-model="bid" required>
         <input type="submit" value="Place a bid">

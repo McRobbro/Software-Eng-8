@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 
 public class Auction {
@@ -35,7 +35,7 @@ public class Auction {
     }
 
     public Long getAuctionTimeDurationInMin() {
-        Duration duration = Duration.between(startTime, endTime);
+        Duration duration = Duration.between(LocalDateTime.now(), endTime);
         return duration.toMinutes();
     }
 

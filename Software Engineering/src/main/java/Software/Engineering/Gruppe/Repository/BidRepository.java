@@ -71,13 +71,20 @@ public class BidRepository implements BidInterface {
 
     @Override
     public Bid getWinner(int id) {
-        List<Bid> BidList = getBidFromAuctionId(id);
-        Bid highestBid = BidList.get(0);
-        for (Bid oneBid : BidList)
-            if (oneBid.getAmount() > highestBid.getAmount()) {
-                highestBid = oneBid;
+        Auction currentAuction = auctionRepository.getAuctionById(id);
+        if(currentAuction.getAuctionTimeDurationInMin() <= 0) {
+            List<Bid> BidList = getBidFromAuctionId(id);
+            if (BidList.size() == 0) {
+                return null;
+            }
+            Bid highestBid = BidList.get(0);
+            for (Bid newHighestBid : BidList) {
+                if (newHighestBid.getAmount() > highestBid.getAmount()) {
+                    highestBid = newHighestBid;
+                }
                 return highestBid;
             }
+        }
         return null;
     }
 
