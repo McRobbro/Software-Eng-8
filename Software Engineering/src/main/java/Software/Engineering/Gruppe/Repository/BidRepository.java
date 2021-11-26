@@ -6,8 +6,8 @@ import Software.Engineering.Gruppe.Model.Bid;
 import Software.Engineering.Gruppe.Model.User;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class BidRepository implements BidInterface {
 
@@ -25,20 +25,39 @@ public class BidRepository implements BidInterface {
 
     @Override
     public Bid makeBid(User user, Auction auction, double amount) {
-        String query = "INSERT INTO bid(userId, auctionId, amount) VALUES(?,?,?)";
+        if(amount < auction.getStartPrice()) {
+            return null;
+        }
+        if(amount > currentHighestBidOnAuction(auction.getAuctionId()) && auction.getTimeDurationToAuctionEnd() > 0 && LocalDateTime.now().isAfter(auction.getStartTime())) {
+            String query = "INSERT INTO bid(userId, auctionId, amount) VALUES(?,?,?)";
+            try (Connection connection = database.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, user.getUserId());
+                preparedStatement.setInt(2, auction.getAuctionId());
+                preparedStatement.setDouble(3, amount);
+                preparedStatement.executeUpdate();
+                return new Bid(user, auction, amount);
 
-        try (Connection connection = database.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, user.getUserId());
-            preparedStatement.setInt(2, auction.getAuctionId());
-            preparedStatement.setDouble(3, amount);
-            preparedStatement.executeUpdate();
-            return new Bid(user, auction, amount);
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
         return null;
+    }
+
+
+
+    public double currentHighestBidOnAuction(int auctionId) {
+        List<Bid> auctionBidList = getBidFromAuctionId(auctionId);
+        auctionBidList.sort((bid1, bid2) -> {
+            if (bid1.getAmount() > bid2.getAmount()) {
+                return -1;
+            } else if (bid1.getAmount() < bid2.getAmount()) {
+                return 1;
+            }
+            return 0;
+        });
+        return auctionBidList.get(0).getAmount();
     }
 
 
@@ -72,7 +91,7 @@ public class BidRepository implements BidInterface {
     @Override
     public Bid getWinner(int id) {
         Auction currentAuction = auctionRepository.getAuctionById(id);
-        if(currentAuction.getAuctionTimeDurationInMin() <= 0) {
+        if(currentAuction.getTimeDurationToAuctionEnd() <= 0) {
             List<Bid> BidList = getBidFromAuctionId(id);
             if (BidList.size() == 0) {
                 return null;

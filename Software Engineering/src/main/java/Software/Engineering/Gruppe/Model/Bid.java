@@ -1,5 +1,6 @@
 package Software.Engineering.Gruppe.Model;
 
+
 public class Bid {
     private int BidId;
     private User userId;
@@ -60,4 +61,5 @@ public class Bid {
                 ", amount=" + amount +
                 '}';
     }
+
 }

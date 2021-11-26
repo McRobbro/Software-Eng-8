@@ -7,10 +7,21 @@
       <p>
         <img v-if="auctionProduct.product.productImage" class="cover-image-frontpage" v-bind:src="auctionProduct.product.productImage">
         <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
-        {{auctionProduct.product.productName}} start price: {{auctionProduct.startPrice}}
+        {{auctionProduct.product.productName}}
+      </p>
+      <p>
+        This product has a start price on: {{auctionProduct.startPrice}}$ <br>
+        auction start date: {{auctionProduct.startTime}} <br>
+        auction end date: {{auctionProduct.endTime}} <br>
+      </p>
+      <p v-if="auctionProduct.timeDurationToAuctionStart <= 0">
+             This auction will end in {{auctionProduct.timeDurationToAuctionEnd}} minutes
+      </p>
+      <p v-else>
+         This auction will open in {{auctionProduct.timeDurationToAuctionStart}} minutes
       </p>
       <form :action=`/api/stores/${storeSlug}/auctions/${auctionProduct.product.productSlug}/createBid` method="post">
-        <label for="bid">Place a bid</label>
+        <label for="bid">Place a bid</label> <br>
         <input type="text" name="bid" id="bid" v-model="bid" required>
         <input type="submit" value="Place a bid">
       </form>

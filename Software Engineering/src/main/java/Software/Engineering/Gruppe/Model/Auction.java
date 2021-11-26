@@ -34,8 +34,14 @@ public class Auction {
         this.endTime = endTime;
     }
 
-    public Long getAuctionTimeDurationInMin() {
+
+    public Long getTimeDurationToAuctionEnd() {
         Duration duration = Duration.between(LocalDateTime.now(), endTime);
+        return duration.toMinutes();
+    }
+
+    public Long getTimeDurationToAuctionStart() {
+        Duration duration = Duration.between(LocalDateTime.now(), startTime);
         return duration.toMinutes();
     }
 

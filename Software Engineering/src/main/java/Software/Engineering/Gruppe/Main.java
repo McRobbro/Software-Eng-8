@@ -147,6 +147,8 @@ public class Main {
 
  */
 
+        System.out.println(bidRepository.currentHighestBidOnAuction(95));
+
 
     }
 }
