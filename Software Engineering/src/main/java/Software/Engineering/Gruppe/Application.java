@@ -95,6 +95,7 @@ public class Application {
         app.post("/api/stores/{storeSlug}/createAuction", auctionController::createAuction, Role.ANYONE);
         app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct, Role.ANYONE);
         app.get("/api/stores/{storeSlug}/auctions/{auctionProd}", auctionController::getSpecificAuction, Role.ANYONE);
+        app.get("/api/stores/{storeSlug}/auctions/{auctionProd}/currentHighestBid", bidController::getCurrentHighestBid, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/auctions/{auctionProd}/createBid", bidController::createBid, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/{prodSlug}/updateProduct", productController::updateProduct, Role.ANYONE);
         app.get("/api/products", productController::getAllProducts, Role.ANYONE);

@@ -20,10 +20,17 @@
       <p v-else>
          This auction will open in {{auctionProduct.timeDurationToAuctionStart}} minutes
       </p>
-      <form :action=`/api/stores/${storeSlug}/auctions/${auctionProduct.product.productSlug}/createBid` method="post">
-        <label for="bid">Place a bid</label> <br>
+      <p>
+        current highest bid: {{currentHighestBid}}
+      </p>
+      <form id="app" @submit="checkForm" :action=`/api/stores/${storeSlug}/auctions/${auctionProduct.product.productSlug}/createBid` method="post">
+        <p v-if="errors.length">
+        <ul>
+          <li v-for="error in errors">{{ error }}</li>
+        </ul>
+       <label for="bid">Place a bid</label> <br>
         <input type="text" name="bid" id="bid" v-model="bid" required>
-        <input type="submit" value="Place a bid">
+        <input onclick="checkForm" type="submit" value="Place a bid">
       </form>
     </div>
   </app-frame>
@@ -35,8 +42,31 @@ app.component("product-auction", {
     auctionProduct: null,
     storeSlug: "",
     cookieValue: document.cookie,
-    bid: null
+    currentHighestBid: null,
+    bid: null,
+    errors:[]
   }),
+
+  methods: {
+    checkForm: function (e) {
+      this.errors = [];
+      let bid = this.bid;
+      let currentHighestBid = this.currentHighestBid;
+      console.log(bid)
+      console.log(currentHighestBid)
+      if (bid > currentHighestBid) {
+        return true;
+      }
+      else {
+        this.errors.push('you need to bid higher then current bid!');
+
+      }
+      e.preventDefault();
+    }
+
+  },
+
+
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
     this.storeSlug = specificStore;
@@ -47,6 +77,11 @@ app.component("product-auction", {
         .then(res => res.json())
         .then(json => this.auctionProduct = json)
         .catch(() => alert("Error while fetching specific product"));
+
+    fetch(`/api/stores/${specificStore}/auctions/${auctionProd}/currentHighestBid`)
+        .then(res => res.json())
+        .then(json => this.currentHighestBid = json)
+        .catch(() => alert("Error while fetching bids"));
   }
 });
 </script>

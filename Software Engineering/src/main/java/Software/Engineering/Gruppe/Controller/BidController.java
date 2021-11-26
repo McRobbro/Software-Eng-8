@@ -8,6 +8,8 @@ import Software.Engineering.Gruppe.Repository.BidRepository;
 import Software.Engineering.Gruppe.Repository.UserRepository;
 import io.javalin.http.Context;
 
+import java.util.List;
+
 import static java.lang.Double.parseDouble;
 
 public class BidController {
@@ -36,6 +38,15 @@ public class BidController {
         else {
             ctx.status(400);
         }
+
+    }
+
+    public void getCurrentHighestBid(Context ctx) {
+        String storeSlug = ctx.pathParam("storeSlug");
+        String prodSlug = ctx.pathParam("auctionProd");
+        Auction currentAuction = auctionRepository.getSpecificAuction(storeSlug, prodSlug);
+        double auctionBids = bidRepository.currentHighestBidOnAuction(currentAuction.getAuctionId());
+        ctx.json(auctionBids);
 
     }
 }
