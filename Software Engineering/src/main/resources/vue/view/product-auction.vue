@@ -16,21 +16,21 @@
       </p>
       <p v-if="auctionProduct.timeDurationToAuctionStart <= 0">
              This auction will end in {{auctionProduct.timeDurationToAuctionEnd}} minutes
+        <br>
+        <br>
+              current highest bid: {{currentHighestBid}}
       </p>
       <p v-else>
          This auction will open in {{auctionProduct.timeDurationToAuctionStart}} minutes
       </p>
-      <p>
-        current highest bid: {{currentHighestBid}}
-      </p>
-      <form id="app" @submit="checkForm" :action=`/api/stores/${storeSlug}/auctions/${auctionProduct.product.productSlug}/createBid` method="post">
+      <form v-if="auctionProduct.timeDurationToAuctionStart <= 0" id="app" @submit="checkForm" :action=`/api/stores/${storeSlug}/auctions/${auctionProduct.product.productSlug}/createBid` method="post">
         <p v-if="errors.length">
         <ul>
           <li v-for="error in errors">{{ error }}</li>
         </ul>
        <label for="bid">Place a bid</label> <br>
         <input type="text" name="bid" id="bid" v-model="bid" required>
-        <input onclick="checkForm" type="submit" value="Place a bid">
+        <input onclick="checkForm()" type="submit" value="Place a bid">
       </form>
     </div>
   </app-frame>
@@ -44,17 +44,20 @@ app.component("product-auction", {
     cookieValue: document.cookie,
     currentHighestBid: null,
     bid: null,
-    errors:[]
+    errors:[],
+    startPrice: null
   }),
 
   methods: {
     checkForm: function (e) {
       this.errors = [];
+      let startPrice = this.auctionProduct.startPrice;
       let bid = this.bid;
       let currentHighestBid = this.currentHighestBid;
-      console.log(bid)
-      console.log(currentHighestBid)
-      if (bid > currentHighestBid) {
+      if(startPrice > bid) {
+        this.errors.push('you need to bid higher then start price!');
+      }
+      else if (bid > currentHighestBid) {
         return true;
       }
       else {
@@ -66,13 +69,13 @@ app.component("product-auction", {
 
   },
 
-
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
     this.storeSlug = specificStore;
     const auctionProd = this.$javalin.pathParams["auctionProd"];
     this.auctionProduct = auctionProd
-    console.log(auctionProd);
+
+
     fetch(`/api/stores/${specificStore}/auctions/${auctionProd}`)
         .then(res => res.json())
         .then(json => this.auctionProduct = json)
@@ -84,6 +87,8 @@ app.component("product-auction", {
         .catch(() => alert("Error while fetching bids"));
   }
 });
+
+
 </script>
 <style>
 img.cover-image-frontpage {

@@ -20,6 +20,10 @@ public class Bid {
         this.amount = amount;
     }
 
+    public Bid() {
+
+    }
+
     public int getBidId() {
         return BidId;
     }

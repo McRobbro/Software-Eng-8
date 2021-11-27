@@ -26,7 +26,7 @@ public class BidRepository implements BidInterface {
     @Override
     public Bid makeBid(User user, Auction auction, double amount) {
         if(amount < auction.getStartPrice()) {
-            return null;
+            return new Bid();
         }
         if(amount > currentHighestBidOnAuction(auction.getAuctionId()) && auction.getTimeDurationToAuctionEnd() > 0 && LocalDateTime.now().isAfter(auction.getStartTime())) {
             String query = "INSERT INTO bid(userId, auctionId, amount) VALUES(?,?,?)";
@@ -49,6 +49,9 @@ public class BidRepository implements BidInterface {
 
     public double currentHighestBidOnAuction(int auctionId) {
         List<Bid> auctionBidList = getBidFromAuctionId(auctionId);
+        if(auctionBidList.size() <= 0) {
+            return 0;
+        }
         auctionBidList.sort((bid1, bid2) -> {
             if (bid1.getAmount() > bid2.getAmount()) {
                 return -1;
