@@ -30,7 +30,7 @@ public class Main {
         AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase, storeRepository, productRepository);
         BidRepository bidRepository = new BidRepository(sqliteDatabase, userRepository, auctionRepository);
 
-
+/*
         System.out.println("\nfunctionality for store");
         //System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
         //System.out.println(storeRepository.updateStore(5,"Andreas-butikk", "Andreas", "null", "lorem ipsum"));
@@ -42,7 +42,9 @@ public class Main {
 
 
 
-        System.out.println("\nfunctionality for products");
+ */
+
+       // System.out.println("\nfunctionality for products");
         // System.out.println(productRepository.createProduct(storeRepository.getSpecificStoreBySlug("johansens-butikk"), "bor", "null", "lorem ipsum", "Belysning", "nlbaqba", 100));
         //System.out.println(storeRepository.getSpecificStoreBySlug("philips-butikk").addProductBySlug("LUX-taklampe"));
         /*
@@ -76,23 +78,23 @@ public class Main {
                 Month.NOVEMBER, 16, 17, 0, 0);
 
         LocalDateTime endDate = LocalDateTime.of(2021,
-                Month.NOVEMBER, 15, 20, 30, 0);
+                Month.NOVEMBER, 18, 20, 30, 0);
 
         //Period period = Period.between(startDate.toLocalDate(), endDate.toLocalDate());
 
-/*
+
         System.out.println("\nfunctionality for auction");
-        Auction auction1 = auctionRepository.createAuction(storeRepository.getSpecificStoreBySlug("johansens-butikk"),
-                productRepository.getSpecificProductBySlug("LUX-taklampe"), startDate, endDate);
+        Auction auction1 = auctionRepository.createAuction(storeRepository.getSpecificStoreBySlug("Heidi-butikk"),
+                productRepository.getSpecificProductBySlug("LUX-taklampe"), 800, startDate, endDate);
         System.out.println(auction1);
-        System.out.println(auction1.getAuctionTimeDurationInMin());
+
        // System.out.println(auctionRepository.getAuctionById(71));
         //System.out.println(auction1.getAuctionId());
 
 
 
 
- */
+
 
 
 
@@ -138,14 +140,16 @@ public class Main {
 
 
  */
-
 /*
+
         System.out.println("***************");
-        System.out.println(auctionRepository.getAuctionById(95).getAuctionTimeDurationInMin());
-        System.out.println(bidRepository.getWinner(95));
+        System.out.println(auctionRepository.getAuctionById(95));
+       // System.out.println(bidRepository.getWinner(95));
 
 
  */
+
+
 
 
 

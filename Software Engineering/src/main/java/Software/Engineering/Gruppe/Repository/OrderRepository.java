@@ -2,9 +2,9 @@ package Software.Engineering.Gruppe.Repository;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Order;
-import Software.Engineering.Gruppe.Model.Product;
 import Software.Engineering.Gruppe.Model.Store;
 import Software.Engineering.Gruppe.Model.User;
+import Software.Engineering.Gruppe.Repository.interfaces.OrderInterface;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,9 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
-public class OrderRepository implements OrderInterface{
+public class OrderRepository implements OrderInterface {
 
     private final SqliteDatabase database;
     UserRepository userRepository;

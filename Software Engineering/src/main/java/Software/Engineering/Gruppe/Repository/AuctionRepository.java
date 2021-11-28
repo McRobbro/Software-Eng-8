@@ -2,16 +2,15 @@ package Software.Engineering.Gruppe.Repository;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.*;
+import Software.Engineering.Gruppe.Repository.interfaces.AuctionInterface;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class AuctionRepository implements AuctionInterface {
@@ -36,8 +35,8 @@ public class AuctionRepository implements AuctionInterface {
             preparedStatement.setInt(1, store.getStoreId());
             preparedStatement.setInt(2, product.getProductId());
             preparedStatement.setDouble(3, startPrice);
-            preparedStatement.setString(3, startTime.format(format));
-            preparedStatement.setString(4, endTime.format(format));
+            preparedStatement.setString(4, startTime.format(format));
+            preparedStatement.setString(5, endTime.format(format));
             preparedStatement.executeUpdate();
             return new Auction(store, product, startPrice, startTime, endTime);
 

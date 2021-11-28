@@ -4,6 +4,7 @@ import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Auction;
 import Software.Engineering.Gruppe.Model.Bid;
 import Software.Engineering.Gruppe.Model.User;
+import Software.Engineering.Gruppe.Repository.interfaces.BidInterface;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -26,7 +27,7 @@ public class BidRepository implements BidInterface {
     @Override
     public Bid makeBid(User user, Auction auction, double amount) {
         if(amount < auction.getStartPrice()) {
-            return new Bid();
+            return null;
         }
         if(amount > currentHighestBidOnAuction(auction.getAuctionId()) && auction.getTimeDurationToAuctionEnd() > 0 && LocalDateTime.now().isAfter(auction.getStartTime())) {
             String query = "INSERT INTO bid(userId, auctionId, amount) VALUES(?,?,?)";

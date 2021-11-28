@@ -1,4 +1,4 @@
-package Software.Engineering.Gruppe.Repository;
+package Software.Engineering.Gruppe.Repository.interfaces;
 
 import Software.Engineering.Gruppe.Model.Auction;
 import Software.Engineering.Gruppe.Model.Bid;
@@ -16,4 +16,5 @@ public interface BidInterface {
     List<Bid> getBidFromAuctionId(int id);
 
     Bid getWinner(int id);
+
 }
