@@ -150,8 +150,9 @@ public class Main {
  */
 
 
+        System.out.println(bidRepository.getAllBidsFromSpecificAuction(95));
 
-
+        System.out.println(bidRepository.getWinner(95));
 
 
     }

@@ -46,6 +46,28 @@ public class AuctionRepository implements AuctionInterface {
         return null;
     }
 
+    @Override
+    public Auction createAuction(int auctionId, Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime) {
+        String query = "INSERT INTO auction(auctionId, storeId, productId, startPrice, start_time, end_time) VALUES(?,?,?,?,?,?)";
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+        try (Connection connection = database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, auctionId);
+            preparedStatement.setInt(2, store.getStoreId());
+            preparedStatement.setInt(3, product.getProductId());
+            preparedStatement.setDouble(4, startPrice);
+            preparedStatement.setString(5, startTime.format(format));
+            preparedStatement.setString(6, endTime.format(format));
+            preparedStatement.executeUpdate();
+            return new Auction(auctionId, store, product, startPrice, startTime, endTime);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
     public Auction getAuctionById(int auctionId) {
@@ -124,10 +146,31 @@ public class AuctionRepository implements AuctionInterface {
             if(oneAuction.getProduct().getProductSlug().equals(prodSlug)) {
                 return oneAuction;
             }
-
         }
         return null;
     }
+
+
+
+
+
+    @Override
+    public boolean deleteAuction(int auctionId) {
+        String query = "DELETE FROM auction WHERE auctionId = ?";
+        try (Connection cn = database.getConnection();
+             PreparedStatement st = cn.prepareStatement(query)) {
+             st.setInt(1, auctionId);
+             st.executeUpdate();
+             if(getAuctionById(auctionId) == null) {
+                 return true;
+             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+
 }
 
 

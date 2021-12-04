@@ -12,11 +12,13 @@ public interface AuctionInterface {
 
     Auction createAuction(Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime);
 
+    Auction createAuction(int auctionId, Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime);
+
     Auction getAuctionById(int auctionId);
 
     List<Auction> getAllAuctionsFromSpecificStore(String storeSlug);
 
     Auction getSpecificAuction(String storeSlug, String prodSlug);
 
-
+    boolean deleteAuction(int auctionId);
 }

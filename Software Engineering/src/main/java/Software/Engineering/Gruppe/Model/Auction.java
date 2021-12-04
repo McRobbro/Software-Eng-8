@@ -27,6 +27,7 @@ public class Auction {
     }
 
     public Auction(Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime) {
+
         this.store = store;
         this.product = product;
         this.startPrice = startPrice;
@@ -98,7 +99,7 @@ public class Auction {
     public String toString() {
         return "Auction{" +
                 "auctionId=" + auctionId + "\n" +
-                ", store=" + store + "\n" +
+                ", store=" + store.getSlug() + "\n" +
                 ", product=" + product + "\n" +
                 ", startTime=" + startTime + "\n" +
                 ", endTime=" + endTime + "\n" +

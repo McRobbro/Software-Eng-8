@@ -1,13 +1,12 @@
 package Software.Engineering.Gruppe.Repository;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
-import Software.Engineering.Gruppe.Model.Auction;
-import Software.Engineering.Gruppe.Model.Bid;
-import Software.Engineering.Gruppe.Model.User;
+import Software.Engineering.Gruppe.Model.*;
 import Software.Engineering.Gruppe.Repository.interfaces.BidInterface;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class BidRepository implements BidInterface {
@@ -46,10 +45,32 @@ public class BidRepository implements BidInterface {
         return null;
     }
 
+    @Override
+    public Bid makeBid(int bidId, User user, Auction auction, double amount) {
+        if(amount < auction.getStartPrice()) {
+            return null;
+        }
+        if(amount > currentHighestBidOnAuction(auction.getAuctionId()) && auction.getTimeDurationToAuctionEnd() > 0 && LocalDateTime.now().isAfter(auction.getStartTime())) {
+            String query = "INSERT INTO bid(bidId, userId, auctionId, amount) VALUES(?,?,?,?)";
+            try (Connection connection = database.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, bidId);
+                preparedStatement.setInt(2, user.getUserId());
+                preparedStatement.setInt(3, auction.getAuctionId());
+                preparedStatement.setDouble(4, amount);
+                preparedStatement.executeUpdate();
+                return new Bid(bidId, user, auction, amount);
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return null;
+    }
 
 
     public double currentHighestBidOnAuction(int auctionId) {
-        List<Bid> auctionBidList = getBidFromAuctionId(auctionId);
+        List<Bid> auctionBidList = getAllBidsFromSpecificAuction(auctionId);
         if(auctionBidList.size() <= 0) {
             return 0;
         }
@@ -66,7 +87,7 @@ public class BidRepository implements BidInterface {
 
 
     @Override
-    public List<Bid> getBidFromAuctionId(int id) {
+    public List<Bid> getAllBidsFromSpecificAuction(int id) {
         List<Bid> BidList = new ArrayList<>();
         String query = "SELECT * FROM bid WHERE auctionId = ?";
 
@@ -93,10 +114,11 @@ public class BidRepository implements BidInterface {
 
 
     @Override
-    public Bid getWinner(int id) {
-        Auction currentAuction = auctionRepository.getAuctionById(id);
+    public Bid getWinner(int auctionId) {
+        Auction currentAuction = auctionRepository.getAuctionById(auctionId);
         if(currentAuction.getTimeDurationToAuctionEnd() <= 0) {
-            List<Bid> BidList = getBidFromAuctionId(id);
+            List<Bid> BidList = getAllBidsFromSpecificAuction(auctionId);
+            System.out.println(BidList);
             if (BidList.size() == 0) {
                 return null;
             }
@@ -105,10 +127,61 @@ public class BidRepository implements BidInterface {
                 if (newHighestBid.getAmount() > highestBid.getAmount()) {
                     highestBid = newHighestBid;
                 }
-                return highestBid;
+
             }
+            return highestBid;
         }
         return null;
     }
 
+
+    @Override
+    public Boolean deleteBid(int auctionId) {
+        String query = "DELETE FROM bid WHERE bidId = ?";
+        try (Connection cn = database.getConnection();
+             PreparedStatement st = cn.prepareStatement(query)) {
+            st.setInt(1, auctionId);
+            st.executeUpdate();
+            if(getAllBidsFromSpecificAuction(auctionId).isEmpty()) {
+                return true;
+            }
+            else {
+                System.out.println("did not delete bid");
+                System.out.println(getAllBidsFromSpecificAuction(auctionId));
+                return false;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+    @Override
+    public Bid getSpecificBidById(int bidId) {
+        Bid specificBid = null;
+        String query = "select * from bid where bidId = ?";
+        try (Connection connection = database.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, bidId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+            int bid = resultSet.getInt("bidId");
+            int userId = resultSet.getInt("userId");
+            User user = userRepository.getSpecificUser(userId);
+            int auctionId = resultSet.getInt("auctionId");
+            Auction auction = auctionRepository.getAuctionById(auctionId);
+            double amount = resultSet.getDouble("amount");
+            specificBid = new Bid(bid, user, auction, amount);
+            return specificBid;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }
+        return null;
+    }
 }

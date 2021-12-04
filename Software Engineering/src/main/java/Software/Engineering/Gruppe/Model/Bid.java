@@ -2,13 +2,13 @@ package Software.Engineering.Gruppe.Model;
 
 
 public class Bid {
-    private int BidId;
+    private int bidId;
     private User userId;
     private Auction auctionId;
     private double amount;
 
     public Bid(int bidId, User userId, Auction auctionId, double amount) {
-        this.BidId = bidId;
+        this.bidId = bidId;
         this.userId = userId;
         this.auctionId = auctionId;
         this.amount = amount;
@@ -25,11 +25,11 @@ public class Bid {
     }
 
     public int getBidId() {
-        return BidId;
+        return bidId;
     }
 
     public void setBidId(int bidId) {
-        BidId = bidId;
+        this.bidId = bidId;
     }
 
     public User getUserId() {
@@ -58,12 +58,11 @@ public class Bid {
 
     @Override
     public String toString() {
-        return "Bid{" +
-                "BidId=" + BidId +
-                ", userId=" + userId +
-                ", auctionId=" + auctionId +
+        return "bid{" +
+                "bidId=" + bidId +
+                ", userId=" + userId.getUsername() +
+                ", auctionId=" + auctionId.getProduct().getProductName() +
                 ", amount=" + amount +
                 '}';
     }
-
 }
