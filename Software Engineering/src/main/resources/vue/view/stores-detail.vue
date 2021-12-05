@@ -6,11 +6,12 @@
     <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/update'"><button>update store</button></a>
     <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/createProduct'"><button>create product</button></a>
     <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/deleteProduct'"><button>delete product</button></a>
+    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/createAuction'"><button>create auction</button></a>
 
     <h1>Auctions</h1>
     <ul>
       <li v-for="auction in storeAuctions">
-        <a :href="`/stores`">{{auction.product.productName}}</a>
+        <a :href="`/stores/${storeSlug}/auctions/${auction.product.productSlug}`">{{auction.product.productName}}</a>
       </li>
     </ul>
 

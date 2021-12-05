@@ -36,6 +36,7 @@ public class test_product_crud_functionality {
     public void tear_down() {
         storeRepository.deleteStore("DummyStSlug");
         productRepository.deleteProduct("DummySlug");
+        productRepository.deleteProduct("DummySlugUpdate");
     }
 
 

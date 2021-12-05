@@ -1,4 +1,4 @@
-package Software.Engineering.Gruppe.Repository;
+package Software.Engineering.Gruppe.Repository.interfaces;
 import Software.Engineering.Gruppe.Model.User;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package Software.Engineering.Gruppe.Repository;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
-import Software.Engineering.Gruppe.Model.Store;
 import Software.Engineering.Gruppe.Model.User;
+import Software.Engineering.Gruppe.Repository.interfaces.UserInterface;
 
 import java.sql.*;
 import java.util.ArrayList;

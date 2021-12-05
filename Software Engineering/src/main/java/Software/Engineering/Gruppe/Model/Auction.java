@@ -4,36 +4,55 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Date;
+
+
 
 
 public class Auction {
     private int auctionId;
     private Store store;
     private Product product;
+    private double startPrice;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime startTime;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime endTime;
 
-    public Auction(int auctionId, Store store, Product product, LocalDateTime startTime, LocalDateTime endTime) {
+    public Auction(int auctionId, Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime) {
         this.auctionId = auctionId;
         this.store = store;
         this.product = product;
+        this.startPrice = startPrice;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public Auction(Store store, Product product, LocalDateTime startTime, LocalDateTime endTime) {
+    public Auction(Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime) {
         this.store = store;
         this.product = product;
+        this.startPrice = startPrice;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public Long getAuctionTimeDurationInMin() {
-        Duration duration = Duration.between(startTime, endTime);
+
+    public Long getTimeDurationToAuctionEnd() {
+        Duration duration = Duration.between(LocalDateTime.now(), endTime);
         return duration.toMinutes();
+    }
+
+    public Long getTimeDurationToAuctionStart() {
+        Duration duration = Duration.between(LocalDateTime.now(), startTime);
+        return duration.toMinutes();
+    }
+
+
+    public double getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(double startPrice) {
+        this.startPrice = startPrice;
     }
 
     public int getAuctionId() {
@@ -79,11 +98,11 @@ public class Auction {
     @Override
     public String toString() {
         return "Auction{" +
-                "auctionId=" + auctionId +
-                ", store=" + store +
-                ", product=" + product +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
+                "auctionId=" + auctionId + "\n" +
+                ", store=" + store.getSlug() + "\n" +
+                ", product=" + product + "\n" +
+                ", startTime=" + startTime + "\n" +
+                ", endTime=" + endTime + "\n" +
                 '}';
     }
 }

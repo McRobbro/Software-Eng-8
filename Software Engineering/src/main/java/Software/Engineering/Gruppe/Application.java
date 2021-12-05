@@ -2,11 +2,8 @@ package Software.Engineering.Gruppe;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Controller.*;
-import Software.Engineering.Gruppe.Repository.AuctionRepository;
-import Software.Engineering.Gruppe.Repository.ProductRepository;
-import Software.Engineering.Gruppe.Repository.StoreRepository;
+import Software.Engineering.Gruppe.Repository.*;
 
-import Software.Engineering.Gruppe.Repository.UserRepository;
 import io.javalin.Javalin;
 import io.javalin.core.security.RouteRole;
 import io.javalin.http.Context;
@@ -32,12 +29,14 @@ public class Application {
         ProductRepository productRepository = new ProductRepository(sqliteDatabase, storeRepository);
         UserRepository userRepository = new UserRepository(sqliteDatabase);
         AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase, storeRepository, productRepository);
+        BidRepository bidRepository = new BidRepository(sqliteDatabase, userRepository, auctionRepository);
         // Init controllers
         UserController userController = new UserController(userRepository);
         LoginController loginController = new LoginController();
         StoresController storesController = new StoresController(storeRepository);
         ProductController productController = new ProductController(productRepository, storeRepository);
         AuctionController auctionController = new AuctionController(auctionRepository, storeRepository, productRepository);
+        BidController bidController = new BidController(bidRepository, userRepository, auctionRepository);
 
         // init javalin web service
         Javalin app = Javalin.create(config -> {
@@ -74,7 +73,9 @@ public class Application {
         app.get("/stores/{storeSlug}/update", new VueComponent("store-update"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/createProduct", new VueComponent("product-create"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/deleteProduct", new VueComponent("product-delete"), Role.STORE_OWNER);
+        app.get("/stores/{storeSlug}/createAuction", new VueComponent("auction-create"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"), Role.ANYONE);
+        app.get("/stores/{storeSlug}/auctions/{auctionProd}", new VueComponent("product-auction"), Role.PLATFORM_OWNER, Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/{prodSlug}/updateProduct", new VueComponent("product-update"), Role.STORE_OWNER);
 
         //api
@@ -91,7 +92,11 @@ public class Application {
         app.post("/api/stores/{storeSlug}/update", storesController::updateStore, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/createProduct", productController::createProduct, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/deleteProduct", productController::deleteProduct, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/createAuction", auctionController::createAuction, Role.ANYONE);
         app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct, Role.ANYONE);
+        app.get("/api/stores/{storeSlug}/auctions/{auctionProd}", auctionController::getSpecificAuction, Role.ANYONE);
+        app.get("/api/stores/{storeSlug}/auctions/{auctionProd}/currentHighestBid", bidController::getCurrentHighestBid, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/auctions/{auctionProd}/createBid", bidController::createBid, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/{prodSlug}/updateProduct", productController::updateProduct, Role.ANYONE);
         app.get("/api/products", productController::getAllProducts, Role.ANYONE);
 

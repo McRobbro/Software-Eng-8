@@ -49,6 +49,7 @@ public class test_store_crud_functionality {
     }
 
 
+
     @Test
     public void test_read_store() {
         assertThat(storeRepository.getSpecificStoreBySlug("DummySlug"), allOf(

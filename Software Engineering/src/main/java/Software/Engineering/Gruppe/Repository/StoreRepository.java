@@ -3,6 +3,7 @@ package Software.Engineering.Gruppe.Repository;
 import
         Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Store;
+import Software.Engineering.Gruppe.Repository.interfaces.StoreInterface;
 
 import java.sql.*;
 import java.util.ArrayList;
