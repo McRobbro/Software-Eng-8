@@ -20,8 +20,9 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-
+  /*
 public class test_auction_crud_functionality {
+
     Path userDir = Paths.get(System.getProperty("user.dir")).getParent();
     String databaseDir = "\\db\\FakeDatabase.db";
     String url = "jdbc:sqlite:" + userDir + databaseDir;
@@ -51,3 +52,5 @@ public class test_auction_crud_functionality {
 
 
 }
+
+     */

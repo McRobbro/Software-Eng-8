@@ -53,7 +53,7 @@ public class test_product_crud_functionality {
 
     @Test
     public void get_all_products() {
-        assertEquals(2, productRepository.getAllProducts().size());
+        assertEquals(1, productRepository.getAllProducts().size());
     }
 
     @Test
