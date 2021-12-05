@@ -49,7 +49,7 @@ public class AuctionRepository implements AuctionInterface {
     @Override
     public Auction createAuction(int auctionId, Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime) {
         String query = "INSERT INTO auction(auctionId, storeId, productId, startPrice, start_time, end_time) VALUES(?,?,?,?,?,?)";
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
         try (Connection connection = database.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -57,8 +57,8 @@ public class AuctionRepository implements AuctionInterface {
             preparedStatement.setInt(2, store.getStoreId());
             preparedStatement.setInt(3, product.getProductId());
             preparedStatement.setDouble(4, startPrice);
-            preparedStatement.setString(5, startTime.format(format));
-            preparedStatement.setString(6, endTime.format(format));
+            preparedStatement.setString(5, startTime.format(formatter));
+            preparedStatement.setString(6, endTime.format(formatter));
             preparedStatement.executeUpdate();
             return new Auction(auctionId, store, product, startPrice, startTime, endTime);
 

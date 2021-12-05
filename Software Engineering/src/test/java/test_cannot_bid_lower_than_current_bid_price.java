@@ -44,6 +44,8 @@ public class test_cannot_bid_lower_than_current_bid_price {
 
     }
 
+
+
     @AfterEach
     public void tearDown() {
         bidRepository.deleteBid(1);
@@ -54,6 +56,7 @@ public class test_cannot_bid_lower_than_current_bid_price {
         userRepository.deleteUser(16);
         auctionRepository.deleteAuction(100);
     }
+
 
 
     @Test
