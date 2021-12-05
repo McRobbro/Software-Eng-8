@@ -21,4 +21,6 @@ public interface AuctionInterface {
     Auction getSpecificAuction(String storeSlug, String prodSlug);
 
     boolean deleteAuction(int auctionId);
+
+    Auction updateAuction(int auctionId, Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime);
 }

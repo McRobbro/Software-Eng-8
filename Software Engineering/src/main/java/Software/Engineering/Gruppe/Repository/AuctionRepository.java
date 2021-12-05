@@ -173,6 +173,33 @@ public class AuctionRepository implements AuctionInterface {
     }
 
 
+    @Override
+    public Auction updateAuction(int auctionId, Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String query = "UPDATE auction SET storeId = ?, " +
+                "productId = ?, " +
+                "startPrice = ?," +
+                "start_time = ?, " +
+                "end_time = ?" +
+                "WHERE auctionId = ?";
+        try (Connection cn = database.getConnection();
+             PreparedStatement st = cn.prepareStatement(query)) {
+            st.setInt(1, store.getStoreId());
+            st.setInt(2, product.getProductId());
+            st.setDouble(3, startPrice);
+            st.setString(4, startTime.format(formatter));
+            st.setString(5, endTime.format(formatter));
+            st.setInt(6, auctionId);
+            st.executeUpdate();
+            return new Auction(store, product, startPrice, startTime, endTime);
+
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
+    }
 }
 
 

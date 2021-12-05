@@ -118,7 +118,6 @@ public class BidRepository implements BidInterface {
         Auction currentAuction = auctionRepository.getAuctionById(auctionId);
         if(currentAuction.getTimeDurationToAuctionEnd() <= 0) {
             List<Bid> BidList = getAllBidsFromSpecificAuction(auctionId);
-            System.out.println(BidList);
             if (BidList.size() == 0) {
                 return null;
             }

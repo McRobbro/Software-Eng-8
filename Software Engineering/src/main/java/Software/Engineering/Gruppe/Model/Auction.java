@@ -100,7 +100,7 @@ public class Auction {
         return "Auction{" +
                 "auctionId=" + auctionId + "\n" +
                 ", store=" + store.getSlug() + "\n" +
-                ", product=" + product + "\n" +
+                ", product=" + product.getProductSlug() + "\n" +
                 ", startTime=" + startTime + "\n" +
                 ", endTime=" + endTime + "\n" +
                 '}';
