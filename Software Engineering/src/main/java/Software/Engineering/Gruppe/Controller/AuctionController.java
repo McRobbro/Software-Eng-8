@@ -65,7 +65,7 @@ public class AuctionController {
                 );
 
          if(newAuction != null) {
-            context.redirect("/stores/" + storeSlug);
+            context.redirect("/stores/" + storeSlug + "/auctions/" + pickedProduct.getProductSlug());
         }
          else{
             context.status(400);

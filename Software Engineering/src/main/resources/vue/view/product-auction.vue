@@ -9,21 +9,12 @@
         <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
         {{auctionProduct.product.productName}}
       </p>
-      <p>
-        This product has a start price on: {{auctionProduct.startPrice}}$ <br>
-        auction start date: {{auctionProduct.startTime}} <br>
-        auction end date: {{auctionProduct.endTime}} <br>
-      </p>
-      <p v-if="auctionProduct.timeDurationToAuctionStart <= 0">
-             This auction will end in {{auctionProduct.timeDurationToAuctionEnd}} minutes
-        <br>
-        <br>
-              current highest bid: {{currentHighestBid}}
-      </p>
-      <p v-else>
-         This auction will open in {{auctionProduct.timeDurationToAuctionStart}} minutes
-      </p>
-      <form v-if="auctionProduct.timeDurationToAuctionStart <= 0" id="app" @submit="checkForm" :action=`/api/stores/${storeSlug}/auctions/${auctionProduct.product.productSlug}/createBid` method="post">
+      <p>This product has a start price on: {{auctionProduct.startPrice}}$</p>
+      <p>auction start date: {{auctionProduct.startTime}}</p>
+      <p>auction end date: {{auctionProduct.endTime}}</p>
+      <div v-if="auctionProduct.timeDurationToAuctionEnd >= 0" class="auction-style">
+      <form v-if="auctionProduct.timeDurationToAuctionStart <= 0" class="auction-style" id="app" @submit="checkForm" :action=`/api/stores/${storeSlug}/auctions/${auctionProduct.product.productSlug}/createBid` method="post">
+        <p>current highest bid: {{currentHighestBid}}</p>
         <p v-if="errors.length">
         <ul>
           <li v-for="error in errors">{{ error }}</li>
@@ -32,6 +23,13 @@
         <input type="text" name="bid" id="bid" v-model="bid" required>
         <input onclick="checkForm()" type="submit" value="Place a bid">
       </form>
+        <form v-else>
+          <p>This auction will start in {{auctionProduct.timeDurationToAuctionStart}} minutes</p>
+        </form>
+      </div>
+      <div v-else>
+        <p>this auction is closed</p>
+      </div>
     </div>
   </app-frame>
 </template>
@@ -100,6 +98,9 @@ img.cover-image-frontpage {
 
 .auction-style {
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
+  justify-content: left;
+  align-self: flex-start;
 }
+
 </style>

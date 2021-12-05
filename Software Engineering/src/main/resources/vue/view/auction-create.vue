@@ -23,7 +23,7 @@
 
         <button type="submit">create auction</button>
       </form>
-    </div>  
+    </div>
   </app-frame>
 </template>
 <script>
