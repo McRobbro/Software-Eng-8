@@ -161,9 +161,7 @@ public class AuctionRepository implements AuctionInterface {
              PreparedStatement st = cn.prepareStatement(query)) {
              st.setInt(1, auctionId);
              st.executeUpdate();
-             if(getAuctionById(auctionId) == null) {
-                 return true;
-             }
+            return getAuctionById(auctionId) == null;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

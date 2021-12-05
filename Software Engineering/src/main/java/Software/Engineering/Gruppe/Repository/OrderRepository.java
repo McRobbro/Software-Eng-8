@@ -69,8 +69,8 @@ public class OrderRepository implements OrderInterface {
             preparedStatement.setInt(4, storeId.getStoreId());
             preparedStatement.executeUpdate();
             return new Order(orderId, orderDate, userId, storeId);
-
-        } catch (SQLException throwables) {
+        }
+        catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return null;

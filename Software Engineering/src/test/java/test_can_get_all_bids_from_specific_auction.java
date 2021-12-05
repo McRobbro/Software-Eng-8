@@ -66,6 +66,7 @@ public class test_can_get_all_bids_from_specific_auction {
         bidRepository.deleteBid(12);
         storeRepository.deleteStore("dummySlug");
         productRepository.deleteProduct("prodSlug");
+        auctionRepository.deleteAuction(100);
 
 
     }

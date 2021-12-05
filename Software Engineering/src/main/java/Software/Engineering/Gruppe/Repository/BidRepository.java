@@ -146,8 +146,6 @@ public class BidRepository implements BidInterface {
                 return true;
             }
             else {
-                System.out.println("did not delete bid");
-                System.out.println(getAllBidsFromSpecificAuction(auctionId));
                 return false;
             }
 

@@ -50,6 +50,7 @@ public class test_can_not_bid_when_auction_is_not_active {
         storeRepository.deleteStore("dummySlug");
         productRepository.deleteProduct("prodSlug");
         userRepository.deleteUser(5);
+        auctionRepository.deleteAuction(100);
     }
 
     @Test

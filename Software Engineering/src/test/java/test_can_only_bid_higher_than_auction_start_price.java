@@ -12,7 +12,7 @@ import java.time.Month;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class test_can_only_bid_higher_then_auction_start_price {
+public class test_can_only_bid_higher_than_auction_start_price {
 
     Path userDir = Paths.get(System.getProperty("user.dir")).getParent();
     String databaseDir = "\\db\\FakeDatabase.db";
@@ -51,24 +51,18 @@ public class test_can_only_bid_higher_then_auction_start_price {
         storeRepository.deleteStore("dummySlug");
         productRepository.deleteProduct("prodSlug");
         userRepository.deleteUser(15);
+        auctionRepository.deleteAuction(100);
 
 
     }
 
-
     @Test
-    public void test_can_only_bid_higher_then_auction_startPrice() {
+    public void test_can_only_bid_higher_than_auction_startPrice() {
         User dummyUser1 = userRepository.createUser(15,"dummyEmail1","dummyUserName1", "dummyPassword1");
         assertNotNull(bidRepository.makeBid(15, dummyUser1, auctionRepository.getSpecificAuction("dummySlug", "prodSlug"), 1250));
 
 
 
-    }
-
-    @Test
-    public void test_cannot_bid_lower_then_auction_startPrice() {
-        User dummyUser1 = userRepository.createUser(15,"dummyEmail1","dummyUserName1", "dummyPassword1");
-        assertNull(bidRepository.makeBid(15, dummyUser1, auctionRepository.getSpecificAuction("dummySlug", "prodSlug"), 100));
     }
 
 }
