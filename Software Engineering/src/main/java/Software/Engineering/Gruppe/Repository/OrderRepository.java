@@ -112,8 +112,9 @@ public class OrderRepository implements OrderInterface {
             PreparedStatement st = cn.prepareStatement(query)) {
             st.setInt(1, orderId);
             st.executeUpdate();
-            return true;
-
+            if(getOrderById(orderId) == null) {
+                return true;
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

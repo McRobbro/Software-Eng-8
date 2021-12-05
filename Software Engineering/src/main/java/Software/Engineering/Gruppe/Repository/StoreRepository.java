@@ -146,8 +146,9 @@ public class StoreRepository implements StoreInterface {
              PreparedStatement st = cn.prepareStatement(query)) {
             st.setString(1, storeSlug);
             st.executeUpdate();
-            return true;
-
+            if(getSpecificStoreBySlug(storeSlug)==null) {
+                return true;
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

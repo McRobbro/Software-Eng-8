@@ -130,7 +130,9 @@ public class UserRepository implements UserInterface {
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, String.valueOf(userId));
                 preparedStatement.executeUpdate();
-                return true;
+                if(getSpecificUser(userId)==null) {
+                    return true;
+                }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }

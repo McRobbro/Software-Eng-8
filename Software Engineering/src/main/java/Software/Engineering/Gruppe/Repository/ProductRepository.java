@@ -198,7 +198,6 @@ public class ProductRepository implements ProductInterface {
             st.setDouble(6, price);
             st.setInt(7, productId);
             st.executeUpdate();
-            System.out.println("Update success");
             return new Product(productId, productSlug, productName, productImage, productDescription, productCategory);
 
         } catch (SQLException throwables) {
@@ -216,7 +215,6 @@ public class ProductRepository implements ProductInterface {
                  PreparedStatement st = cn.prepareStatement(query)) {
                 st.setString(1, productSlug);
                 st.executeUpdate();
-                System.out.println("delete ok");
                 return true;
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
