@@ -26,6 +26,7 @@ public class test_can_not_bid_when_auction_is_not_active {
     BidRepository bidRepository = new BidRepository(sqliteDatabase, userRepository, auctionRepository);
 
 
+
     @BeforeEach
     public void data_setup() {
         LocalDateTime dummyDateStart = LocalDateTime.of(2100, Month.NOVEMBER, 10, 13, 0, 0);

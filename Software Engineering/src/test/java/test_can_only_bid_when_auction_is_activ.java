@@ -26,6 +26,7 @@ public class test_can_only_bid_when_auction_is_activ {
     BidRepository bidRepository = new BidRepository(sqliteDatabase, userRepository, auctionRepository);
 
 
+
     @BeforeEach
     public void data_setup() {
         LocalDateTime dummyDateStart = LocalDateTime.of(2021, Month.NOVEMBER, 10, 13, 0, 0);

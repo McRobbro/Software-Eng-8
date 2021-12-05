@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 
 
+
 public class Auction {
     private int auctionId;
     private Store store;
@@ -27,7 +28,6 @@ public class Auction {
     }
 
     public Auction(Store store, Product product, double startPrice, LocalDateTime startTime, LocalDateTime endTime) {
-
         this.store = store;
         this.product = product;
         this.startPrice = startPrice;

@@ -69,6 +69,7 @@ public class AuctionRepository implements AuctionInterface {
     }
 
 
+
     @Override
     public Auction getAuctionById(int auctionId) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -100,6 +101,7 @@ public class AuctionRepository implements AuctionInterface {
         }
         return null;
     }
+
 
     @Override
     public List<Auction> getAllAuctionsFromSpecificStore(String storeSlug) {

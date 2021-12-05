@@ -34,6 +34,7 @@ public class test_can_get_all_bids_from_specific_auction {
         productRepository.createProduct(storeRepository.getSpecificStoreBySlug("dummySlug"), "prodSlug", "prodName", "prodImage", "prodBio", "prodCat",800);
 
 
+
         // auction object
         auctionRepository.createAuction( 100,
                 storeRepository.getSpecificStoreBySlug("dummySlug"),

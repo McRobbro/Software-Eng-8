@@ -26,6 +26,7 @@ public class test_cannot_bid_lower_than_current_bid_price {
     AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase, storeRepository, productRepository);
     BidRepository bidRepository = new BidRepository(sqliteDatabase, userRepository, auctionRepository);
 
+    
     @BeforeEach
     public void data_setup() {
         LocalDateTime dummyDateStart = LocalDateTime.of(2021, Month.NOVEMBER, 10, 13, 0, 0);

@@ -38,6 +38,7 @@ public class test_bid_crud_functionality {
         productRepository.createProduct(storeRepository.getSpecificStoreBySlug("dummySlug"), "prodSlug", "prodName", "prodImage", "prodBio", "prodCat",800);
 
 
+
         // auction object
         auctionRepository.createAuction( 100,
                 storeRepository.getSpecificStoreBySlug("dummySlug"),

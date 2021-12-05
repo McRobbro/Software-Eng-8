@@ -45,6 +45,7 @@ public class AuctionController {
 
     }
 
+
     public void createAuction(Context context) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String storeSlug = context.pathParam("storeSlug");
@@ -61,8 +62,7 @@ public class AuctionController {
                pickedProduct,
               parseDouble(startPrice),
                  ldtStart,
-                 ldtEnd
-                );
+                 ldtEnd);
 
          if(newAuction != null) {
             context.redirect("/stores/" + storeSlug + "/auctions/" + pickedProduct.getProductSlug());

@@ -27,6 +27,7 @@ public class test_can_only_bid_higher_than_current_bid_price {
 
 
 
+
     @BeforeEach
     public void data_setup() {
         LocalDateTime dummyDateStart = LocalDateTime.of(2021, Month.NOVEMBER, 10, 13, 0, 0);
