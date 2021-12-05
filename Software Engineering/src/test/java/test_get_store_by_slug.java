@@ -17,7 +17,7 @@ public class test_get_store_by_slug {
     SqliteDatabase sqliteDatabase = new SqliteDatabase(url);
     StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
 
-    @Test
+
     public void get_store() {
         assertEquals("philips-butikk", storeRepository.getSpecificStoreBySlug("philips-butikk").getSlug());
         assertEquals("Andreas-butikk", storeRepository.getSpecificStoreBySlug("Andreas-butikk").getSlug());
