@@ -1,11 +1,11 @@
 package Software.Engineering.Gruppe.Model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.junit.jupiter.params.provider.Arguments;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-
-
+import java.util.stream.Stream;
 
 
 public class Auction {
@@ -95,6 +95,8 @@ public class Auction {
         this.endTime = endTime;
     }
 
+
+
     @Override
     public String toString() {
         return "Auction{" +
@@ -105,5 +107,9 @@ public class Auction {
                 ", endTime=" + endTime + "\n" +
                 '}';
     }
+
+
 }
+
+
 
