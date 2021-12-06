@@ -1,14 +1,19 @@
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
+import Software.Engineering.Gruppe.Model.Bid;
 import Software.Engineering.Gruppe.Model.User;
 import Software.Engineering.Gruppe.Repository.*;
-import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -63,9 +68,11 @@ public class test_bid_crud_functionality {
     }
 
 
-    @Test
-    public void test_create_bid() {
-        assertNotNull(bidRepository.getSpecificBidById(50));
+    @ParameterizedTest
+    @MethodSource("graphPath")
+    public void test_create_bid(String expected) {
+        Bid bid = bidRepository.getSpecificBidById(50);
+        assertThat(bid, test_helper_class.hasGraph(expected, notNullValue()));
 
     }
 
@@ -82,6 +89,13 @@ public class test_bid_crud_functionality {
     }
 
 
+
+    public static Stream graphPath() {
+        return Stream.of(
+                Arguments.of("bidId")
+        );
+
+    }
 
 
 }
