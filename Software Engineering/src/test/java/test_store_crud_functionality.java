@@ -37,7 +37,7 @@ public class test_store_crud_functionality {
     }
 
 
-
+    /* Tester krav "Butikk.Registrere" */
     @Test
     public void test_create_store() {
         assertThat(storeRepository.getSpecificStoreBySlug("DummySlug"), allOf(
@@ -49,7 +49,7 @@ public class test_store_crud_functionality {
     }
 
 
-
+    /* Tester krav "Butikk.Registrere" */
     @Test
     public void test_read_store() {
         assertThat(storeRepository.getSpecificStoreBySlug("DummySlug"), allOf(
@@ -62,7 +62,7 @@ public class test_store_crud_functionality {
     }
 
 
-
+    /* Tester krav "Butikk.Endre" */
     @Test
     public void test_update_store() {
         int testStoreId = storeRepository.getSpecificStoreBySlug("DummySlug").getStoreId();
@@ -75,7 +75,7 @@ public class test_store_crud_functionality {
         ));
     }
 
-
+    /* Tester krav "Butikk.Slette" */
     @Test
     public void test_delete_store() {
         storeRepository.deleteStore("DummySlug");
