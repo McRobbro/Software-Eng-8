@@ -50,6 +50,7 @@ public class Application {
             });
         }).start(7777);
 
+
         JavalinVue.stateFunction = ctx -> Map.of("currentUser", getUserRole(ctx));
         JavalinVue.rootDirectory(c -> c.classpathPath("/vue"));
         JavalinVue.vueVersion(c -> c.vue3("app"));
@@ -61,12 +62,13 @@ public class Application {
             ctx.result("Platform home page");
         });
 
+
         // Init Vue Files
         app.get("/login", new VueComponent("login-page"), Role.ANYONE);
         app.get("/users", new VueComponent("users-overview"), Role.PLATFORM_OWNER);
         app.get("/user", new VueComponent("user-detail"), Role.USER, Role.PLATFORM_OWNER, Role.STORE_OWNER);
         app.get("/users/{userUsername}", new VueComponent("users-detail"), Role.PLATFORM_OWNER);
-        app.get("/stores", new VueComponent("store-overview"), Role.PLATFORM_OWNER, Role.STORE_OWNER, Role.USER);
+        app.get("/stores", new VueComponent("store-overview"), Role.PLATFORM_OWNER, Role.STORE_OWNER, Role.USER, Role.ANYONE);
         app.get("/stores/create", new VueComponent("store-create"), Role.PLATFORM_OWNER);
         app.get("/stores/delete", new VueComponent("store-delete"), Role.PLATFORM_OWNER);
         app.get("/stores/{storeSlug}", new VueComponent("store-detail"), Role.STORE_OWNER, Role.USER);
@@ -75,7 +77,7 @@ public class Application {
         app.get("/stores/{storeSlug}/deleteProduct", new VueComponent("product-delete"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/createAuction", new VueComponent("auction-create"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"), Role.ANYONE);
-        app.get("/stores/{storeSlug}/auctions/{auctionProd}", new VueComponent("product-auction"), Role.PLATFORM_OWNER, Role.STORE_OWNER);
+        app.get("/stores/{storeSlug}/auctions/{auctionProd}", new VueComponent("product-auction"), Role.PLATFORM_OWNER, Role.STORE_OWNER, Role.USER);
         app.get("/stores/{storeSlug}/{prodSlug}/updateProduct", new VueComponent("product-update"), Role.STORE_OWNER);
 
         //api
