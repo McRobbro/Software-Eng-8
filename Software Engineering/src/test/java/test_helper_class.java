@@ -20,6 +20,10 @@ public class test_helper_class {
         return ret;
     }
 
+    public static boolean isNumeric(String str) {
+
+        return false;
+    }
 
 
 }

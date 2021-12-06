@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.Month;
 
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import static com.fasterxml.jackson.core.io.NumberInput.parseInt;
@@ -46,7 +47,7 @@ public class test_auction_crud_functionality {
         auctionRepository.createAuction(100,
                 storeRepository.getSpecificStoreBySlug("dummySlug"),
                 productRepository.getSpecificProduct("dummySlug", "prodSlug"),
-                850,
+                850.0,
                 dummyDateStart,
                 dummyDateEnd
         );
@@ -54,37 +55,47 @@ public class test_auction_crud_functionality {
     }
 
 
+
     @AfterEach
     public void tear_down() {
         auctionRepository.deleteAuction(100);
         storeRepository.deleteStore("dummySlug");
         productRepository.deleteProduct("prodSlug");
-
-
     }
+
 
 
     @ParameterizedTest
     @MethodSource("graphPath")
     public void test_create_auction(String expected, String value) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Auction auction = auctionRepository.getAuctionById(100);
+        LocalDateTime auctionStartTime = LocalDateTime.parse(auction.getStartTime().format(formatter).replace("T", " "), formatter);
+
         assertThat(auction, test_helper_class.hasGraph(expected, equalTo(value)));
 
+        assertThat(auction, allOf(
+           hasProperty("startPrice", equalTo(850.0)),
+           hasProperty("startTime", equalTo(auctionStartTime))
+        ));
     }
 
 
     public static Stream graphPath() {
         return Stream.of(
-                Arguments.of("auctionId", 100),
-                Arguments.of("store.storeId"),
+                //  Arguments.of("auctionId"),
+                // Arguments.of("store.storeId"),
                 Arguments.of("store.slug", "dummySlug"),
                 Arguments.of("store.storeName", "dummyName"),
                 Arguments.of("store.storeImage", "dummyImage"),
-                Arguments.of("store.storeDescription", "dummyBio"),
-                Arguments.of("startPrice", 850)
+                Arguments.of("store.storeDescription", "dummyBio")
         );
 
     }
+
+
 }
+
+
 
 
