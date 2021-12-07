@@ -72,6 +72,8 @@ public class test_can_get_all_bids_from_specific_auction {
 
     }
 
+    /* Dette er ikke en test tilknyttet et spesifikt krav. Det tester kun at man kan hente ut fra databasen
+       alle bud tilknyttet en spesifikk auksjon, sjekker generelt at opprettelse av bud fungerer som det skal */
     @Test
     public void test_can_fetch_three_bids_from_a_specific_auction() {
         List<Bid> bidListFromSpecificAuction = bidRepository.getAllBidsFromSpecificAuction(100);
