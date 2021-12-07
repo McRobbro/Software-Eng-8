@@ -17,10 +17,10 @@
             <label for="email">E-Mail</label>
             <input type="email" name="email" id="email" v-model="selectedUser.email">
 
-            <label for="username">Username</label>
+            <label for="username">Brukernavn</label>
             <input type="text" name="username" id="username" v-model="selectedUser.username">
 
-            <label for="password">Password</label>
+            <label for="password">Passord</label>
             <input type="password" name="password" id="password" v-model="selectedUser.password">
 
             <input type="submit" value="update user">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="changeInfo" v-else>
-      <p>You are not a USER, and can not change your information at this time</p>
+      <p>Du er ikke en registrert bruker, og kan ikke endre informasjonen din for øyeblikket </p>
     </div>
   </app-frame>
 </template>
@@ -50,7 +50,7 @@ app.component("user-detail", {
         .then(json => this.users = json)
         .catch((error) => {
           console.log(error);
-          alert("Error while fetching stores")
+          alert("Feil ved henting av brukere")
         });
   },
   methods: {

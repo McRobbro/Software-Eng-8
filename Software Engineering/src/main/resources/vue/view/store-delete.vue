@@ -5,7 +5,7 @@
 
     <div class="itemblock">
     <form class="itemblock-form" :action=`/api/stores/delete` method="post">
-      <label for="delete-select">Velg Butikk</label>
+      <label for="delete-select">Velg butikk: </label>
       <select name="store-delete" id="delete-select">
         <option v-for="store in stores">
           {{store.slug}}

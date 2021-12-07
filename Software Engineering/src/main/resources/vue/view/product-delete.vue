@@ -4,13 +4,13 @@
   <app-frame>
     <div class="itemblock">
       <form class="itemblock-form" :action=`/api/stores/${storeSlug}/deleteProduct` method="post">
-        <label for="product-delete-select">Velg Produkt</label>
+        <label for="product-delete-select">Velg Vare</label>
         <select name="product-delete" id="product-delete-select">
           <option v-for="product in storeProducts">
             {{product.productSlug}}
           </option>
         </select>
-        <button type="submit">Slett Produkt</button>
+        <button type="submit">Slett Vare</button>
       </form>
     </div>
   </app-frame>

@@ -14,13 +14,10 @@
         </select>
         <label for="startPrice"> Startpris </label>
         <input type="text" name="startPrice" id="startPrice" v-model="startPrice" required>
-
         <label for="startDate"> Starttid </label>
         <input type="datetime-local" min="2021" name="startDate" id="startDate" v-model="startDate" required>
-
         <label for="endDate"> Slutttid </label>
         <input type="datetime-local" name="endDate" id="endDate" v-model="endDate" required>
-
         <button type="submit"> Oprett auksjon </button>
       </form>
     </div>

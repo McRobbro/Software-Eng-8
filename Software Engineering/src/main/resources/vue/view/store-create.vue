@@ -6,19 +6,19 @@
     <div class="itemblock">
       <form class="itemblock-form" :action=`/api/stores/create` method="post">
 
-        <label for="slug">storeSlug</label>
+        <label for="slug">Slug (identifiserende del av URLen til butikken): </label>
         <input type="text" name="slug" id="slug" v-model="slug" required>
 
-        <lable for="name">storeName</lable>
+        <lable for="name"> Butikknavn: </lable>
         <input type="text" name="storeName" id="storeName" v-model="storeName" required>
 
-        <lable for="storeImage">storeImage</lable>
+        <lable for="storeImage"> URL til bilde av butikken: </lable>
         <input type="url" name="storeImage" id="storeImage" v-model="storeImage">
 
-        <lable for="storeDescription">storeDescription</lable>
+        <lable for="storeDescription"> Beskrivelse av butikken: </lable>
         <input type="text" name="storeDescription" id="storeDescription" v-model="storeDescription">
 
-        <input type="submit" value="Create store">
+        <input type="submit" value="Opprett butikk">
       </form>
     </div>
   </app-frame>

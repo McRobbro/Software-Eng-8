@@ -3,8 +3,6 @@
   </navbar>
   <app-frame>
     <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/' + prodSlug + '/updateProduct'"><button>Oppdater vare</button></a>
-
-
     <div v-if="product">
       <h1>{{product.store.slug}}</h1>
       <div class="itemblock">
@@ -43,7 +41,7 @@ app.component("product-detail", {
   },
   methods: {
     ConfirmWindow() {
-      if(confirm("Do you want to purchase")) {
+      if(confirm("Vil du kjøpe denne varen?")) {
 
       }
     }
