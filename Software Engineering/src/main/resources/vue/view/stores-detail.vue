@@ -2,11 +2,11 @@
   <navbar>
   </navbar>
   <app-frame>
-    <div class="itemblock-special">
-    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/update'">Oppdater informasjon om butikk</a>
-    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/createProduct'">Legg til vare</a>
-    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/deleteProduct'">Slett vare</a>
-    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/createAuction'">Opprett auksjon</a>
+    <div class="itemblock-special" v-if="cookieValue === 'role=Butikkeier'">
+    <a :href="'/stores/' + storeSlug + '/update'">Oppdater informasjon om butikk</a>
+    <a :href="'/stores/' + storeSlug + '/createProduct'">Legg til vare</a>
+    <a :href="'/stores/' + storeSlug + '/deleteProduct'">Slett vare</a>
+    <a :href="'/stores/' + storeSlug + '/createAuction'">Opprett auksjon</a>
     </div>
 
     <h1>Auksjoner</h1>
