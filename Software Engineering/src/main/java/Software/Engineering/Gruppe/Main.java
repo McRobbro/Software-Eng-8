@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -148,7 +149,7 @@ public class Main {
 
 
  */
-
+        System.out.println(orderRepository.createOrder(LocalDateTime.now(), userRepository.getSpecificUser(100), storeRepository.getSpecificStoreById(1), productRepository.getSpecificProductById(1) ));
 
         System.out.println(bidRepository.getAllBidsFromSpecificAuction(95));
 

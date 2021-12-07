@@ -28,7 +28,7 @@ body {
 
 main {
   color: white;
-  margin: 80px auto;
+  margin: 2% auto;
   min-width: 1000px;
   width: 95%;
   height: 100%;

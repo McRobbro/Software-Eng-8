@@ -2,7 +2,7 @@
   <div class="navbar">
     <nav>
       <a :href="/stores/"><p>Home</p></a>
-      <a :href="/cart/" id="cart" v-if="cookieValue === 'role=USER'"><p><i class="fas fa-shopping-cart">0</i></p></a>
+<!--      <a :href="/cart/" id="cart" v-if="cookieValue === 'role=USER'"><p><i class="fas fa-shopping-cart">0</i></p></a> -->
       <a :href="/login/" id="login"><p>Login or Sign up</p></a>
       <a :href="/users/" id="users" v-if="cookieValue === 'role=PLATFORM_OWNER'"><p>Registered Users</p></a>
       <p class="currentUser" v-if="cookieValue === 'role=PLATFORM_OWNER'" >Current Role: {{$javalin.state.currentUser}}</p>

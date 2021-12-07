@@ -30,6 +30,7 @@ public class Application {
         UserRepository userRepository = new UserRepository(sqliteDatabase);
         AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase, storeRepository, productRepository);
         BidRepository bidRepository = new BidRepository(sqliteDatabase, userRepository, auctionRepository);
+        OrderRepository orderRepository = new OrderRepository(sqliteDatabase, userRepository, storeRepository);
         // Init controllers
         UserController userController = new UserController(userRepository);
         LoginController loginController = new LoginController();
@@ -37,6 +38,7 @@ public class Application {
         ProductController productController = new ProductController(productRepository, storeRepository);
         AuctionController auctionController = new AuctionController(auctionRepository, storeRepository, productRepository);
         BidController bidController = new BidController(bidRepository, userRepository, auctionRepository);
+        OrderController orderController = new OrderController(orderRepository, storeRepository, productRepository, userRepository);
 
         // init javalin web service
         Javalin app = Javalin.create(config -> {
@@ -75,7 +77,7 @@ public class Application {
         app.get("/stores/{storeSlug}/deleteProduct", new VueComponent("product-delete"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/createAuction", new VueComponent("auction-create"), Role.STORE_OWNER);
         app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"), Role.ANYONE);
-        app.get("/stores/{storeSlug}/auctions/{auctionProd}", new VueComponent("product-auction"), Role.PLATFORM_OWNER, Role.STORE_OWNER);
+        app.get("/stores/{storeSlug}/auctions/{auctionProd}", new VueComponent("product-auction"), Role.PLATFORM_OWNER, Role.STORE_OWNER, Role.USER);
         app.get("/stores/{storeSlug}/{prodSlug}/updateProduct", new VueComponent("product-update"), Role.STORE_OWNER);
 
         //api
@@ -94,6 +96,7 @@ public class Application {
         app.post("/api/stores/{storeSlug}/deleteProduct", productController::deleteProduct, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/createAuction", auctionController::createAuction, Role.ANYONE);
         app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/{prodSlug}/purchase", orderController::orderTheProduct, Role.ANYONE);
         app.get("/api/stores/{storeSlug}/auctions/{auctionProd}", auctionController::getSpecificAuction, Role.ANYONE);
         app.get("/api/stores/{storeSlug}/auctions/{auctionProd}/currentHighestBid", bidController::getCurrentHighestBid, Role.ANYONE);
         app.post("/api/stores/{storeSlug}/auctions/{auctionProd}/createBid", bidController::createBid, Role.ANYONE);

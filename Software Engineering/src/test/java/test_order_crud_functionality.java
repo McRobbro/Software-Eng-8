@@ -31,8 +31,7 @@ public class test_order_crud_functionality {
 
     @BeforeEach
     public void data_setup() {
-        LocalDateTime dummyDate = LocalDateTime.of(2021,
-                Month.NOVEMBER, 23, 15, 0, 0);
+        LocalDateTime dummyDate = LocalDateTime.now();
         Store dummyStore = storeRepository.createStore("DummyStSlug", "DummyStName", "DummyStImg", "dummyStDesc");
         User dummyUser = userRepository.createUser(5,"dummyEmail","DummyName", "dummyPassword");
         orderRepository.createOrder(1, dummyDate, dummyUser, dummyStore);

@@ -2,6 +2,7 @@ package Software.Engineering.Gruppe.Repository;
 
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
 import Software.Engineering.Gruppe.Model.Order;
+import Software.Engineering.Gruppe.Model.Product;
 import Software.Engineering.Gruppe.Model.Store;
 import Software.Engineering.Gruppe.Model.User;
 import Software.Engineering.Gruppe.Repository.interfaces.OrderInterface;
@@ -37,18 +38,20 @@ public class OrderRepository implements OrderInterface {
         return null;
     }*/
 
+
     @Override
-    public Order createOrder(LocalDateTime orderDate, User userId, Store storeId) {
+    public Order createOrder(LocalDateTime orderDate, User user, Store store, Product product) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String query = "INSERT INTO 'order' (orderDate, userId, storeId) VALUES(?,?,?)";
+        String query = "INSERT INTO 'order' (orderDate, userId, storeId, productId) VALUES(?,?,?,?)";
 
         try (Connection connection = database.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, orderDate.format(format));
-            preparedStatement.setInt(2, userId.getUserId());
-            preparedStatement.setInt(3, storeId.getStoreId());
+            preparedStatement.setInt(2, user.getUserId());
+            preparedStatement.setInt(3, store.getStoreId());
+            preparedStatement.setInt(4, product.getProductId());
             preparedStatement.executeUpdate();
-            return new Order(orderDate, userId, storeId);
+            return new Order(orderDate, user, store, product);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -56,7 +59,7 @@ public class OrderRepository implements OrderInterface {
         return null;
     }
 
-    
+
     public Order createOrder(int orderId, LocalDateTime orderDate, User userId, Store storeId) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String query = "INSERT INTO 'order' (orderId, orderDate, userId, storeId) VALUES(?,?,?,?)";

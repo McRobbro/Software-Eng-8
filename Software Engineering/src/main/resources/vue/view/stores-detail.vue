@@ -9,19 +9,23 @@
     <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/createAuction'"><button>create auction</button></a>
 
     <h1>Auctions</h1>
-    <ul>
+    <ul class="store-overview-list">
       <li v-for="auction in storeAuctions">
-        <a :href="`/stores/${storeSlug}/auctions/${auction.product.productSlug}`">{{auction.product.productName}}</a>
+        <a :href="`/stores/${storeSlug}/auctions/${auction.product.productSlug}`">
+        <img v-if="auction.product.productImage" class="cover-image-frontpage" v-bind:src="auction.product.productImage">
+        <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
+          {{auction.product.productName}}
+        </a>
       </li>
     </ul>
 
+    <h1>For Sale</h1>
     <ul class="store-overview-list">
       <li v-for="product in storeProducts">
         <a :href="`/stores/${product.store.slug}/${product.productSlug}`">
           <img v-if="product.productImage" class="cover-image-frontpage" v-bind:src="product.productImage">
           <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
           {{product.productName}}
-          ({{product.productDescription}})
         </a>
       </li>
     </ul>
