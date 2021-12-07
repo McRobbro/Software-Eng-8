@@ -72,6 +72,7 @@ public class test_bid_crud_functionality {
     }
 
 
+    /* Tester krav "Auksjon.Bud.FørsteBud" */
     @ParameterizedTest
     @MethodSource("graphPath")
     public void test_create_bid(String expected) {
@@ -79,13 +80,14 @@ public class test_bid_crud_functionality {
         assertThat(bid, test_helper_class.hasGraph(expected, notNullValue()));
 
     }
-
+    /* Tester krav "Auksjon.Bud.FørsteBud" */
     @Test
     public void test_read_bid() {
         assertNotNull(bidRepository.getSpecificBidById(50));
 
     }
 
+    /* Tester krav "Auksjon.Bud.FørsteBud" */
     @Test
     public void test_delete_bid() {
         bidRepository.deleteBid(50);

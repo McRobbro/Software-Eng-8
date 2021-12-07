@@ -28,7 +28,7 @@ app.component("users-overview", {
         .then(json => this.users = json)
         .catch((error) => {
           console.log(error);
-          alert("Error while fetching all users")
+          alert("Feil ved henting av alle brukere")
         });
   }
 

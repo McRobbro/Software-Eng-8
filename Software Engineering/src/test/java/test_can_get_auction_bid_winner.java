@@ -81,6 +81,7 @@ public class test_can_get_auction_bid_winner {
 
     }
 
+    /* Tester krav "Auksjon.Vinner" */
     @Test
     public void test_can_fetch_winner_from_auction_when_auction_has_ended() {
         // auction closed
@@ -97,7 +98,8 @@ public class test_can_get_auction_bid_winner {
         assertEquals(1500, bidRepository.getWinner(100).getAmount());
 
     }
-    
+
+    /* Tester krav "Auksjon.Vinner" */
     @Test
     public void test_cannot_fetch_winner_when_auction_has_not_started() {
         // auction not started
@@ -114,6 +116,7 @@ public class test_can_get_auction_bid_winner {
         assertNull(bidRepository.getWinner(100));
     }
 
+    /* Tester krav "Auksjon.Vinner" */
     @Test
     public void test_cant_fetch_winner_when_bid_list_is_empty() {
         bidRepository.deleteBid(10);

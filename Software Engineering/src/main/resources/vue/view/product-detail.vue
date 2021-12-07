@@ -2,7 +2,7 @@
   <navbar>
   </navbar>
   <app-frame>
-    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/' + prodSlug + '/updateProduct'"><button>update product</button></a>
+    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/' + prodSlug + '/updateProduct'"><button>Oppdater vare</button></a>
 
 
     <div v-if="product">
@@ -15,7 +15,7 @@
         <p>{{product.productDescription}}</p>
         <p>{{product.price}}</p>
         <form :action=`/api/stores/${product.store.slug}/${product.productSlug}/purchase` method="post">
-          <button type="submit" v-on:click="ConfirmWindow()">Purchase Item</button>
+          <button type="submit" v-on:click="ConfirmWindow()">Kjøp vare</button>
         </form>
       </div>
       </div>
@@ -33,13 +33,13 @@ app.component("product-detail", {
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
     this.storeName = specificStore;
-    console.log("This store name: " + specificStore);
+    console.log("Butikken: " + specificStore);
     const specificProduct = this.$javalin.pathParams["prodSlug"];
     this.product = specificProduct
     fetch(`/api/stores/${specificStore}/${specificProduct}`)
         .then(res => res.json())
         .then(json => this.product = json)
-        .catch(() => alert("Error while fetching specific product"));
+        .catch(() => alert("Feil ved henting av varer"));
   },
   methods: {
     ConfirmWindow() {

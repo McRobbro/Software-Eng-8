@@ -54,7 +54,7 @@ public class test_cannot_bid_lower_than_auction_start_price {
     }
 
 
-
+    /* Tester krav "Auksjon.Bud.FørsteBud" */
     @Test
     public void test_can_not_bid_lower_than_the_auction_startPrice() {
         User dummyUser1 = userRepository.createUser(15,"dummyEmail1","dummyUserName1", "dummyPassword1");

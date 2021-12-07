@@ -39,7 +39,7 @@ public class test_product_crud_functionality {
         productRepository.deleteProduct("DummySlugUpdate");
     }
 
-
+    /* Tester krav "Vare.Registrere" */
     @Test
     public void test_create_product() {
         assertThat(productRepository.getSpecificProductBySlug("DummySlug"), allOf(
@@ -51,10 +51,12 @@ public class test_product_crud_functionality {
         ));
     }
 
+    /* Tester krav "Vare.Presentere" */
     @Test
     public void get_all_products() {
         assertEquals(1, productRepository.getAllProducts().size());
     }
+
 
     @Test
     public void test_get_specific_product_by_Id(){
@@ -68,6 +70,7 @@ public class test_product_crud_functionality {
         ));
     }
 
+    /* Tester krav "Vare.Endre" */
     @Test
     public void test_update_product() {
         int productId = productRepository.getSpecificProductBySlug("DummySlug").getProductId();
@@ -82,6 +85,7 @@ public class test_product_crud_functionality {
         ));
     }
 
+    /* Tester krav "Vare.Slette" */
     @Test
     public void test_delete_product() {
         productRepository.deleteProduct("DummySlug");

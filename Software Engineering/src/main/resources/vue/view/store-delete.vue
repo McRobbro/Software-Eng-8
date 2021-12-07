@@ -5,15 +5,14 @@
 
     <div class="itemblock">
     <form class="itemblock-form" :action=`/api/stores/delete` method="post">
-      <label for="delete-select">Select store</label>
+      <label for="delete-select">Velg Butikk</label>
       <select name="store-delete" id="delete-select">
         <option v-for="store in stores">
           {{store.slug}}
         </option>
       </select>
-      <button type="submit">Delete store</button>
+      <button type="submit">Slett butikk</button>
     </form>
-    </div>
   </app-frame>
 </template>
 <script>
@@ -29,7 +28,7 @@ app.component("store-delete", {
         .then(json => this.stores = json)
         .catch((error) => {
           console.log(error);
-          alert("Error while fetching stores")
+          alert("Feil ved henting av butikker")
         });
   }
 

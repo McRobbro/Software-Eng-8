@@ -4,13 +4,13 @@
   <app-frame>
     <div class="itemblock">
       <form class="itemblock-form" :action=`/api/stores/${storeSlug}/deleteProduct` method="post">
-        <label for="product-delete-select">Select product</label>
+        <label for="product-delete-select">Velg Produkt</label>
         <select name="product-delete" id="product-delete-select">
           <option v-for="product in storeProducts">
             {{product.productSlug}}
           </option>
         </select>
-        <button type="submit">delete product</button>
+        <button type="submit">Slett Produkt</button>
       </form>
     </div>
   </app-frame>
@@ -26,11 +26,11 @@ app.component("product-delete", {
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
     this.storeSlug = specificStore;
-    console.log("This store name: " + specificStore);
+    console.log("Butikken: " + specificStore);
     fetch(`/api/stores/${specificStore}`)
         .then(res => res.json())
         .then(json => this.storeProducts = json)
-        .catch(() => alert("Error while fetching products"));
+        .catch(() => alert("Feil ved henting av varer"));
   }
 
 });
