@@ -31,6 +31,8 @@ public class Main {
         AuctionRepository auctionRepository = new AuctionRepository(sqliteDatabase, storeRepository, productRepository);
         BidRepository bidRepository = new BidRepository(sqliteDatabase, userRepository, auctionRepository);
 
+
+
 /*
         System.out.println("\nfunctionality for store");
         //System.out.println(storeRepository.createStore("Marius-butikk", "Marius", "null","lorem ipsum"));
