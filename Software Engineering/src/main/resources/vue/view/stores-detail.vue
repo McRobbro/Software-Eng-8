@@ -2,11 +2,12 @@
   <navbar>
   </navbar>
   <app-frame>
-
-    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/update'"><button>Oppdater informasjon om butikk</button></a>
-    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/createProduct'"><button>Legg til vare</button></a>
-    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/deleteProduct'"><button>Slett vare</button></a>
-    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/createAuction'"><button>Opprett auksjon</button></a>
+    <div class="itemblock-special">
+    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/update'">Oppdater informasjon om butikk</a>
+    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/createProduct'">Legg til vare</a>
+    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/deleteProduct'">Slett vare</a>
+    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/createAuction'">Opprett auksjon</a>
+    </div>
 
     <h1>Auksjoner</h1>
     <ul class="store-overview-list">
@@ -58,6 +59,31 @@ app.component("store-detail", {
 });
 </script>
 <style>
+.itemblock-special {
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+  padding: 16px;
+  margin: auto;
+  background-color: #0e0e0e;
+  font-size: 1.25em;
+  text-decoration: none;
+  border: 1px solid var(--gold-color);
+  border-radius: 12px;
+}
+.itemblock-special a{
+  padding: 5px;
+  margin: 5px 15px;
+  background-color: grey;
+  border-radius: 25px;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+}
+.itemblock-special a:hover {
+  background-color: #FFD700;
+  transition: 0.5s;
+}
 ul.store-overview-list {
   display: flex;
   flex-flow: wrap;
