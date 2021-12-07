@@ -1,15 +1,15 @@
 # Hvordan kjøre prototypen
 
 Programvare som trengs for å kjøre prototypen er: 
-IntelliJ med Java 15
-Nettleser (Google Chrome er anbefalt)
-Avhengigheter (blir automatisk satt opp av byggesystemet Gradle)
-Javalin
-JUnit
-Vue
-Hamcrest 
-jackson
-sqlite-jdbc
+- IntelliJ med Java 15
+- Nettleser (Google Chrome er anbefalt)
+- Avhengigheter (blir automatisk satt opp av byggesystemet Gradle)
+- Javalin
+- JUnit
+- Vue
+- Hamcrest 
+- jackson
+- sqlite-jdbc
 
 
 Kjøre prototypen: 
