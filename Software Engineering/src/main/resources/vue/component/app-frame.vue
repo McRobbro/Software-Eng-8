@@ -43,7 +43,54 @@ main section {
 }
 
 main section p{
+  font-size: 1em;
   float: left;
 }
 
+button {
+  position: relative;
+  margin: 15px 0;
+  padding: 5px;
+  left: 50%;
+  transform: translate(-50%)
+}
+
+ul.store-overview-list a {
+  display: block;
+  max-width: 250px;
+
+  padding: 16px;
+  background: #0e0e0e;
+  text-decoration: none;
+  color: white;
+
+  border-bottom: 1px solid var(--gold-color);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+h1 {
+  text-align: center;
+}
+.itemblock {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  display: block;
+  width: 33%;
+
+  padding: 16px;
+  margin: auto;
+  background: #0e0e0e;
+  font-size: 1.25em;
+  text-decoration: none;
+  color: white;
+
+  border-bottom: 1px solid var(--gold-color);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+.itemblock-form {
+  display: flex;
+  flex-flow: column;
+}
 </style>
