@@ -69,7 +69,7 @@ public class test_auction_crud_functionality {
 
 
 
-
+    /* Tester krav "Auksjon.Opprette" */
     @ParameterizedTest
     @MethodSource("graphPath")
     public void test_create_auction(String expected, String value) {

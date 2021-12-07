@@ -33,7 +33,7 @@ public class test_get_all_products {
         productRepository.deleteProduct("DummySlug");
     }
 
-
+    /* Tester krav "Vare.Presentere" */
     @Test
     public void get_all_products() {
         assertEquals(1, productRepository.getAllProducts().size());

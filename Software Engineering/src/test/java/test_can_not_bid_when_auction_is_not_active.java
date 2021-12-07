@@ -54,6 +54,7 @@ public class test_can_not_bid_when_auction_is_not_active {
         auctionRepository.deleteAuction(100);
     }
 
+    /* Tester krav "Auksjon.Tid.Slutt" */
     @Test
     public void test_cannot_bid_when_auction_is_not_active() {
         User dummyUser1 = userRepository.createUser(5,"dummyEmail1","dummyUserName1", "dummyPassword1");

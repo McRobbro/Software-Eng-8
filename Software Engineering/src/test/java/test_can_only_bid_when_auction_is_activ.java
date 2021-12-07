@@ -54,7 +54,7 @@ public class test_can_only_bid_when_auction_is_activ {
         auctionRepository.deleteAuction(100);
     }
 
-
+    /* Tester krav "Auksjon.Aktiv" */
     @Test
     public void test_can_bid_when_auction_is_active() {
         User dummyUser1 = userRepository.createUser(15,"dummyEmail1","dummyUserName1", "dummyPassword1");
