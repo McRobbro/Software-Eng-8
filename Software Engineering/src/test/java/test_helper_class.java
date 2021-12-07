@@ -21,8 +21,15 @@ public class test_helper_class {
     }
 
     public static boolean isNumeric(String str) {
-
-        return false;
+        if (str == null) {
+            return false;
+        }
+        try {
+            int number = Integer.parseInt(str);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
 
