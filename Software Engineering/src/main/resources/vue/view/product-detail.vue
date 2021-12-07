@@ -11,7 +11,7 @@
       <div class="itemblock-wrapper">
         <p>{{product.productName}}</p>
         <p>{{product.productDescription}}</p>
-        <p>{{product.price}}</p>
+        <p>{{product.price}},-</p>
         <form :action=`/api/stores/${product.store.slug}/${product.productSlug}/purchase` method="post">
           <button type="submit" v-on:click="ConfirmWindow()">Kjøp vare</button>
         </form>
