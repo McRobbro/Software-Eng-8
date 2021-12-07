@@ -72,7 +72,7 @@ public class test_bid_crud_functionality {
     }
 
 
-    /* Tester krav "Auksjon.Bud.FørsteBud" */
+    /* Tester krav "Auksjon.Bud.FørsteBud" og "Auksjon.Bud.NesteBud"*/
     @ParameterizedTest
     @MethodSource("graphPath")
     public void test_create_bid(String expected) {
@@ -80,14 +80,15 @@ public class test_bid_crud_functionality {
         assertThat(bid, test_helper_class.hasGraph(expected, notNullValue()));
 
     }
-    /* Tester krav "Auksjon.Bud.FørsteBud" */
+    /* Tester krav "Auksjon.Bud.FørsteBud" og "Auksjon.Bud.NesteBud"*/
     @Test
     public void test_read_bid() {
         assertNotNull(bidRepository.getSpecificBidById(50));
 
     }
 
-    /* Tester krav "Auksjon.Bud.FørsteBud" */
+    /* Dette er ikke en test av et direkte krav, for det skal ikke gå an å slette et aktivt bud, men vi tok med en
+    delete_bid metode + test for å ha muligheten til å teste at et bud kan slettes fra bud-tabellen i databasen. */
     @Test
     public void test_delete_bid() {
         bidRepository.deleteBid(50);

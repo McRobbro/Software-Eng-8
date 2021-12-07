@@ -30,6 +30,10 @@ public class test_user_crud_functionality {
         userRepository.deleteUser(1);
     }
 
+    /* Følgende tester er ikke knyttet opp til krav (da det er et eksternt innloggingssystem som håndterer registrering
+    og håndtering av metoder tilknyttet brukerdata). Men vi trengte å kunne opprette brukere og tilhørende metoder
+    for å undersøke funksjonalitet tilhørende brukertypene i prototypen */
+
     @Test
     public void test_create_user() {
         assertThat(userRepository.getSpecificUser(1), allOf(

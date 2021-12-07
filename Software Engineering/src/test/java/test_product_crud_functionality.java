@@ -57,7 +57,7 @@ public class test_product_crud_functionality {
         assertEquals(1, productRepository.getAllProducts().size());
     }
 
-
+    /* Ikke tilknyttet spesifikt krav, men tester funksjonalitet ift. databasen */
     @Test
     public void test_get_specific_product_by_Id(){
         int productId = productRepository.getSpecificProductBySlug("DummySlug").getProductId();

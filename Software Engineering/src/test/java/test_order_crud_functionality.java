@@ -63,7 +63,7 @@ public class test_order_crud_functionality {
 
 
 
-
+    /* Tester krav "Ordre.Opprettelse" */
     @ParameterizedTest
     @MethodSource("graphPath")
     public void test_create_order(String expected) {
@@ -71,11 +71,14 @@ public class test_order_crud_functionality {
         assertThat(order, test_helper_class.hasGraph(expected, notNullValue()));
     }
 
+    /* Tester krav "Ordre.Opprettelse" */
     @Test
     public void test_read_order() {
         assertNotNull(orderRepository.getOrderById(1));
     }
 
+    /* Dette er ikke en test av et direkte krav, for det skal ikke gå an å slette en ordre, men vi tok med en
+    delete_order metode + test for å ha muligheten til å teste at en ordre kan slettes fra ordre-tabellen i databasen. */
     @Test
     public void test_delete_order() {
         orderRepository.deleteOrder(1);
