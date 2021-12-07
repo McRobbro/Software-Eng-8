@@ -57,6 +57,7 @@ public class test_can_only_bid_higher_than_auction_start_price {
 
     }
 
+    /* Tester krav "Auksjon.Bud.FørsteBud" */
     @Test
     public void test_can_only_bid_higher_than_auction_startPrice() {
         User dummyUser1 = userRepository.createUser(15,"dummyEmail1","dummyUserName1", "dummyPassword1");

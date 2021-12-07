@@ -34,7 +34,7 @@ public class test_get_all_stores {
         storeRepository.deleteStore("DummySlug3");
 
     }
-
+    /* Tester krav "Butikk.Presentere" */
     @Test
     public void test_can_get_all_stores() {
         assertEquals(3, storeRepository.getAllStores().size());

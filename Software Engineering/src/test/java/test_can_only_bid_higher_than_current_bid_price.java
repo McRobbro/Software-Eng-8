@@ -60,6 +60,7 @@ public class test_can_only_bid_higher_than_current_bid_price {
     }
 
 
+    /* Tester krav "Auksjon.Bud.NesteBud" */
     @Test
     public void test_can_bid_higher_than_currentBidPrice() {
         User dummyUser1 = userRepository.createUser(15,"dummyEmail1","dummyUserName1", "dummyPassword1");
