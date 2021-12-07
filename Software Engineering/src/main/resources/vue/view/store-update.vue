@@ -9,8 +9,8 @@
         <li v-for="error in errors">{{ error }}</li>
       </ul>
     </div>
-    <div class="form-style">
-      <form class="create" :action=`/api/stores/${storeSlug}/update` method="post">
+    <div class="itemblock">
+      <form class="itemblock-form" :action=`/api/stores/${storeSlug}/update` method="post">
 
         <label for="slug">storeSlug</label>
         <input type="text" name="slug" id="slug" v-model="slug">

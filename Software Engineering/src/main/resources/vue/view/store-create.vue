@@ -3,8 +3,8 @@
   </navbar>
 
   <app-frame>
-    <div class="form-style">
-      <form class="create" :action=`/api/stores/create` method="post">
+    <div class="itemblock">
+      <form class="itemblock-form" :action=`/api/stores/create` method="post">
 
         <label for="slug">storeSlug</label>
         <input type="text" name="slug" id="slug" v-model="slug" required>

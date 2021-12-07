@@ -3,10 +3,10 @@
   </navbar>
   <app-frame>
 
-    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/update'"><button>update store</button></a>
-    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/createProduct'"><button>create product</button></a>
-    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/deleteProduct'"><button>delete product</button></a>
-    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/createAuction'"><button>create auction</button></a>
+      <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/update'"><button>update store</button></a>
+      <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/createProduct'"><button>create product</button></a>
+      <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/deleteProduct'"><button>delete product</button></a>
+      <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/createAuction'"><button>create auction</button></a>
 
     <h1>Auctions</h1>
     <ul class="store-overview-list">
