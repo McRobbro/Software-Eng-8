@@ -15,10 +15,8 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.stream.Stream;
 
-import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -40,7 +38,13 @@ public class test_bid_crud_functionality {
         LocalDateTime dummyDateStart = LocalDateTime.of(2021, Month.NOVEMBER, 10, 18, 0, 0);
         LocalDateTime dummyDateEnd = LocalDateTime.of(2050, Month.NOVEMBER, 10, 19, 15, 0);
         storeRepository.createStore("dummySlug", "dummyName", "dummyImage", "dummyBio");
-        productRepository.createProduct(storeRepository.getSpecificStoreBySlug("dummySlug"), "prodSlug", "prodName", "prodImage", "prodBio", "prodCat",800);
+        productRepository.createProduct(storeRepository.getSpecificStoreBySlug("dummySlug"),
+                "prodSlug",
+                "prodName",
+                "prodImage",
+                "prodBio",
+                "prodCat",
+                800);
 
 
 
