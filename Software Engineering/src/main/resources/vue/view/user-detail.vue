@@ -4,13 +4,13 @@
 
   <app-frame>
 
-    <div class="itemblock" v-if="cookieValue === 'role=USER'">
+    <div class="itemblock" v-if="cookieValue === 'role=Registrert bruker'">
       <div class="changeInfo" v-if="showPages == false">
         <a href="#" @click="changeUser(user)" v-for="(user, index) in users" :key="index"><p>{{user.username}}</p></a>
       </div>
 
       <div class="changeInfo" v-else-if="showPages == true">
-        <button @click="showPages = false">Go Back</button>
+        <button @click="showPages = false">Gå tilbake</button>
         <div class="form-style">
           <form class="create" @submit="checkForm" :action=`/api/user/${selectedUser.userId}/update` method="post">
 

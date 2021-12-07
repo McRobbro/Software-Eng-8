@@ -7,7 +7,7 @@
       <a :href="/users/" id="users" v-if="cookieValue === 'role=Administrator'"><p>registrerte brukere</p></a>
       <p class="currentUser" v-if="cookieValue === 'role=Administrator'" >Nåværende rolle: {{$javalin.state.currentUser}}</p>
       <p class="currentUser" v-if="cookieValue === 'role=Butikkeier'" >Nåværende rolle: {{$javalin.state.currentUser}}</p>
-      <a :href="/user/" id="user" v-if="cookieValue === 'role=Registrert butikkunde'"><p>{{$javalin.state.currentUser}}</p></a>
+      <a :href="/user/" id="user" v-if="cookieValue === 'role=Registrert bruker'"><p>{{$javalin.state.currentUser}}</p></a>
     </nav>
   </div>
 </template>
