@@ -2,17 +2,15 @@
   <navbar>
   </navbar>
   <app-frame>
-    <div class="itemblock">
-      <form class="itemblock-form" :action=`/api/stores/${storeSlug}/deleteProduct` method="post">
-        <label for="product-delete-select">Select product</label>
-        <select name="product-delete" id="product-delete-select">
-          <option v-for="product in storeProducts">
-            {{product.productSlug}}
-          </option>
-        </select>
-        <button type="submit">delete product</button>
-      </form>
-    </div>
+    <form :action=`/api/stores/${storeSlug}/deleteProduct` method="post">
+      <label for="product-delete-select">Select product</label>
+      <select name="product-delete" id="product-delete-select">
+        <option v-for="product in storeProducts">
+          {{product.productSlug}}
+        </option>
+      </select>
+      <button type="submit">delete product</button>
+    </form>
   </app-frame>
 </template>
 <script>

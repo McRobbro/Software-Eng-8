@@ -28,7 +28,7 @@ public class UserController {
     }
 
     public void getSpecificUserByUsername(Context context) {
-        String username = context.pathParam("userUsername");
+        String username = context.pathParam("username");
         User user = userRepository.getSpecificUserByUsername(username);
         context.json(user);
     }

@@ -4,9 +4,9 @@
 
   <app-frame>
 
-    <div class="itemblock" v-if="cookieValue === 'role=USER'">
+    <div v-if="cookieValue === 'role=USER'">
       <div class="changeInfo" v-if="showPages == false">
-        <a href="#" @click="changeUser(user)" v-for="(user, index) in users" :key="index"><p>{{user.username}}</p></a>
+        <a href="#" @click="changeUser(user)" v-for="(user, index) in users" :key="index">{{user.username}}</a>
       </div>
 
       <div class="changeInfo" v-else-if="showPages == true">
@@ -66,6 +66,7 @@ app.component("user-detail", {
   display: flex;
   flex-flow: column;
 }
+
 button {
   width: 33%;
 }
@@ -78,20 +79,5 @@ label {
 }
 input {
   margin-bottom: 5px;
-}
-.itemblock {
-  text-align: center;
-  width: 50%;
-}
-.itemblock p {
-  text-decoration: none;
-}
-a {
-  color: white;
-}
-a:hover {
-  color: black;
-  background-color: gold;
-  transition: 0.25s;
 }
 </style>

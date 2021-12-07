@@ -3,8 +3,7 @@
   </navbar>
   <app-frame>
 
-    <div class="itemblock">
-    <form class="itemblock-form" :action=`/api/stores/delete` method="post">
+    <form :action=`/api/stores/delete` method="post">
       <label for="delete-select">Select store</label>
       <select name="store-delete" id="delete-select">
         <option v-for="store in stores">
@@ -13,7 +12,6 @@
       </select>
       <button type="submit">Delete store</button>
     </form>
-    </div>
   </app-frame>
 </template>
 <script>

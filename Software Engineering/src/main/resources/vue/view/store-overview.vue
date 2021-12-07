@@ -46,6 +46,20 @@ ul.store-overview-list {
   padding: 0;
   list-style: none;
 }
+
+ul.store-overview-list a {
+  display: block;
+  max-width: 250px;
+
+  padding: 16px;
+  background: #0e0e0e;
+  text-decoration: none;
+  color: white;
+
+  border-bottom: 1px solid var(--gold-color);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
 li {
   margin: 16px;
 }
@@ -57,8 +71,5 @@ img.cover-image-frontpage {
   width: 100%;
   padding-bottom: 20px;
   max-height: auto;
-}
-button {
-  left: 45%;
 }
 </style>

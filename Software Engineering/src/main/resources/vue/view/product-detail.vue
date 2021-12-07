@@ -15,7 +15,7 @@
         <p>{{product.productDescription}}</p>
         <p>{{product.price}}</p>
         <form :action=`/api/stores/${product.store.slug}/${product.productSlug}/purchase` method="post">
-          <button type="submit" v-on:click="ConfirmWindow()">Purchase Item</button>
+          <button type="submit">Purchase Item</button>
         </form>
       </div>
       </div>
@@ -40,13 +40,6 @@ app.component("product-detail", {
         .then(res => res.json())
         .then(json => this.product = json)
         .catch(() => alert("Error while fetching specific product"));
-  },
-  methods: {
-    ConfirmWindow() {
-      if(confirm("Do you want to purchase")) {
-
-      }
-    }
   }
 });
 </script>
@@ -61,7 +54,19 @@ h1 {
   text-align: center;
 }
 .itemblock {
-  width: 50%;
+  display: block;
+  max-width: 75%;
+
+  padding: 16px;
+  margin: auto;
+  background: #0e0e0e;
+  font-size: 1.25em;
+  text-decoration: none;
+  color: white;
+
+  border-bottom: 1px solid var(--gold-color);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 .itemblock-wrapper {
   width: 45%;

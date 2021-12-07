@@ -3,8 +3,8 @@
   </navbar>
 
   <app-frame>
-    <div class="itemblock">
-      <form class="itemblock-form" :action=`/api/stores/${storeSlug}/createProduct` method="post">
+    <div class="form-style">
+      <form class="create" :action=`/api/stores/${storeSlug}/createProduct` method="post">
 
         <label for="productSlug">Slug (identifiserende del av URLen til varen): </label>
         <input type="text" name="productSlug" id="productSlug" v-model="productSlug" required>
@@ -50,4 +50,10 @@ app.component("product-create", {
 });
 </script>
 <style>
+
+form {
+
+
+}
+
 </style>

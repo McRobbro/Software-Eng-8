@@ -3,6 +3,10 @@
   </navbar>
 
   <app-frame>
+
+    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='stores/create'">Create User</button>
+    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='users/delete'">Delete User</button>
+
     <ul class="store-overview-list">
       <li v-for="user in users">
         <a :href="`/users/${user.username}`">
