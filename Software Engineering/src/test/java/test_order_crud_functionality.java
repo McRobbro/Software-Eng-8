@@ -1,80 +1,80 @@
 import Software.Engineering.Gruppe.Config.SqliteDatabase;
-import Software.Engineering.Gruppe.Model.Store;
-import Software.Engineering.Gruppe.Model.User;
+import Software.Engineering.Gruppe.Model.Order;
 import Software.Engineering.Gruppe.Repository.OrderRepository;
+import Software.Engineering.Gruppe.Repository.ProductRepository;
 import Software.Engineering.Gruppe.Repository.StoreRepository;
 import Software.Engineering.Gruppe.Repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.stream.Stream;
 
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.core.Is.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class test_order_crud_functionality {
     Path userDir = Paths.get(System.getProperty("user.dir")).getParent();
     String databaseDir = "\\db\\FakeDatabase.db";
     String url = "jdbc:sqlite:" + userDir + databaseDir;
     SqliteDatabase sqliteDatabase = new SqliteDatabase(url);
-    StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
     UserRepository userRepository = new UserRepository(sqliteDatabase);
+    StoreRepository storeRepository = new StoreRepository(sqliteDatabase);
+    ProductRepository productRepository = new ProductRepository(sqliteDatabase, storeRepository);
     OrderRepository orderRepository = new OrderRepository(sqliteDatabase, userRepository, storeRepository);
-
 
     @BeforeEach
     public void data_setup() {
-        LocalDateTime dummyDate = LocalDateTime.now();
-        Store dummyStore = storeRepository.createStore("DummyStSlug", "DummyStName", "DummyStImg", "dummyStDesc");
-        User dummyUser = userRepository.createUser(5,"dummyEmail","DummyName", "dummyPassword");
-        orderRepository.createOrder(1, dummyDate, dummyUser, dummyStore);
+        LocalDateTime dummyDate = LocalDateTime.of(2021, Month.NOVEMBER, 10, 18, 0, 0);
+        storeRepository.createStore("dummySlug", "dummyName", "dummyImage", "dummyBio");
+        userRepository.createUser(100, "dummyEmail", "dummyUsername", "dummyPassword");
+        productRepository.createProduct(storeRepository.getSpecificStoreBySlug("dummySlug"),
+                "prodSlug",
+                "prodName",
+                "prodImage",
+                "prodBio",
+                "prodCat",
+                800);
+
+        //order object
+        orderRepository.createOrder(1,
+                dummyDate,
+                userRepository.getSpecificUser(100),
+                storeRepository.getSpecificStoreBySlug("dummySlug"),
+                productRepository.getSpecificProduct("dummySlug", "prodSlug"));
     }
+
 
     @AfterEach
     public void tear_down() {
-        userRepository.deleteUser(5);
-        storeRepository.deleteStore("DummyStSlug");
+        userRepository.deleteUser(100);
+        storeRepository.deleteStore("dummySlug");
+        productRepository.deleteProduct("prodSlug");
         orderRepository.deleteOrder(1);
-     }
-/*
-    @Test
-    public void test_create_order() {
+    }
 
-        LocalDateTime dummyTime = orderRepository.getOrderById(1).getOrderDate();
-        int storeId = storeRepository.getSpecificStoreBySlug("DummyStSlug").getStoreId();
-        assertEquals(orderRepository.getOrderById(1), allOf(
-                hasProperty("orderId", is(1)),
-                hasProperty("orderDate", is(dummyTime)),
-                hasProperty("userId", is(5)),
-                hasProperty("storeId", is(storeId))
-        ));
 
+
+
+    @ParameterizedTest
+    @MethodSource("graphPath")
+    public void test_create_order(String expected) {
+        Order order = orderRepository.getOrderById(1);
+        assertThat(order, test_helper_class.hasGraph(expected, notNullValue()));
     }
 
     @Test
-    public void test_get_order_by_id() {
-        LocalDateTime dummyTime = orderRepository.getOrderById(1).getOrderDate();
-        int storeId = storeRepository.getSpecificStoreBySlug("DummyStSlug").getStoreId();
-        assertEquals(orderRepository.getOrderById(1), allOf(
-                hasProperty("orderId", is(1)),
-                hasProperty("orderDate", is(dummyTime)),
-                hasProperty("userId", is(5)),
-                hasProperty("storeId", is(storeId))
-        ));
+    public void test_read_order() {
+        assertNotNull(orderRepository.getOrderById(1));
     }
-*/
-    /*
-    @Test
-    public void test_update_order() {}
-    there is no method updateOrder()
-    */
 
     @Test
     public void test_delete_order() {
@@ -82,11 +82,10 @@ public class test_order_crud_functionality {
         assertNull(orderRepository.getOrderById(1));
     }
 
+    public static Stream graphPath() {
+        return Stream.of(
+                Arguments.of("orderId")
+        );
 
-
-
-
-
-
-
+    }
 }

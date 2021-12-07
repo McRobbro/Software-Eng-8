@@ -60,9 +60,9 @@ public class OrderRepository implements OrderInterface {
     }
 
 
-    public Order createOrder(int orderId, LocalDateTime orderDate, User userId, Store storeId) {
+    public Order createOrder(int orderId, LocalDateTime orderDate, User userId, Store storeId, Product productId) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String query = "INSERT INTO 'order' (orderId, orderDate, userId, storeId) VALUES(?,?,?,?)";
+        String query = "INSERT INTO 'order' (orderId, orderDate, userId, storeId, productId) VALUES(?,?,?,?,?)";
 
         try (Connection connection = database.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -70,6 +70,7 @@ public class OrderRepository implements OrderInterface {
             preparedStatement.setString(2, orderDate.format(format));
             preparedStatement.setInt(3, userId.getUserId());
             preparedStatement.setInt(4, storeId.getStoreId());
+            preparedStatement.setInt(5, productId.getProductId());
             preparedStatement.executeUpdate();
             return new Order(orderId, orderDate, userId, storeId);
         }
@@ -124,7 +125,5 @@ public class OrderRepository implements OrderInterface {
 
         return false;
     }
-
-
 }
 
