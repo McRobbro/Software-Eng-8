@@ -3,12 +3,12 @@
   </navbar>
   <app-frame>
 
-    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/update'"><button>update store</button></a>
-    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/createProduct'"><button>create product</button></a>
-    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/deleteProduct'"><button>delete product</button></a>
-    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/createAuction'"><button>create auction</button></a>
+    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/update'"><button>Oppdater informasjon om butikk</button></a>
+    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/createProduct'"><button>Legg til vare</button></a>
+    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/deleteProduct'"><button>Slett vare</button></a>
+    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/createAuction'"><button>Opprett auksjon</button></a>
 
-    <h1>Auctions</h1>
+    <h1>Auksjoner</h1>
     <ul class="store-overview-list">
       <li v-for="auction in storeAuctions">
         <a :href="`/stores/${storeSlug}/auctions/${auction.product.productSlug}`">
@@ -19,7 +19,7 @@
       </li>
     </ul>
 
-    <h1>For Sale</h1>
+    <h1>Varer til salgs</h1>
     <ul class="store-overview-list">
       <li v-for="product in storeProducts">
         <a :href="`/stores/${product.store.slug}/${product.productSlug}`">

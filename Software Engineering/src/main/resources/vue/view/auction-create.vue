@@ -5,23 +5,23 @@
   <app-frame>
     <div class="form-style">
       <form class="create" :action=`/api/stores/${storeSlug}/createAuction` method="post">
-        <label for="auction-product-select">Select product</label>
+        <label for="auction-product-select">Velg vare </label>
         <select name="auctionProduct" id="auction-product-select" required>
-          <option disabled selected value> -- select an product --</option>
+          <option disabled selected value> -- velg en vare --</option>
           <option v-for="product in storeProducts">
             {{product.productSlug}}
           </option>
         </select>
-        <label for="startPrice">start price</label>
+        <label for="startPrice"> Startpris </label>
         <input type="text" name="startPrice" id="startPrice" v-model="startPrice" required>
 
-        <label for="startDate">start time</label>
+        <label for="startDate"> Starttid </label>
         <input type="datetime-local" min="2021" name="startDate" id="startDate" v-model="startDate" required>
 
-        <label for="endDate">end date</label>
+        <label for="endDate"> Slutttid </label>
         <input type="datetime-local" name="endDate" id="endDate" v-model="endDate" required>
 
-        <button type="submit">create auction</button>
+        <button type="submit"> Oprett auksjon </button>
       </form>
     </div>
   </app-frame>

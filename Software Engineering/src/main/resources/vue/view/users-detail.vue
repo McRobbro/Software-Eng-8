@@ -31,7 +31,7 @@ app.component("users-detail", {
         .then(json => this.user = json)
         .catch((error) => {
           console.log(error);
-          alert("Error while fetching specific user")
+          alert("Feil ved henting av spesifikk bruker")
         });
   }
 

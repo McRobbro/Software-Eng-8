@@ -4,8 +4,8 @@
 
   <app-frame>
 
-    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='stores/create'">Create User</button>
-    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='users/delete'">Delete User</button>
+    <button v-if="cookieValue === 'role=Administrator'" onclick="window.location.href='stores/create'">Opprett bruker</button>
+    <button v-if="cookieValue === 'role=Administrator'" onclick="window.location.href='users/delete'">Slett bruker</button>
 
     <ul class="store-overview-list">
       <li v-for="user in users">
@@ -32,7 +32,7 @@ app.component("users-overview", {
         .then(json => this.users = json)
         .catch((error) => {
           console.log(error);
-          alert("Error while fetching all users")
+          alert("Feil ved henting av alle brukere")
         });
   }
 
