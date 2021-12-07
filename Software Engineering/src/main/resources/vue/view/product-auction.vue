@@ -8,17 +8,17 @@
         <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
       <div class="itemblock-wrapper">
       <p>{{auctionProduct.product.productName}}</p>
-      <p>Dette produktet har en startpris på: {{auctionProduct.startPrice}}$</p>
+      <p>Dette produktet har en startpris på: {{auctionProduct.startPrice}},-</p>
       <p>Auksjonens starttid: {{auctionProduct.startTime}}</p>
       <p>Auksjonens sluttid: {{auctionProduct.endTime}}</p>
       <div v-if="auctionProduct.timeDurationToAuctionEnd >= 0" class="closed">
       <form v-if="auctionProduct.timeDurationToAuctionStart <= 0" class="auction-style" id="app" @submit="checkForm" :action=`/api/stores/${storeSlug}/auctions/${auctionProduct.product.productSlug}/createBid` method="post">
-        <p>current highest bid: {{currentHighestBid}}</p>
+        <p>Nåverende høyste bud:  {{currentHighestBid}},-</p>
         <p v-if="errors.length">
         <ul>
           <li v-for="error in errors">{{ error }}</li>
         </ul>
-       <label for="bid">Place a bid</label> <br>
+       <label for="bid">Legg inn et bud</label> <br>
         <input type="text" name="bid" id="bid" v-model="bid" required>
         <input onclick="checkForm()" type="submit" value="Place a bid">
       </form>
