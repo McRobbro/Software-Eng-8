@@ -30,7 +30,7 @@
     </div>
 
     <div class="changeInfo" v-else>
-      <p>You are not a USER, and can not change your information at this time</p>
+      <p>Du er ikke en registrert bruker, og kan ikke endre informasjonen din for øyeblikket </p>
     </div>
   </app-frame>
 </template>
@@ -50,7 +50,7 @@ app.component("user-detail", {
         .then(json => this.users = json)
         .catch((error) => {
           console.log(error);
-          alert("Error while fetching stores")
+          alert("Feil ved henting av butikk")
         });
   },
   methods: {

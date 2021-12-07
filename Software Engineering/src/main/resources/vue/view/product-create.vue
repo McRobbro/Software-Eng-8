@@ -6,25 +6,25 @@
     <div class="itemblock">
       <form class="itemblock-form" :action=`/api/stores/${storeSlug}/createProduct` method="post">
 
-        <label for="productSlug">productSlug</label>
+        <label for="productSlug">Slug (identifiserende del av URLen til varen): </label>
         <input type="text" name="productSlug" id="productSlug" v-model="productSlug" required>
 
-        <lable for="productName">productName</lable>
+        <lable for="productName"> Varenavn: </lable>
         <input type="text" name="productName" id="productName" v-model="productName" required>
 
-        <lable for="productImage">productImage</lable>
+        <lable for="productImage"> URL til bilde av varen: </lable>
         <input type="url" name="productImage" id="productImage" v-model="productImage" required>
 
-        <lable for="productDescription">productDescription</lable>
+        <lable for="productDescription"> Beskrivelse av varen: </lable>
         <input type="text" name="productDescription" id="productDescription" v-model="productDescription" required>
 
-        <lable for="productCategory">productCategory</lable>
+        <lable for="productCategory"> Varekategori: </lable>
         <input type="text" name="productCategory" id="productCategory" v-model="productCategory" required>
 
-        <lable for="productPrice">productPrice</lable>
+        <lable for="productPrice"> Pris på varen: </lable>
         <input type="text" name="productPrice" id="productPrice" v-model="productPrice" required>
 
-        <input type="submit" value="product create">
+        <input type="submit" value="Opprett vare">
       </form>
     </div>
   </app-frame>
@@ -44,7 +44,7 @@ app.component("product-create", {
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
     this.storeSlug = specificStore;
-    console.log("This store name: " + specificStore);
+    console.log("Butikken: " + specificStore);
 
   }
 });

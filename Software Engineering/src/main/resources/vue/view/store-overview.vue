@@ -4,8 +4,8 @@
 
   <app-frame>
 
-    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='stores/create'">Create store</button>
-    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='stores/delete'">Delete store</button>
+    <button v-if="cookieValue === 'role=Administrator'" onclick="window.location.href='stores/create'">Opprett butikk</button>
+    <button v-if="cookieValue === 'role=Administrator'" onclick="window.location.href='stores/delete'">Slett butikk</button>
 
     <ul class="store-overview-list">
       <li v-for="store in stores">
@@ -31,7 +31,7 @@ app.component("store-overview", {
         .then(json => this.stores = json)
         .catch((error) => {
           console.log(error);
-          alert("Error while fetching stores")
+          alert("Feil ved henting av butikker")
         });
   }
 
