@@ -73,7 +73,7 @@ public class Application {
         app.get("/stores", new VueComponent("store-overview"), Role.Administrator, Role.Butikkeier, Role.Registrert_bruker, Role.Uregistrert_bruker);
         app.get("/stores/create", new VueComponent("store-create"), Role.Administrator);
         app.get("/stores/delete", new VueComponent("store-delete"), Role.Administrator);
-        app.get("/stores/{storeSlug}", new VueComponent("store-detail"), Role.Butikkeier, Role.Registrert_bruker);
+        app.get("/stores/{storeSlug}", new VueComponent("store-detail"), Role.Butikkeier, Role.Registrert_bruker, Role.Uregistrert_bruker);
         app.get("/stores/{storeSlug}/update", new VueComponent("store-update"), Role.Butikkeier);
         app.get("/stores/{storeSlug}/createProduct", new VueComponent("product-create"), Role.Butikkeier);
         app.get("/stores/{storeSlug}/deleteProduct", new VueComponent("product-delete"), Role.Butikkeier);
