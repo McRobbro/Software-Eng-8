@@ -3,10 +3,6 @@
   </navbar>
 
   <app-frame>
-
-    <button v-if="cookieValue === 'role=Administrator'" onclick="window.location.href='stores/create'">Opprett bruker</button>
-    <button v-if="cookieValue === 'role=Administrator'" onclick="window.location.href='users/delete'">Slett bruker</button>
-
     <ul class="store-overview-list">
       <li v-for="user in users">
         <a :href="`/users/${user.username}`">
@@ -32,7 +28,7 @@ app.component("users-overview", {
         .then(json => this.users = json)
         .catch((error) => {
           console.log(error);
-          alert("Feil ved henting av alle brukere")
+          alert("Error while fetching all users")
         });
   }
 

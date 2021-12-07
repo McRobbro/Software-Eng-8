@@ -4,8 +4,8 @@
 
   <app-frame>
 
-    <button v-if="cookieValue === 'role=Administrator'" onclick="window.location.href='stores/create'">Opprett butikk</button>
-    <button v-if="cookieValue === 'role=Administrator'" onclick="window.location.href='stores/delete'">Slett butikk</button>
+    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='stores/create'">Create store</button>
+    <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='stores/delete'">Delete store</button>
 
     <ul class="store-overview-list">
       <li v-for="store in stores">
@@ -31,7 +31,7 @@ app.component("store-overview", {
         .then(json => this.stores = json)
         .catch((error) => {
           console.log(error);
-          alert("Feil ved henting av butikker")
+          alert("Error while fetching stores")
         });
   }
 
@@ -46,20 +46,6 @@ ul.store-overview-list {
   padding: 0;
   list-style: none;
 }
-
-ul.store-overview-list a {
-  display: block;
-  max-width: 250px;
-
-  padding: 16px;
-  background: #0e0e0e;
-  text-decoration: none;
-  color: white;
-
-  border-bottom: 1px solid var(--gold-color);
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-}
 li {
   margin: 16px;
 }
@@ -71,5 +57,8 @@ img.cover-image-frontpage {
   width: 100%;
   padding-bottom: 20px;
   max-height: auto;
+}
+button {
+  left: 45%;
 }
 </style>

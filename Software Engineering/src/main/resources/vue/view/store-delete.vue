@@ -3,15 +3,17 @@
   </navbar>
   <app-frame>
 
-    <form :action=`/api/stores/delete` method="post">
-      <label for="delete-select">Velg butikk: </label>
+    <div class="itemblock">
+    <form class="itemblock-form" :action=`/api/stores/delete` method="post">
+      <label for="delete-select">Select store</label>
       <select name="store-delete" id="delete-select">
         <option v-for="store in stores">
           {{store.slug}}
         </option>
       </select>
-      <button type="submit">Slett butikk</button>
+      <button type="submit">Delete store</button>
     </form>
+    </div>
   </app-frame>
 </template>
 <script>
@@ -27,7 +29,7 @@ app.component("store-delete", {
         .then(json => this.stores = json)
         .catch((error) => {
           console.log(error);
-          alert("Feil ved henting av butikker")
+          alert("Error while fetching stores")
         });
   }
 

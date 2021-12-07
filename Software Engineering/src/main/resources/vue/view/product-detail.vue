@@ -2,7 +2,7 @@
   <navbar>
   </navbar>
   <app-frame>
-    <a v-if="cookieValue === 'role=Butikkeier'" :href="'/stores/' + storeSlug + '/' + prodSlug + '/updateProduct'"><button>Oppdater vare</button></a>
+    <a v-if="cookieValue === 'role=STORE_OWNER'" :href="'/stores/' + storeSlug + '/' + prodSlug + '/updateProduct'"><button>update product</button></a>
 
 
     <div v-if="product">
@@ -15,7 +15,7 @@
         <p>{{product.productDescription}}</p>
         <p>{{product.price}}</p>
         <form :action=`/api/stores/${product.store.slug}/${product.productSlug}/purchase` method="post">
-          <button type="submit">Kjøp vare</button>
+          <button type="submit" v-on:click="ConfirmWindow()">Purchase Item</button>
         </form>
       </div>
       </div>
@@ -33,13 +33,20 @@ app.component("product-detail", {
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
     this.storeName = specificStore;
-    console.log("Butikken: " + specificStore);
+    console.log("This store name: " + specificStore);
     const specificProduct = this.$javalin.pathParams["prodSlug"];
     this.product = specificProduct
     fetch(`/api/stores/${specificStore}/${specificProduct}`)
         .then(res => res.json())
         .then(json => this.product = json)
-        .catch(() => alert("Feil ved henting av varer"));
+        .catch(() => alert("Error while fetching specific product"));
+  },
+  methods: {
+    ConfirmWindow() {
+      if(confirm("Do you want to purchase")) {
+
+      }
+    }
   }
 });
 </script>
@@ -54,19 +61,7 @@ h1 {
   text-align: center;
 }
 .itemblock {
-  display: block;
-  max-width: 75%;
-
-  padding: 16px;
-  margin: auto;
-  background: #0e0e0e;
-  font-size: 1.25em;
-  text-decoration: none;
-  color: white;
-
-  border-bottom: 1px solid var(--gold-color);
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  width: 50%;
 }
 .itemblock-wrapper {
   width: 45%;

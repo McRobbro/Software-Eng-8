@@ -3,22 +3,22 @@
   </navbar>
 
   <app-frame>
-    <div class="form-style">
-      <form class="create" :action=`/api/stores/create` method="post">
+    <div class="itemblock">
+      <form class="itemblock-form" :action=`/api/stores/create` method="post">
 
-        <label for="slug">Slug (identifiserende del av URLen til butikken): </label>
+        <label for="slug">storeSlug</label>
         <input type="text" name="slug" id="slug" v-model="slug" required>
 
-        <lable for="name"> Butikknavn: </lable>
+        <lable for="name">storeName</lable>
         <input type="text" name="storeName" id="storeName" v-model="storeName" required>
 
-        <lable for="storeImage"> URL til bilde av butikken: </lable>
+        <lable for="storeImage">storeImage</lable>
         <input type="url" name="storeImage" id="storeImage" v-model="storeImage">
 
-        <lable for="storeDescription"> Beskrivelse av butikken: </lable>
+        <lable for="storeDescription">storeDescription</lable>
         <input type="text" name="storeDescription" id="storeDescription" v-model="storeDescription">
 
-        <input type="submit" value="Opprett butikk">
+        <input type="submit" value="Create store">
       </form>
     </div>
   </app-frame>

@@ -15,7 +15,7 @@ import java.util.Map;
 public class Application {
 
     enum Role implements RouteRole {
-        Uregistrert_bruker, Butikkeier, Administrator, Registrert_bruker;
+        ANYONE, STORE_OWNER, PLATFORM_OWNER, USER;
     }
 
 
@@ -44,7 +44,7 @@ public class Application {
         Javalin app = Javalin.create(config -> {
             config.enableWebjars();
             config.accessManager((handler, ctx, permittedRoles) -> {
-                if (permittedRoles.contains(Role.Uregistrert_bruker) || getUserRole(ctx) == Role.Administrator || permittedRoles.contains(getUserRole(ctx))) {
+                if (permittedRoles.contains(Role.ANYONE) || getUserRole(ctx) == Role.PLATFORM_OWNER || permittedRoles.contains(getUserRole(ctx))) {
                     handler.handle(ctx);
                 } else {
                     ctx.status(401);
@@ -61,49 +61,49 @@ public class Application {
         app.before("/", ctx -> ctx.redirect("/login"));
         // Register routes and handlers
         app.get("/home", ctx -> {
-            ctx.result("Plattformens hjemmeside");
+            ctx.result("Platform home page");
         });
 
 
         // Init Vue Files
-        app.get("/login", new VueComponent("login-page"), Role.Uregistrert_bruker);
-        app.get("/users", new VueComponent("users-overview"), Role.Administrator);
-        app.get("/user", new VueComponent("user-detail"), Role.Registrert_bruker, Role.Administrator, Role.Butikkeier);
-        app.get("/users/{userUsername}", new VueComponent("users-detail"), Role.Administrator);
-        app.get("/stores", new VueComponent("store-overview"), Role.Administrator, Role.Butikkeier, Role.Registrert_bruker, Role.Uregistrert_bruker);
-        app.get("/stores/create", new VueComponent("store-create"), Role.Administrator);
-        app.get("/stores/delete", new VueComponent("store-delete"), Role.Administrator);
-        app.get("/stores/{storeSlug}", new VueComponent("store-detail"), Role.Butikkeier, Role.Registrert_bruker);
-        app.get("/stores/{storeSlug}/update", new VueComponent("store-update"), Role.Butikkeier);
-        app.get("/stores/{storeSlug}/createProduct", new VueComponent("product-create"), Role.Butikkeier);
-        app.get("/stores/{storeSlug}/deleteProduct", new VueComponent("product-delete"), Role.Butikkeier);
-        app.get("/stores/{storeSlug}/createAuction", new VueComponent("auction-create"), Role.Butikkeier);
-        app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"), Role.Uregistrert_bruker);
-        app.get("/stores/{storeSlug}/auctions/{auctionProd}", new VueComponent("product-auction"), Role.Administrator, Role.Butikkeier, Role.Registrert_bruker);
-        app.get("/stores/{storeSlug}/{prodSlug}/updateProduct", new VueComponent("product-update"), Role.Butikkeier);
+        app.get("/login", new VueComponent("login-page"), Role.ANYONE);
+        app.get("/users", new VueComponent("users-overview"), Role.PLATFORM_OWNER);
+        app.get("/user", new VueComponent("user-detail"), Role.USER, Role.PLATFORM_OWNER, Role.STORE_OWNER);
+        app.get("/users/{userUsername}", new VueComponent("users-detail"), Role.PLATFORM_OWNER);
+        app.get("/stores", new VueComponent("store-overview"), Role.PLATFORM_OWNER, Role.STORE_OWNER, Role.USER, Role.ANYONE);
+        app.get("/stores/create", new VueComponent("store-create"), Role.PLATFORM_OWNER);
+        app.get("/stores/delete", new VueComponent("store-delete"), Role.PLATFORM_OWNER);
+        app.get("/stores/{storeSlug}", new VueComponent("store-detail"), Role.STORE_OWNER, Role.USER);
+        app.get("/stores/{storeSlug}/update", new VueComponent("store-update"), Role.STORE_OWNER);
+        app.get("/stores/{storeSlug}/createProduct", new VueComponent("product-create"), Role.STORE_OWNER);
+        app.get("/stores/{storeSlug}/deleteProduct", new VueComponent("product-delete"), Role.STORE_OWNER);
+        app.get("/stores/{storeSlug}/createAuction", new VueComponent("auction-create"), Role.STORE_OWNER);
+        app.get("/stores/{storeSlug}/{prodSlug}", new VueComponent("product-detail"), Role.ANYONE);
+        app.get("/stores/{storeSlug}/auctions/{auctionProd}", new VueComponent("product-auction"), Role.PLATFORM_OWNER, Role.STORE_OWNER, Role.USER);
+        app.get("/stores/{storeSlug}/{prodSlug}/updateProduct", new VueComponent("product-update"), Role.STORE_OWNER);
 
         //api
-        app.post("/api/login", loginController::login, Role.Uregistrert_bruker);
-        app.post("api/user/{userId}/update", userController::updateUser, Role.Uregistrert_bruker);
-        app.get("api/users", userController::getUsers, Role.Uregistrert_bruker);
-        app.get("api/users/{userUsername}", userController::getSpecificUserByUsername, Role.Uregistrert_bruker);
+        app.post("/api/login", loginController::login, Role.ANYONE);
+        app.post("api/user/{userId}/update", userController::updateUser, Role.ANYONE);
+        app.get("api/users", userController::getUsers, Role.ANYONE);
+        app.get("api/users/{userUsername}", userController::getSpecificUserByUsername, Role.ANYONE);
         //app.post("api/users/{userUsername}/delete", userController::deleteUser, Role.ANYONE);
-        app.get("/api/stores", storesController::getAllStores, Role.Uregistrert_bruker);
-        app.post("/api/stores/create", storesController::createStore, Role.Uregistrert_bruker);
-        app.post("/api/stores/delete", storesController::deleteStore, Role.Uregistrert_bruker);
-        app.get("/api/stores/{storeSlug}", productController::getProductsFromStore, Role.Uregistrert_bruker);
-        app.get("/api/stores/{storeSlug}/auctions", auctionController::getAllAuctionsFromStore, Role.Uregistrert_bruker);
-        app.post("/api/stores/{storeSlug}/update", storesController::updateStore, Role.Uregistrert_bruker);
-        app.post("/api/stores/{storeSlug}/createProduct", productController::createProduct, Role.Uregistrert_bruker);
-        app.post("/api/stores/{storeSlug}/deleteProduct", productController::deleteProduct, Role.Uregistrert_bruker);
-        app.post("/api/stores/{storeSlug}/createAuction", auctionController::createAuction, Role.Uregistrert_bruker);
-        app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct, Role.Uregistrert_bruker);
-        app.post("/api/stores/{storeSlug}/{prodSlug}/purchase", orderController::orderTheProduct, Role.Uregistrert_bruker);
-        app.get("/api/stores/{storeSlug}/auctions/{auctionProd}", auctionController::getSpecificAuction, Role.Uregistrert_bruker);
-        app.get("/api/stores/{storeSlug}/auctions/{auctionProd}/currentHighestBid", bidController::getCurrentHighestBid, Role.Uregistrert_bruker);
-        app.post("/api/stores/{storeSlug}/auctions/{auctionProd}/createBid", bidController::createBid, Role.Uregistrert_bruker);
-        app.post("/api/stores/{storeSlug}/{prodSlug}/updateProduct", productController::updateProduct, Role.Uregistrert_bruker);
-        app.get("/api/products", productController::getAllProducts, Role.Uregistrert_bruker);
+        app.get("/api/stores", storesController::getAllStores, Role.ANYONE);
+        app.post("/api/stores/create", storesController::createStore, Role.ANYONE);
+        app.post("/api/stores/delete", storesController::deleteStore, Role.ANYONE);
+        app.get("/api/stores/{storeSlug}", productController::getProductsFromStore, Role.ANYONE);
+        app.get("/api/stores/{storeSlug}/auctions", auctionController::getAllAuctionsFromStore, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/update", storesController::updateStore, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/createProduct", productController::createProduct, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/deleteProduct", productController::deleteProduct, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/createAuction", auctionController::createAuction, Role.ANYONE);
+        app.get("/api/stores/{storeSlug}/{prodSlug}", productController::getSpecificProduct, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/{prodSlug}/purchase", orderController::orderTheProduct, Role.ANYONE);
+        app.get("/api/stores/{storeSlug}/auctions/{auctionProd}", auctionController::getSpecificAuction, Role.ANYONE);
+        app.get("/api/stores/{storeSlug}/auctions/{auctionProd}/currentHighestBid", bidController::getCurrentHighestBid, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/auctions/{auctionProd}/createBid", bidController::createBid, Role.ANYONE);
+        app.post("/api/stores/{storeSlug}/{prodSlug}/updateProduct", productController::updateProduct, Role.ANYONE);
+        app.get("/api/products", productController::getAllProducts, Role.ANYONE);
 
         app.error(404, ctx -> {
             ctx.result("Generic 404 message");
@@ -113,15 +113,15 @@ public class Application {
     public static Role getUserRole(Context ctx) {
         String role = ctx.cookie("role");
         if (role == null) {
-            return Role.Uregistrert_bruker;
-        } else if (role.equals("Administrator")) {
-            return Role.Administrator;
-        } else if (role.equals("Butikkeier")) {
-            return Role.Butikkeier;
-        } else if (role.equals("Registrert bruker")) {
-            return Role.Registrert_bruker;
+            return Role.ANYONE;
+        } else if (role.equals("PLATFORM_OWNER")) {
+            return Role.PLATFORM_OWNER;
+        } else if (role.equals("STORE_OWNER")) {
+            return Role.STORE_OWNER;
+        } else if (role.equals("USER")) {
+            return Role.USER;
         } else {
-            return Role.Uregistrert_bruker;
+            return Role.ANYONE;
         }
     }
 }

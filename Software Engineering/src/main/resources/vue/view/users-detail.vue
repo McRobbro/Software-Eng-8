@@ -5,10 +5,11 @@
   <app-frame>
     <ul class="store-overview-list">
       <div v-if="user">
-        <a :href="`/users/${user.username}`">
+        <a>
           <img v-if="user.Image" class="cover-image-frontpage" v-bind:src="user.Image">
           <img v-else class="cover-image-frontpage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Icon-round-Question_mark.svg/480px-Icon-round-Question_mark.svg.png">
           {{user.email}} ({{user.username}})</a>
+        <button v-if="cookieValue === 'role=PLATFORM_OWNER'" onclick="window.location.href='users/delete'">Delete User</button>
       </div>
     </ul>
   </app-frame>
@@ -31,7 +32,7 @@ app.component("users-detail", {
         .then(json => this.user = json)
         .catch((error) => {
           console.log(error);
-          alert("Feil ved henting av spesifikk bruker")
+          alert("Error while fetching specific user")
         });
   }
 

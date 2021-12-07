@@ -2,15 +2,17 @@
   <navbar>
   </navbar>
   <app-frame>
-    <form :action=`/api/stores/${storeSlug}/deleteProduct` method="post">
-      <label for="product-delete-select">Velg vare </label>
-      <select name="product-delete" id="product-delete-select">
-        <option v-for="product in storeProducts">
-          {{product.productSlug}}
-        </option>
-      </select>
-      <button type="submit">Slett vare</button>
-    </form>
+    <div class="itemblock">
+      <form class="itemblock-form" :action=`/api/stores/${storeSlug}/deleteProduct` method="post">
+        <label for="product-delete-select">Select product</label>
+        <select name="product-delete" id="product-delete-select">
+          <option v-for="product in storeProducts">
+            {{product.productSlug}}
+          </option>
+        </select>
+        <button type="submit">delete product</button>
+      </form>
+    </div>
   </app-frame>
 </template>
 <script>
@@ -24,11 +26,11 @@ app.component("product-delete", {
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
     this.storeSlug = specificStore;
-    console.log("Butikken: " + specificStore);
+    console.log("This store name: " + specificStore);
     fetch(`/api/stores/${specificStore}`)
         .then(res => res.json())
         .then(json => this.storeProducts = json)
-        .catch(() => alert("Feil ved henting av varer"));
+        .catch(() => alert("Error while fetching products"));
   }
 
 });

@@ -3,28 +3,28 @@
   </navbar>
 
   <app-frame>
-    <div class="form-style">
-      <form class="create" :action=`/api/stores/${storeSlug}/createProduct` method="post">
+    <div class="itemblock">
+      <form class="itemblock-form" :action=`/api/stores/${storeSlug}/createProduct` method="post">
 
-        <label for="productSlug">Slug (identifiserende del av URLen til varen): </label>
+        <label for="productSlug">productSlug</label>
         <input type="text" name="productSlug" id="productSlug" v-model="productSlug" required>
 
-        <lable for="productName"> Varenavn: </lable>
+        <lable for="productName">productName</lable>
         <input type="text" name="productName" id="productName" v-model="productName" required>
 
-        <lable for="productImage"> URL til bilde av varen: </lable>
+        <lable for="productImage">productImage</lable>
         <input type="url" name="productImage" id="productImage" v-model="productImage" required>
 
-        <lable for="productDescription"> Beskrivelse av varen: </lable>
+        <lable for="productDescription">productDescription</lable>
         <input type="text" name="productDescription" id="productDescription" v-model="productDescription" required>
 
-        <lable for="productCategory"> Varekategori: </lable>
+        <lable for="productCategory">productCategory</lable>
         <input type="text" name="productCategory" id="productCategory" v-model="productCategory" required>
 
-        <lable for="productPrice"> Pris på varen: </lable>
+        <lable for="productPrice">productPrice</lable>
         <input type="text" name="productPrice" id="productPrice" v-model="productPrice" required>
 
-        <input type="submit" value="Opprett vare">
+        <input type="submit" value="product create">
       </form>
     </div>
   </app-frame>
@@ -44,16 +44,10 @@ app.component("product-create", {
   created() {
     const specificStore = this.$javalin.pathParams["storeSlug"];
     this.storeSlug = specificStore;
-    console.log("Butikken: " + specificStore);
+    console.log("This store name: " + specificStore);
 
   }
 });
 </script>
 <style>
-
-form {
-
-
-}
-
 </style>
